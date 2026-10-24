@@ -1,0 +1,21 @@
+.ds-busca {
+  flex-shrink: 0; height: var(--alvo-min); display: flex; align-items: center; gap: var(--e-10); padding: 0 var(--e-12);
+  background: var(--fundo-rebaixado);
+  border-top: var(--traco-borda) solid var(--rebaixado-sombra);
+  border-bottom: var(--traco-borda) solid var(--rebaixado-luz);
+  border-left: var(--traco-borda) solid var(--rebaixado-lado);
+  border-right: var(--traco-borda) solid var(--rebaixado-lado);
+}
+/* o que se digita sai com os números tabulares da base, como o termo da referência
+ * (T06/08: ABC-1234) — o campo do navegador não herda a letra sozinho */
+.ds-busca-entrada {
+  flex-grow: 1; min-width: 0; margin: 0; padding: 0; background: transparent; border: 0; outline: none;
+  color: var(--tinta); font-family: inherit; font-size: var(--t-link); font-weight: 500; font-variant-numeric: inherit;
+}
+/* o lugar do texto: a altura inteira do campo; a dica fica por cima do campo vazio, centrada como ele */
+.ds-busca-lugar { position: relative; flex-grow: 1; min-width: 0; align-self: stretch; display: flex; align-items: center; }
+.ds-busca-dica {
+  position: absolute; inset: 0; display: flex; align-items: center; pointer-events: none;
+  white-space: nowrap; overflow: hidden;
+  font-size: var(--t-link); font-weight: 500; color: var(--tinta-apagada);
+}

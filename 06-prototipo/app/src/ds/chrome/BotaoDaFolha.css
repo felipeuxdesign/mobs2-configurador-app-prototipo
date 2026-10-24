@@ -1,0 +1,6 @@
+.ds-botao-folha {
+  height: var(--botao-secundario); justify-content: center;
+  background: var(--fundo-botao);   /* o desenho do botão secundário, um só */
+  border: var(--traco-borda) solid var(--borda-botao); border-radius: var(--raio);
+  font-size: var(--t-link); font-weight: 700; color: var(--tinta);
+}

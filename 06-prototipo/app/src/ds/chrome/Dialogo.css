@@ -1,0 +1,27 @@
+.ds-dialogo-lugar-16 { padding: var(--e-16); }
+.ds-dialogo-lugar-20 { padding: var(--e-20); }
+.ds-dialogo-lugar-24 { padding: var(--e-24); }   /* o aviso do acesso, sobre o menu inteiro (T04/12) */
+
+.ds-dialogo {
+  display: flex; flex-direction: column; gap: var(--e-12);
+  padding: var(--e-20) var(--sobreposto-recheio) var(--e-12) var(--sobreposto-recheio);
+  background: var(--fundo-faixa);
+  border: var(--traco-borda) solid var(--borda-dialogo); border-radius: var(--raio);   /* o token do papel */
+  transition: opacity var(--mov-rapido) var(--mov-curva), transform var(--mov-rapido) var(--mov-curva);
+}
+.ds-dialogo-fechado { opacity: 0; transform: scale(var(--escala-dialogo)); }
+
+.ds-dialogo-titulo { font-size: var(--t-titulo-bloco); font-weight: 700; color: var(--tinta); }
+.ds-dialogo-frase { font-size: var(--t-corpo); font-weight: 500; line-height: var(--entrelinha-dialogo); color: var(--tinta-forte); }
+.ds-dialogo-destaque { font-weight: 700; color: var(--tinta); }
+
+/* o toque do diálogo (decisão 38, folha 2): a saída a 8 do primário, com o
+ * desenho de 44, e o toque de 48 cresce só pra baixo, os 4 que faltam, pro lado livre (o recheio de
+ * 12 do pé da caixa). Sem a saída, o vão não conta (T01/09, T04/12). A saída de sempre (T04/09, 13,
+ * T13/10) é o link do rodapé, que come 5 embaixo */
+.ds-dialogo-acoes { display: flex; flex-direction: column; gap: var(--e-8); margin-top: var(--e-4); }
+.ds-dialogo-acoes .ds-link { height: var(--toque-desenho); margin: 0 0 calc(var(--link-recuo) * -1) 0; }
+.ds-dialogo-acoes .ds-link::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: var(--alvo-min); }
+/* a saída de 44 (T04/06): as ações a 6 do texto, e o Cancelar come 4 embaixo */
+.ds-dialogo-acoes-44 { margin-top: var(--e-6); }
+.ds-dialogo-acoes-44 .ds-link { margin: 0 0 calc(var(--e-4) * -1) 0; }

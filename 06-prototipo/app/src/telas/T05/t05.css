@@ -1,0 +1,38 @@
+/* T05 · Conectar módulo — só a montagem da tela; o desenho de cada bloco é da
+ * peça. Só tokens (tokens.css). */
+.t05 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* o miolo: entre a barra e o rodapé, rola quando passa de 800, sem a
+ * barra de rolagem do computador; a folga de 16 até o rodapé é o recheio
+ * dele. A busca abre com 28 em cima e 14 entre os blocos, como as
+ * referências desenham. */
+.t05 .tela-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto; scrollbar-width: none;
+  display: flex; flex-direction: column;
+}
+.t05 .t05-miolo-busca { gap: var(--e-14); padding: var(--e-28) var(--respiro) var(--respiro) var(--respiro); }
+
+/* as listas não encolhem: quem cede espaço é o bloco escolhido (flex-grow) */
+.t05-lista { flex-shrink: 0; }
+/* 16 embaixo da lista, antes do nenhum outro (02) e do que conferir (04), como as referências desenham */
+.t05 .t05-lista { margin-bottom: var(--e-16); }
+
+/* o rótulo de bloco em cima dos outros módulos por perto */
+.t05-rotulo-bloco {
+  flex-shrink: 0;
+  font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada);
+}
+
+/* a frase de abertura em cima da lista de escolha (T05/01) */
+.t05-frase { flex-shrink: 0; font-size: var(--t-link); font-weight: 500; line-height: var(--entrelinha-texto); color: var(--tinta-secundaria); }
+
+/* T05/03 · a legenda solta embaixo do vazio da busca: quanto durou e qual tentativa */
+.t05-legenda { flex-shrink: 0; font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+
+/* o mundo real · T05/16 e 17 · a lei Folga até o rodapé: a caixa é grande — é a área
+ * da lista, onde os módulos vão aparecer (R-26) —, mas para 16 antes do rodapé, com a folga do miolo,
+ * e não encosta no traço dele */
+
+/* as esperas da conexão (a 18 e a 19): a frase embaixo da lista é neutra,
+   nunca falha — 12/500 em --tinta-secundaria, sem o recheio da legenda, a 4 + 8 do botão */
+.t05.t05-espera .ds-rodape-legenda { padding-bottom: 0; font-weight: 500; color: var(--tinta-secundaria); }

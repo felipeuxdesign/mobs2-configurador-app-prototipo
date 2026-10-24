@@ -1,0 +1,151 @@
+/* O palco: o fundo --fundo-faixa, o quadrado, o celular no centro, a coluna,
+ * o painel e a etiqueta. Nada reage a passar o mouse; o que responde é o
+ * pressionado. A mãozinha só nas peças do palco; dentro do celular, a seta. */
+html, body, #raiz { height: 100%; }
+body { background: var(--fundo-faixa); overflow: hidden; }
+
+.palco { position: relative; min-height: 100%; height: 100%; font-family: var(--fonte); color: var(--tinta); }
+.palco :where(button) { font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; cursor: pointer; }
+/* o foco do teclado é só das peças do palco (06-prototipo/CLAUDE.md, regra 5): o botão do app, dentro do celular, não ganha anel */
+:is(.palco-quadrado, .painel button, .coluna button):focus-visible { outline: var(--traco-destaque) solid var(--tinta-forte); outline-offset: var(--traco-destaque); }
+.palco-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--palco-ls-rotulo); color: var(--tinta-apagada); }
+.palco-icone-14 { width: var(--e-14); height: var(--e-14); stroke-width: var(--traco-icone); }
+.palco-icone-16 { width: var(--e-16); height: var(--e-16); stroke-width: var(--traco-icone); }
+.palco-icone-18 { width: var(--glifo-30); height: var(--glifo-30); stroke-width: var(--traco-icone); }
+
+/* o quadrado · 44 × 44, a 16 das bordas */
+.palco-quadrado {
+  position: absolute; left: var(--palco-margem); top: var(--palco-margem); z-index: 5;
+  width: var(--palco-quadrado); height: var(--palco-quadrado); display: flex; align-items: center; justify-content: center;
+  background: var(--poco); border-top: var(--traco-borda) solid var(--poco-fundo); border-bottom: var(--traco-borda) solid var(--borda-poco);
+  border-left: var(--traco-borda) solid var(--poco-lado); border-right: var(--traco-borda) solid var(--poco-lado);
+  color: var(--tinta-apagada);
+}
+.palco-quadrado:active { background: var(--elevado); }
+
+/* a cena · o celular no centro da janela nos dois eixos, com a mesma folga em cima e embaixo; a coluna a 40 dele,
+   com a altura dele. O painel passa por cima: o celular e a coluna não se mexem quando ele abre */
+.palco-cena { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+/* a moldura (decisão 43): a silhueta — a borda de 8 no recheio, quase-preta, e o fio de luz por dentro,
+   o contorno por fora e a sombra embaixo, por sombra, que não somam no tamanho: 376 × 816 por fora, o canto de 36 por fora e
+   28 na tela, concêntricos. A escala (Palco.jsx) leva a moldura inteira junto: a borda e os raios proporcionais */
+.celular {
+  position: relative; flex-shrink: 0;
+  width: var(--palco-celular-largura); height: var(--palco-celular-altura);
+  padding: var(--palco-borda);
+  border-radius: var(--palco-raio-fora); background: var(--palco-borda-cor);
+  box-shadow: inset 0 0 0 var(--palco-fio) var(--palco-fio-luz), 0 0 0 var(--palco-fio) var(--palco-contorno), var(--palco-sombra);
+  transform-origin: center center;
+}
+/* uma moldura só: num estado, ela é a mesma do fluxo — o que avisa que o app está parado é o Voltar ao fluxo, que pisca (decisão 43) */
+.celular-tela { width: var(--tela-largura); height: var(--tela-altura); border-radius: var(--palco-raio-tela); overflow: hidden; background: var(--fundo-pagina); position: relative; cursor: default; }
+/* a tela do celular é desenhada como uma camada só. Sem isso, com o celular em escala, o navegador
+   separa a barra do sistema numa camada própria sempre que algo anima por baixo (o interruptor, a
+   folha), e entre as duas camadas sobra um fio sem tinta, por onde aparece a moldura — às vezes ele
+   fica depois da animação. Numa camada só, não há emenda. Medido: a nitidez do texto é a mesma */
+.celular-tela { will-change: transform; }
+.celular-tela * { cursor: default; }
+
+/* a coluna tem a altura do celular (na escala dele), e o conteúdo fica no meio (palco.md, decisão 30) */
+.coluna { position: absolute; top: calc(50% - var(--palco-celular-altura) * var(--escala, 1) / 2);
+  left: calc(50% + var(--palco-celular-largura) * var(--escala, 1) / 2 + var(--palco-coluna-distancia));
+  height: calc(var(--palco-celular-altura) * var(--escala, 1)); overflow-y: auto;
+  width: var(--palco-coluna); display: flex; flex-direction: column; justify-content: safe center; gap: var(--e-14); }
+.coluna-topo { flex-shrink: 0; height: var(--palco-topo-coluna); display: flex; align-items: center; }
+.coluna-no-fluxo { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+.coluna-cabeca { display: flex; flex-direction: column; gap: var(--palco-cabeca-coluna-vao); }
+.coluna-tela { font-size: var(--t-secundario); font-weight: 600; color: var(--tinta-secundaria); }
+.coluna-voltar {
+  height: var(--palco-botao-voltar); display: flex; align-items: center; gap: var(--e-8); padding: 0 var(--e-12); align-self: flex-start;
+  background: var(--fundo-botao); border: var(--traco-borda) solid var(--borda-botao); border-radius: var(--raio);   /* o desenho do botão secundário · o palco é sempre escuro, então os valores do escuro */
+  font-size: var(--t-secundario); font-weight: 700; color: var(--tinta);
+}
+.coluna-voltar:active { background: var(--elevado); }
+.coluna-voltar-pisca { animation: palco-pisca var(--mov-lento) var(--mov-curva) 1; }
+@keyframes palco-pisca { 50% { opacity: var(--palco-opacidade-pisca); } }
+.coluna-lista { display: flex; flex-direction: column; }
+.coluna-grupo { display: flex; flex-direction: column; }
+/* o nome do grupo (só a T05): 10 em cima e 2 embaixo, sem vão entre os grupos, como os quadros 00 e 03 desenham;
+   a tinta e a letra são as do rótulo de 10 (lei 11: o quadro usa --marca-limite, abaixo do piso de texto, PALCO-A15) */
+.coluna-grupo-nome { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); padding: var(--e-10) 0 var(--e-2); }
+.coluna-linha { height: var(--palco-linha-coluna); display: flex; align-items: center; gap: var(--e-10); text-align: left; }
+/* o que nasce de outro quadro fica recuado embaixo dele, sem linhas ligando (palco.md, a cena 05) */
+.coluna-linha-recuo { padding-left: var(--palco-recuo-coluna); }
+.coluna-longa .coluna-linha { height: var(--palco-linha-coluna-longa); }
+.coluna-linha:active .coluna-nome { color: var(--tinta); }
+.coluna-nome { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-apagada); }
+.coluna-linha-aberta .coluna-nome { font-weight: 700; color: var(--tinta); }
+
+/* o painel · 280, da esquerda, por cima de tudo */
+.painel-fora { position: fixed; inset: 0; z-index: 9; pointer-events: none; }
+.painel-fora-aberto { pointer-events: auto; }
+.painel {
+  position: fixed; left: 0; top: 0; bottom: 0; z-index: 10; width: var(--palco-painel); display: flex; flex-direction: column;
+  background: var(--fundo-faixa); border-right: var(--traco-borda) solid var(--borda);
+  transform: translateX(-100%); transition: transform var(--mov-padrao) var(--mov-curva);
+}
+.painel-aberto { transform: none; }
+.painel-cabeca { height: var(--palco-painel-cabeca); flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--e-16) 0 var(--e-20); }
+/* o corpo: o que fica entre o cabeçalho e o pé, com a linha do cabeçalho no topo (o cabeçalho tem os seus 68 por dentro, quadro 04) */
+.painel-corpo { flex-grow: 1; min-height: 0; display: flex; flex-direction: column; border-top: var(--traco-borda) solid var(--borda-rodape); }
+.painel-titulo { display: flex; flex-direction: column; gap: var(--e-2); }
+.painel-telas { font-size: var(--t-destaque); font-weight: 700; }
+.painel-x { width: var(--palco-x); height: var(--palco-x); display: flex; align-items: center; justify-content: center; color: var(--tinta-secundaria);
+  background: var(--poco); border-top: var(--traco-borda) solid var(--poco-fundo); border-bottom: var(--traco-borda) solid var(--borda-poco);
+  border-left: var(--traco-borda) solid var(--poco-lado); border-right: var(--traco-borda) solid var(--poco-lado); }
+/* o X responde como o quadrado, o outro poço do palco (palco.md: tudo responde no clique, com o pressionado) */
+.painel-x:active { background: var(--elevado); }
+.painel-lista { flex-grow: 1; min-height: 0; overflow-y: auto; padding: var(--e-4) 0 var(--e-16); }
+.painel-parte { padding: var(--e-12) var(--e-20) var(--e-4); font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); }
+.painel-linha { width: 100%; height: var(--palco-linha-painel); display: flex; align-items: center; gap: var(--e-10); padding: 0 var(--e-20); text-align: left; }
+/* a tela aberta: o fundo do cartão e o traço claro à esquerda, sem lima (quadro 00 e 04); o pressionado sobe pra --elevado (movimento.md) */
+.painel-linha-aberta { background: var(--fundo-cartao); box-shadow: inset var(--traco-destaque) 0 0 var(--tinta); }
+.painel-linha:active { background: var(--elevado); }
+.painel-codigo { width: var(--palco-codigo); font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 700; color: var(--tinta-apagada); }
+.painel-nome { font-size: var(--t-corpo); font-weight: 500; color: var(--tinta-forte); }
+.painel-linha-aberta .painel-codigo { color: var(--tinta-secundaria); }
+.painel-linha-aberta .painel-nome { color: var(--tinta); font-weight: 700; }
+/* o pé: a borda, e a data da última atualização */
+.painel-pe { flex-shrink: 0; display: flex; flex-direction: column; padding: var(--e-8) var(--e-20) var(--e-20); border-top: var(--traco-borda) solid var(--borda); }
+/* a linha Modo claro no pé: 44 de alto, o sol de 16 em --tinta-secundaria, o texto 14/600 em
+   --tinta-forte e o interruptor à direita · a data fica 8 embaixo dela */
+.painel .ds-interruptor.painel-modo-claro { height: var(--linha-padrao); }
+.painel-modo-claro .ds-interruptor-rotulo { font-size: var(--t-corpo); font-weight: 600; color: var(--tinta-forte); }
+.painel-sol { color: var(--tinta-secundaria); stroke-width: var(--palco-traco-sol); }
+.painel-modo-claro + .painel-etiqueta { margin-top: var(--e-8); }
+
+/* ?print=1 — só a tela do app, no canto: o que se compara com o PNG */
+.palco-print { background: var(--fundo-pagina); }
+.palco-print .celular-tela { border-radius: 0; }
+
+/* janela estreita (<900): o app em tela cheia, sem moldura nem coluna; o quadrado flutua.
+   Deitada — mais larga que alta, o celular de lado (regra 11) —, o app não gira: o celular
+   volta a ser o do palco, 360 × 800 com a moldura, no centro e em escala (Palco.jsx), e o
+   resto do estreito fica (o quadrado, o painel com o Voltar ao fluxo e a etiqueta) */
+.palco-estreito:not(.palco-deitado) .palco-cena { align-items: stretch; justify-content: stretch; }
+.palco-estreito:not(.palco-deitado) .celular { width: 100%; height: 100%; padding: 0; border: 0; border-radius: 0; box-shadow: none; }
+.palco-estreito:not(.palco-deitado) .celular-tela { width: 100%; height: 100%; border-radius: 0; overflow-y: auto; }
+/* no celular de verdade, com o app na tela inteira, as barras desenhadas saem: a altura dela vira
+   zero, e tudo que as telas medem a partir dela (o véu, as folhas, o topo do login) acompanha. No computador,
+   no print e no celular deitado (que desenha o celular), ela fica */
+.palco-celular:not(.palco-deitado) { --barra-sistema: var(--palco-barra-no-celular); }
+.palco-celular:not(.palco-deitado) .ds-barra-sistema { overflow: hidden; padding: 0; }
+/* e a navegação por gestos desenhada também: a do aparelho já está lá */
+.palco-celular:not(.palco-deitado) .ds-navegacao-gestos { display: none; }
+/* no estreito, o painel leva o Voltar ao fluxo e a etiqueta; o toque no
+   app parado pisca o quadrado, que é a porta do Voltar */
+/* 12 da linha do cabeçalho (decisão 17: nada encosta); embaixo, o recheio da lista e o do nome da parte já dão 16 até O CAMINHO.
+   Nunca encolhe quando a lista não cabe e rola */
+.painel-voltar { flex-shrink: 0; margin: var(--e-12) var(--e-20) 0; }
+.painel-etiqueta { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); color: var(--tinta-apagada); }
+.palco-pisca { animation: palco-pisca var(--mov-lento) var(--mov-curva) 1; }
+/* a rolagem do palco: o painel e a coluna rolam com uma barra
+   fina, nas cores do palco, sem trilho claro; no celular estreito, a rolagem
+   é a do sistema (o indicador do app), e a barra do navegador não aparece */
+.palco :where(.painel-lista, .coluna) { scrollbar-width: thin; scrollbar-color: var(--palco-rolagem-cor) transparent; }
+.palco :where(.painel-lista, .coluna)::-webkit-scrollbar { width: var(--palco-rolagem); }
+.palco :where(.painel-lista, .coluna)::-webkit-scrollbar-track { background: transparent; }
+.palco :where(.painel-lista, .coluna)::-webkit-scrollbar-thumb { background: var(--palco-rolagem-cor); border-radius: calc(var(--palco-rolagem) / 2); }
+.celular-tela { scrollbar-width: none; }
+.celular-tela::-webkit-scrollbar { display: none; width: 0; height: 0; }

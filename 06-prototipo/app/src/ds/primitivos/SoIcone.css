@@ -1,0 +1,9 @@
+.ds-so-icone { position: relative; width: var(--poco-44); height: var(--poco-44); display: flex; align-items: center; justify-content: center; flex-shrink: 0; touch-action: manipulation; }
+.ds-so-icone::before { content: ''; position: absolute; inset: calc((var(--poco-44) - var(--alvo-min)) / 2); }
+.ds-so-icone:active { opacity: var(--toque-apagado); transition: none; }
+.ds-so-icone { transition: opacity var(--mov-solta) var(--mov-curva); }
+
+/* o glifo dentro do botão: sem caixa própria; quando troca, esmaece no lugar (T01: o olho ↔ o riscado) */
+.ds-so-icone-glifo { display: flex; }
+.ds-troca-esmaece { animation: ds-troca-esmaece var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-troca-esmaece { from { opacity: 0; } }

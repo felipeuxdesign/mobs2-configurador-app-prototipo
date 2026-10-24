@@ -1,0 +1,64 @@
+/* O item da seção aberta do checklist (folha 7): a leitura de 44 com o poço
+ * de 30; o de tocar, o feito e o com ressalva, de 50 com o poço de 32. O
+ * traço de baixo é a divisória, e a última da seção fica sem ele. */
+.ds-item-ck {
+  display: flex; align-items: center; gap: var(--e-10); flex-shrink: 0;
+  border-bottom: var(--traco-borda) solid var(--divisoria);
+}
+.ds-item-ck.ds-item-ck-sem-divisoria { border-bottom: 0; }
+/* com as linhas do porquê (T13/27): a linha cresce, a 6 em cima e embaixo */
+.ds-item-ck.ds-item-ck-com-linhas, .ds-tocavel.ds-item-ck.ds-item-ck-com-linhas { height: auto; min-height: var(--linha-padrao); padding: var(--e-6) 0; box-sizing: border-box; }
+.ds-item-ck-pilha { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-item-ck-pilha .ds-item-ck-nome { flex-grow: 0; }
+.ds-item-ck-linha { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }
+.ds-item-ck-linha.ds-item-ck-linha-falha { color: var(--vermelho); }
+/* T13/43: o bloco deixado para depois — a 8 em cima e embaixo, e o *revisar em seguida* em --tinta */
+.ds-item-ck.ds-item-ck-com-linhas.ds-item-ck-revisar { padding: var(--e-8) 0; }
+.ds-item-ck-pilha .ds-item-ck-linha.ds-item-ck-linha-forte { color: var(--tinta); }
+.ds-item-ck-leitura { height: var(--linha-padrao); }
+.ds-item-ck-dupla { height: var(--linha-dupla); }
+.ds-tocavel.ds-item-ck-tocar { padding: 0; }
+
+/* a leitura: o nome em --tinta-forte, o valor à direita em 700 */
+.ds-item-ck-nome { flex-grow: 1; min-width: 0; font-size: var(--t-corpo); font-weight: 600; color: var(--tinta-forte); }
+.ds-item-ck-valor { flex-shrink: 0; font-size: var(--t-corpo); font-weight: 700; color: var(--tinta); }
+.ds-item-ck-valor.ds-item-ck-valor-apagado { color: var(--tinta-apagada); }
+.ds-item-ck-valor.ds-item-ck-valor-falha { color: var(--vermelho); }
+/* o valor que é o estado do item (a Montagem): em 13 e --tinta-secundaria */
+.ds-item-ck-valor.ds-item-ck-valor-estado { font-size: var(--t-secundario); color: var(--tinta-secundaria); }
+
+/* o de tocar e o feito: o nome e a legenda empilhados, a 2 */
+.ds-item-ck-texto { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-item-ck-titulo { font-size: var(--t-corpo); font-weight: 600; color: var(--tinta); }
+.ds-item-ck-legenda { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }
+
+/* o glifo pelo dado: o que o técnico resolve em --tinta-secundaria, o que espera o servidor em --marca-limite */
+.ds-item-ck .ds-glifo.ds-item-ck-glifo-pendente { color: var(--tinta-secundaria); }
+.ds-item-ck .ds-glifo.ds-item-ck-glifo-aguarda { color: var(--marca-limite); }
+/* o que só acontece depois (o Autoteste, T13/04) e o bloco deixado para depois (T13/43): o relógio em --tinta-secundaria */
+.ds-item-ck .ds-glifo.ds-item-ck-glifo-espera, .ds-item-ck .ds-glifo.ds-item-ck-glifo-revisar { color: var(--tinta-secundaria); }
+.ds-item-ck-valor.ds-item-ck-valor-espera { color: var(--tinta-secundaria); }
+
+/* T13/38 a 42: o bloco da linha com o que ela abre embaixo — a 40 da
+ * esquerda (o poço de 30 e o vão de 10), o vão de 8 e 12 no pé, e o traço de baixo do bloco inteiro ·
+ * o lendo (a Seção D): o quadrado de agora e o valor em --tinta */
+.ds-item-ck-bloco { display: flex; flex-direction: column; flex-shrink: 0; border-bottom: var(--traco-borda) solid var(--divisoria); }
+.ds-item-ck-bloco.ds-item-ck-sem-divisoria { border-bottom: 0; }
+.ds-item-ck-embaixo { display: flex; flex-direction: column; gap: var(--e-8); padding: 0 0 var(--e-12) calc(var(--poco-30) + var(--e-10)); }
+.ds-item-ck .ds-glifo.ds-item-ck-glifo-lendo { color: var(--tinta); }
+/* o quadrado de agora do item lendo, no poço de 30: o de 10, como a T13/38 e a folha 7 desenham */
+.ds-item-ck .ds-glifo-agora.ds-item-ck-glifo-lendo { width: var(--e-10); height: var(--e-10); }
+
+/* a resposta que se refaz (decisão 64, T13/41, 42, 49 e 50): o item respondido, com a ação — o
+ * nome em --tinta e a resposta embaixo, em 12/500 a 1 dele, em --tinta-secundaria (o não ouvi que
+ * ainda não conta e o evento que não chegou, em --vermelho); o botão da linha à direita */
+.ds-item-ck-respondido { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--traco-borda); }
+.ds-item-ck-respondido .ds-item-ck-nome { flex-grow: 0; color: var(--tinta); }
+.ds-item-ck-resposta { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }
+.ds-item-ck-resposta.ds-item-ck-resposta-falha { color: var(--vermelho); }
+/* a resposta que troca no lugar (T13/42 → 50) esmaece em 150, desacelerando; com reduzir, direto */
+.ds-item-ck-resposta-nasce { animation: ds-item-ck-nasce var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-item-ck-nasce { from { opacity: 0; } }
+/* o nome em destaque (T13/49): o nome em --tinta e o valor em --tinta-secundaria */
+.ds-item-ck-destaque-nome .ds-item-ck-nome { color: var(--tinta); }
+.ds-item-ck-destaque-nome .ds-item-ck-valor { color: var(--tinta-secundaria); }

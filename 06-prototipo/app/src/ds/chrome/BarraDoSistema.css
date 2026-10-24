@@ -1,0 +1,25 @@
+/* os 30 de sempre (nada embaixo se move): o desenho oficial na largura da tela, cortado na altura da barra
+   (o viewBox do BarraDoSistema.jsx). É do aparelho, e fica por cima de tudo o que o app desenha
+   (--camada-sistema): a faixa que desce e a que sobe passam por baixo dela, e ela não se move.
+   O fundo é o da tela (lei 22): a barra sangra */
+.ds-barra-sistema {
+  position: relative; isolation: isolate; z-index: var(--camada-sistema);
+  height: var(--barra-sistema); flex-shrink: 0;
+  background: var(--fundo-faixa);
+}
+.ds-barra-sistema-tira { background: var(--fundo-rebaixado); }
+.ds-barra-sistema-pagina { background: var(--fundo-pagina); }
+.ds-barra-sistema > svg { display: block; width: 100%; height: 100%; }
+
+/* sob o véu: a camada escura fica por baixo do desenho */
+.ds-barra-sistema::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--veu); opacity: 0;
+  transition: opacity var(--mov-rapido) var(--mov-curva);
+}
+.ds-barra-sistema-veu-folha::before { opacity: 1; transition-duration: var(--mov-padrao); }
+.ds-barra-sistema-veu-dialogo::before { opacity: 1; }
+
+/* R-19: no claro, a hora, o sinal, o Wi-Fi e a bateria na cor do texto, como o Android
+   faz com app claro · o desenho oficial vem em branco; só a cor dele troca, pelo token */
+[data-tema="claro"] .ds-barra-sistema path[fill="white"] { fill: var(--tinta); }

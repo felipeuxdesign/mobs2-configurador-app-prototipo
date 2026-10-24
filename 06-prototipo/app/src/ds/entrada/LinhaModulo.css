@@ -1,0 +1,30 @@
+.ds-linha-modulo {
+  display: flex; align-items: center; justify-content: space-between;
+  height: var(--linha-dupla); border-bottom: var(--traco-borda) solid var(--divisoria);
+}
+.ds-linha-modulo.ds-sem-divisoria { border-bottom: 0; }
+.ds-linha-modulo-serial { font-size: var(--t-link); font-weight: 700; color: var(--tinta-forte); }
+.ds-linha-modulo-apagada .ds-linha-modulo-serial { color: var(--tinta-apagada); }
+.ds-linha-modulo-variante { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+
+/* T05 · a última linha, com a folga do pé do cartão (56) */
+.ds-linha-modulo.ds-linha-modulo-fim { height: var(--linha-modulo-fim); }
+
+/* T05/01 · com o marcador de escolha: 72, o poço de 30, o serial em 17
+ * em cima da variante, e o firmware à direita, com o rótulo em cima */
+.ds-linha-modulo.ds-linha-modulo-escolha { justify-content: flex-start; gap: var(--e-12); height: var(--linha-escolha); }
+.ds-linha-modulo.ds-linha-modulo-escolha.ds-linha-modulo-fim { height: var(--linha-modulo-escolha-fim); }
+.ds-linha-modulo-corpo { flex-grow: 1; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-linha-modulo-escolha .ds-linha-modulo-serial { font-size: var(--t-botao); letter-spacing: var(--ls-dado); }
+.ds-linha-modulo-escolha.ds-linha-modulo-apagada .ds-linha-modulo-serial { letter-spacing: 0; }
+.ds-linha-modulo-coluna { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: var(--e-2); }
+.ds-linha-modulo-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); }
+.ds-linha-modulo-valor { font-size: var(--t-corpo); font-weight: 700; color: var(--tinta-secundaria); }
+
+/* a linha marcada da T05: o número em --tinta; e a falha à direita (04), em vermelho */
+.ds-linha-modulo-escolha[aria-checked="true"] .ds-linha-modulo-serial { color: var(--tinta); }
+.ds-linha-modulo-falha { flex-shrink: 0; font-size: var(--t-secundario); font-weight: 700; color: var(--vermelho); }
+
+/* a conexão confirmada (T05/07): o traço lima de 2 por dentro, colado na divisória */
+.ds-linha-modulo.ds-linha-modulo-confirmada { position: relative; }
+.ds-linha-modulo-traco { position: absolute; left: 0; right: 0; bottom: 0; height: var(--traco-destaque); background: var(--lima); pointer-events: none; }

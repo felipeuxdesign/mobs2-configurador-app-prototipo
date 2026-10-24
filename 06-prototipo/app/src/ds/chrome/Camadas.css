@@ -1,0 +1,8 @@
+.ds-chrome-camadas { display: inline-grid; }
+.ds-chrome-camadas > span { grid-area: 1 / 1; }
+.ds-chrome-camadas-toque { color: var(--tinta); opacity: 0; transition: opacity var(--mov-solta) var(--mov-curva); }
+.ds-chrome-camadas-toque[data-texto]::before { content: attr(data-texto); }
+.ds-com-camadas { touch-action: manipulation; user-select: none; }
+.ds-com-camadas:active .ds-chrome-camadas-toque,
+.ds-com-camadas.ds-forca-toque .ds-chrome-camadas-toque { opacity: 1; transition: none; }
+.ds-com-camadas.ds-forca-toque .ds-chrome-camadas-normal { opacity: 0; }

@@ -1,0 +1,33 @@
+.ds-veu {
+  position: relative;
+  flex-grow: 1; min-height: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  background: var(--veu);
+  transition: opacity var(--mov-rapido) var(--mov-curva);
+}
+/* O fundo alcança o topo sem mudar o lugar da folha ou da caixa: o véu sobe sobre o chrome da tela
+ * (--veu-topo, as medidas da tira e da faixa) e mais 2 por baixo da barra do sistema, que é opaca e os
+ * cobre, com margem negativa, e devolve a mesma medida em padding — o layout não se mexe, e o véu é UM
+ * retângulo só: duas partes (um ::before em cima) e a barra se encontrariam no mesmo pixel, e com o
+ * celular em escala no palco sobraria um fio sem véu embaixo da barra.
+ * A barra escurece pela sua API. */
+.ds-veu {
+  --veu-acima: calc(var(--veu-topo, 0px) + var(--traco-destaque));
+  margin-top: calc(-1 * var(--veu-acima)); padding-top: var(--veu-acima);
+}
+.ds-veu-dialogo { justify-content: center; }
+.ds-veu-folha:not(.ds-veu-oculto) { transition-duration: var(--mov-padrao); }
+.ds-veu-oculto { opacity: 0; pointer-events: none; }
+
+/* A troca no mesmo véu (PorCima.jsx): o véu é a caixa do que sai, que fica fora do
+ * fluxo e por baixo do que entra (z-index -1, dentro dele) — e continua aceso, parado. */
+.ds-veu-troca { position: relative; isolation: isolate; }
+/* Se outra composição ampliar o fundo pintado, só o trecho novo esmaece.
+ * Na T04, a cobertura já é integral, e a troca não usa --veu-corte. */
+.ds-veu-cresce { background: linear-gradient(to bottom, var(--veu) var(--veu-acima), transparent var(--veu-acima), transparent calc(var(--veu-acima) + var(--veu-corte)), var(--veu) calc(var(--veu-acima) + var(--veu-corte))); }
+.ds-veu-cresce-pedaco {
+  position: absolute; top: var(--veu-acima); left: 0; right: 0; height: var(--veu-corte); z-index: -1;
+  background: var(--veu); pointer-events: none;
+  animation: ds-veu-cresce var(--mov-rapido) var(--mov-curva);
+}
+@keyframes ds-veu-cresce { from { opacity: 0; } }

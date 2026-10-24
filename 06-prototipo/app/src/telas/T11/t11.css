@@ -1,0 +1,44 @@
+/* T11 · Conferir configuração — só a montagem da tela; o desenho de cada bloco é da peça.
+ * A barra do sistema na cor da faixa, a faixa da sessão, o miolo e o rodapé. */
+.t11 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* a faixa mora num fieldset, que a desabilita de uma vez quando a folha Outras
+ * ações abre (T11/03, como a T04/10). Sem o papel ou desenho do fieldset,
+ * a faixa fica inerte atrás do véu, sem toque nem acesso pelo leitor. */
+.t11-topo { flex-shrink: 0; min-width: 0; margin: 0; padding: 0; border: 0; }
+.t11-topo:disabled { pointer-events: none; }
+
+/* o corpo: o miolo e o rodapé, numa caixa só, que fica inerte atrás do véu da
+ * folha. Tem o lugar que o miolo e o rodapé tinham, sem mudar nada. */
+.t11-corpo { flex-grow: 1; min-height: 0; display: flex; flex-direction: column; }
+
+/* Outras ações (T11/03): a composição permanece abaixo da faixa, e só o fundo
+ * se estende sobre ela. A barra do sistema escurece pela própria peça.
+ * O app (.app) é a caixa de posição. */
+.t11-sobre {
+  --veu-topo: var(--faixa-sessao);
+  position: absolute; top: calc(var(--barra-sistema) + var(--faixa-sessao)); right: 0; bottom: 0; left: 0; z-index: 1;
+  display: flex; flex-direction: column;
+}
+
+/* o miolo: entre a faixa e o rodapé, rola quando passa de 800. A folga de
+ * 16 até o rodapé é o recheio dele; os blocos ficam a 12, como as três referências. */
+.t11 .tela-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--e-12);
+  padding: var(--e-14) var(--e-16) var(--respiro) var(--e-16);
+}
+.t11 .tela-miolo > * { flex-shrink: 0; }
+
+/* a legenda solta embaixo da lista (01: o que o Reenviar preserva; 04: o que o Corrigir arrasta): não é a 'com legenda' do rodapé,
+ * que fica a 12 do botão e centrada — é o texto de 12 do conteúdo */
+
+
+/* a 04: as ações desde o conferindo, desligadas — a frase em cima, neutra
+   (12/500 em --tinta-secundaria, a 6 + 6 do botão), e o Outras ações apagado embaixo, no lugar da explicação */
+.t11 .ds-rodape-legenda { font-weight: 500; color: var(--tinta-secundaria); }
+/* a do 01, com o link: só os 4 de margem, sem o recheio de 6 */
+.t11 .ds-rodape.ds-rodape-com-link .ds-rodape-legenda { padding-bottom: 0; }
+.t11.t11-lendo .ds-rodape-explicacao { color: var(--marca); }
+/* o botão da linha que ainda não foi lida: guarda o lugar, invisível (nada muda de lugar) */
+.t11-acao-espera { visibility: hidden; }

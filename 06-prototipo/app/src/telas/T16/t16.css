@@ -1,0 +1,38 @@
+/* T16 · Sessão — só a montagem da tela; o desenho de cada bloco é da peça.
+ * A barra do sistema na cor da faixa, a faixa (sem ação enquanto encerra, sem
+ * sessão depois), o miolo e o rodapé. */
+.t16 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* o miolo: entre a faixa e o rodapé, rola quando passa de 800. A folga de
+ * 16 até o rodapé é o recheio dele. 14 entre os blocos nas sete, como as
+ * referências desenham. */
+.t16 .tela-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--e-14);
+  padding: var(--e-14) var(--e-16) var(--respiro) var(--e-16);
+}
+.t16 .tela-miolo > * { flex-shrink: 0; }
+
+/* o que entra quando chega a última assertiva (T16·4): a prova, o bloqueio e o
+ * Voltar ao menu ficam no lugar desde a primeira, neutros — a espera e a chegada
+ * são das peças (Prova e Aviso com `aguarda`, Primario com `acende`) */
+
+/* a nota solta embaixo do cartão das assertivas (T16/02): a frase de 12, apagada */
+.t16-nota { font-size: var(--t-legenda); font-weight: 500; line-height: var(--entrelinha-apoio); color: var(--tinta-apagada); }
+
+/* os três contadores (T16/02, 05 e 07): 13/600 em --tinta-apagada, o número em 700 e --tinta */
+.t16-contadores { margin: 0; font-size: var(--t-secundario); font-weight: 600; color: var(--tinta-apagada); }
+.t16-contadores strong { font-weight: 700; color: var(--tinta); }
+
+/* as assertivas (T16/07 e 02): a que ainda não chegou fica apagada — o título em
+ * --tinta-apagada, o relógio e o traço em --marca —, e o *não se aplica* em --tinta-apagada */
+.t16 .ds-checagem.t16-assertiva-espera .ds-checagem-titulo { color: var(--tinta-apagada); }
+.t16 .ds-checagem.t16-assertiva-espera .ds-checagem-valor,
+.t16 .ds-checagem.t16-assertiva-espera .ds-glifo-cor-secundaria { color: var(--marca); }
+.t16 .ds-checagem.t16-assertiva-nsa .ds-checagem-valor { color: var(--tinta-apagada); }
+
+/* o Descartar a instalação? (T16/11): como o Encerrar antes de terminar?, o véu e a caixa começam
+ * embaixo da barra do sistema e cobrem a faixa (o .app é a caixa de posição) · o pé que fica
+ * atrás dele, inerte, sem caixa própria: nada muda de lugar */
+.t16-sobre { position: absolute; top: var(--barra-sistema); right: 0; bottom: 0; left: 0; z-index: 1; display: flex; flex-direction: column; }
+.t16-pe { display: contents; }

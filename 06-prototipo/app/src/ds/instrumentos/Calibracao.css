@@ -1,0 +1,67 @@
+/* o valor em poço */
+.ds-valor-poco { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: var(--e-12) var(--e-14); }
+.ds-valor-poco-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-secundaria); }
+.ds-valor-poco-numero { font-size: var(--n-pequeno); font-weight: 700; letter-spacing: var(--ls-n-poco); }
+.ds-valor-poco-unidade { font-size: var(--n-unidade-p); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); padding-left: var(--e-4); }
+.ds-valor-poco-apagado .ds-valor-poco-rotulo,
+.ds-valor-poco-apagado .ds-valor-poco-numero,
+.ds-valor-poco-apagado .ds-valor-poco-unidade { color: var(--tinta-apagada); }
+/* a releitura que não confere (T10/10): o número em vermelho */
+.ds-valor-poco-falha .ds-valor-poco-numero { color: var(--vermelho); }
+
+/* a régua da diferença */
+.ds-regua { flex-shrink: 0; display: flex; align-items: center; gap: var(--e-10); padding: 0 var(--e-2); }
+.ds-regua-traco { display: block; flex-grow: 1; height: var(--traco-borda); background: var(--divisoria); }
+.ds-regua-texto { font-size: var(--t-secundario); font-weight: 700; color: var(--tinta-secundaria); }
+.ds-regua-confere { display: flex; align-items: center; gap: var(--e-6); color: var(--tinta); }
+.ds-regua-confere .ds-glifo, .ds-regua-falha .ds-glifo { width: var(--glifo-confere); height: var(--glifo-confere); }
+/* o ícone em linha com o texto desce até o meio das minúsculas: 1 no texto de 13; o
+ * xis do não confere (T10/10) é o da família do poço, com o círculo, como o check */
+.ds-regua-confere .ds-glifo, .ds-regua-falha .ds-glifo { position: relative; top: var(--traco-borda); }
+/* o não confere (T10/10): o xis solto de 14 e a frase, em vermelho */
+.ds-regua-falha { display: flex; align-items: center; gap: var(--e-6); color: var(--vermelho); }
+/* o veredito que chega: a diferença encolhe no centro e esmaece, ainda no
+ * lugar dela — o fim é o desenho dela parada, até sair, pra não voltar um quadro;
+ * depois o veredito entra e esmaece no lugar (sem preenchimento: acabou, não sobra
+ * animação viva) */
+.ds-regua-sai { transform: scale(0); opacity: 0; animation: ds-regua-sai var(--mov-lento) var(--mov-curva); }
+@keyframes ds-regua-sai { from { transform: none; opacity: 1; } }
+.ds-regua-entra { animation: ds-regua-entra var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-regua-entra { from { opacity: 0; } }
+
+/* o valor alvo: o campo do painel em foco, com o lima (a folha 8). O lima do traço de baixo é o
+ * traço de foco dos campos (TracoFoco.css): a borda fica em 1 e o de 2 é desenhado por cima,
+ * com a capa que acende da esquerda pra direita. O número que não cabe não vaza do poço: o corte fica
+ * no poço, e a capa, que cobre a borda de baixo, passa 1 dele (overflow-clip-margin) */
+.ds-valor-alvo.ds-caixa-poco {
+  position: relative; flex-grow: 1; min-height: 0; overflow: clip; overflow-clip-margin: var(--traco-borda);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--e-8); padding: var(--e-16);
+}
+.ds-valor-alvo-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--lima); }
+.ds-valor-alvo-numero { font-size: var(--n-destaque); font-weight: 700; letter-spacing: var(--ls-n-destaque); line-height: var(--entrelinha-numero); white-space: nowrap; }
+.ds-valor-alvo-unidade { font-size: var(--n-unidade-g); font-weight: 500; color: var(--tinta-secundaria); padding-left: var(--e-4); }
+.ds-valor-alvo-legenda { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-apagada); }
+/* sem o lima: o painel vazio (folha 8) e o número fora do foco (o cumprido, T10/01, 07, 09, 10) —
+   a borda do poço (a capa do traço de foco cobre o lima) e o rótulo apagado; no vazio, o traço no
+   lugar do número em --marca-limite */
+.ds-valor-alvo-vazio .ds-valor-alvo-rotulo,
+.ds-valor-alvo-cumprido .ds-valor-alvo-rotulo { color: var(--tinta-apagada); }
+.ds-valor-alvo-vazio .ds-valor-alvo-numero { color: var(--marca-limite); }
+/* o campo em foco: o lima de volta, por cima das duas (T10/05) — o traço, pelo ds-foco (TracoFoco.css) */
+.ds-valor-alvo-foco .ds-valor-alvo-rotulo { color: var(--lima); }
+/* o semeado que se corrige (T10/01 e 09): o convite no desenho do link dentro do conteúdo (folha 6),
+   14/600, sublinhado na marca vazia · o poço inteiro é o botão; pressionado, o convite vai pra --tinta,
+   como o link · o botão sem desenho próprio: o que se vê é o poço */
+button.ds-valor-alvo { width: 100%; font: inherit; color: inherit; text-align: inherit; cursor: default; touch-action: manipulation; user-select: none; }
+.ds-valor-alvo-corrigir {
+  font-size: var(--t-corpo); font-weight: 600; color: var(--tinta-forte);
+  text-decoration: underline; text-decoration-color: var(--marca-vazia); text-underline-offset: var(--e-4);
+}
+.ds-valor-alvo-tocavel:active .ds-valor-alvo-corrigir { color: var(--tinta); }
+/* o campo: por cima do poço inteiro, sem desenho — o que se vê é o número da peça */
+.ds-valor-alvo-campo {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0;
+  background: transparent; color: transparent; caret-color: transparent; opacity: 0;
+  font-family: inherit; font-size: var(--t-destaque);
+}

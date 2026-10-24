@@ -1,0 +1,483 @@
+/* tokens.css — a fonte única de todo valor visual do App Configurador.
+ * Derivado do design system (referencias/design-system/). Valor solto fora deste
+ * arquivo é dívida: a auditoria procura hex, px e rgba fora daqui.
+ * Dois temas: o ESCURO é o padrão (:root) e o CLARO, neutro frio, é escolha do técnico ([data-tema="claro"],
+ * na folha da Conta, lembrada no aparelho). Só as cores mudam de um tema pro outro — tipo,
+ * espaço e medidas são os mesmos. Barlow empacotada no app (os woff2 de 05-recursos/fontes), e a Google Sans recortada só na hora da barra de status (decisão 43) — nunca baixadas da internet. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  /* ── fundos ─────────────────────────────────────────── */
+  --fundo-pagina:      #0F0D14;   /* a página do app */
+  --fundo-faixa:       #16131D;   /* faixa de sessão, folha */
+  --fundo-cartao:      #1A1726;   /* cartão e lista */
+  --fundo-apagado:     #131019;   /* vazio declarado, tracejado */
+  --fundo-botao:       #241F33;   /* o fill do botão secundário · um degrau fora do cartão */
+  --fundo-botao-no-rebaixado: #241F33;   /* o fill do botão secundário em cima do rebaixado · um degrau acima dele (R-21) */
+  --poco:              #0B0910;   /* o poço */
+  --poco-fundo:        #06050A;   /* a borda funda do poço (topo) */
+  /* o rebaixado: a superfície rebaixada GRANDE (campo, painel, bloco, faixa do topo,
+   * busca, área da foto) · o poço fica só pro quadradinho · no escuro, os valores do poço (R-24) */
+  --fundo-rebaixado:   #0B0910;   /* a superfície rebaixada grande · no escuro, o mesmo do poço */
+  --rebaixado-sombra:  #06050A;   /* a borda de cima do rebaixado · no escuro, a mesma do poço */
+  --rebaixado-lado:    #14111C;   /* as laterais do rebaixado */
+  --rebaixado-luz:     #332C49;   /* a borda de baixo do rebaixado */
+
+  /* ── bordas e elevação ──────────────────────────────── */
+  --borda-poco:        #332C49;   /* borda de baixo do poço */
+  --borda:             #2B2540;   /* cartão e lista — uma só */
+  --divisoria:         #241F33;   /* entre linhas */
+  --separador:         #2E2840;   /* separador curto */
+  --borda-rodape:      #221D2E;   /* topo do rodapé */
+  --poco-lado:         #14111C;   /* laterais do poço */
+  --elevado:           #1E1A29;   /* pressionado · a linha tocável, sob o dedo · nenhum botão usa de fundo */
+
+  /* ── tinta de texto · nada abaixo de --tinta-apagada ─── */
+  --tinta:             #F2F0F7;
+  --tinta-forte:       #C9C3DA;
+  --tinta-secundaria:  #A9A2BC;
+  --tinta-apagada:     #867E9A;   /* o piso de texto: 4,5:1 em todos os fundos */
+
+  /* ── só fora de texto ───────────────────────────────── */
+  --marca-limite:      #6E6683;   /* traço dos limites da faixa (3:1) */
+  --marca:             #4E475E;   /* traço, poço vazio, ícone apagado */
+  --marca-vazia:       #4A4166;   /* marcador de escolha vazio */
+  --borda-neutra:      #3A3350;   /* caixa neutra, e o tracejado do vazio */
+  --borda-botao:       #3A3350;   /* a borda do botão secundário · um tom acima da dos cartões, a mesma intensidade nos dois temas */
+  --borda-interruptor: #6E6683;   /* o contorno do interruptor desligado · quem marca o estado é a bolinha (no escuro, o --marca-limite) */
+  --andamento:         #F2F0F7;   /* o que marca o andamento: a etapa atual, o "agora" na régua, o item da vez (R-22) · no escuro, o creme */
+  --andamento-alerta:  #F2F0F7;   /* o mesmo marcador dentro de uma barra em alerta · no claro, acompanha o vermelho */
+
+  /* ── ação e veredito ────────────────────────────────── */
+  --lima:              #AAEF00;   /* veredito e escolhido — nunca enfeite · o texto do botão principal tem token próprio, --texto-primario */
+  --roxo:              #402070;   /* fundo do primário */
+  --roxo-pressionado:  #4A2A80;   /* NOVO · validar no aparelho */
+  --texto-primario:    #AAEF00;   /* o texto do botão principal, sobre o roxo · lima no escuro, branco no claro */
+  --logo:              #AAEF00;   /* a cor do logo · lima no escuro, o roxo institucional no claro · Marca, pelo desenho pintado */
+  --vermelho:          #E06A5A;   /* falha */
+
+  /* ── transparências com nome ────────────────────────── */
+  --lima-faixa:        rgba(170, 239, 0, 0.14);  /* a faixa esperada da barra */
+  --lima-feito:        rgba(170, 239, 0, 0.5);   /* segmento feito */
+  --lima-borda:        rgba(170, 239, 0, 0.6);   /* as bordas da faixa */
+  --vermelho-faixa:    rgba(224, 106, 90, 0.18);
+  --vermelho-borda:    rgba(224, 106, 90, 0.8);
+  --veu:               rgba(6, 5, 10, 0.32);     /* o véu atrás de folha e diálogo modais · a cor do tema a 32%, o padrão do Material 3 (ScrimOpacity = 0.32) · cobre a tela inteira, até o fundo da barra de status · atrás dele, a tela de onde a folha ou o diálogo saiu */
+
+  /* ── tipo · Barlow 400 · 500 · 600 · 700 ────────────── */
+  --fonte: 'Barlow', system-ui, sans-serif;
+  --fonte-sistema: 'Google Sans', sans-serif;  /* só a hora da barra de status, que é do Android · o recorte vai empacotado em 05-recursos/fontes, nunca baixado */
+  --t-rotulo-bloco:    10px;  /* caixa alta · letra 1.5px */
+  --t-rotulo-topo:     11px;  /* caixa alta · letra 1.4px */
+  --t-legenda:         12px;  /* o piso de texto que informa */
+  --t-secundario:      13px;
+  --t-corpo:           14px;
+  --t-link:            15px;
+  --t-destaque:        16px;
+  --t-botao:           17px;
+  --t-titulo-bloco:    20px;  /* letra −0.2px */
+  --t-titulo-tela:     22px;  /* letra −0.3px · um por tela */
+  --t-titulo-proc:     28px;  /* letra −0.4px · entrada e passo em foco */
+
+  /* ── números de instrumento · sempre tabular ────────── */
+  --n-cartao:          26px;  /* letra −0.4px */
+  --n-identidade:      34px;  /* serial e placa · −0.6px */
+  --n-progresso:       40px;  /* −1px */
+  --n-destaque:        48px;  /* −1.6px */
+  --n-cronometro:      62px;  /* −2px */
+  --n-unidade-p:       12px;  /* junto de número até 34 */
+  --n-unidade-g:       18px;  /* junto de 48 e 62 */
+
+  /* ── espaço · de 2 em 2 ─────────────────────────────── */
+  --e-2: 2px;  --e-4: 4px;  --e-6: 6px;  --e-8: 8px;  --e-10: 10px;
+  --e-12: 12px; --e-14: 14px; --e-16: 16px; --e-20: 20px; --e-24: 24px;
+  --e-28: 28px; --e-36: 36px; --e-40: 40px;
+  --respiro: 16px;            /* padding do conteúdo e espaço antes do rodapé */
+
+  /* ── alturas ────────────────────────────────────────── */
+  --linha-compacta:    38px;
+  --linha-padrao:      44px;
+  --linha-dupla:       50px;
+  --linha-escolha:     72px;
+  --linha-precheck-sessao: 38px;  /* exceção declarada: pré-checagem com a faixa de sessão */
+  --alvo-min:          48px;
+  --alvo-primario:     56px;
+  --faixa-sessao:      52px;
+  --faixa-sessao-menu: 50px;
+
+  /* ── forma ──────────────────────────────────────────── */
+  --raio:              4px;   /* em tudo; círculo só no LED e no avatar */
+  --poco-22: 22px;
+  --poco-24: 24px;
+  --poco-32: 32px;
+  --poco-44: 44px;
+  --tela-largura: 360px;
+  --tela-altura: 800px;
+  --pe-visivel: 32px;
+  --rodape-pe-com-link: 24px;
+  --rodape-pe-com-botao: 32px;
+  --poco-folga-divisoria: 6px; --poco-26: 26px; --poco-28: 28px;
+  --poco-30: 30px; --poco-34: 34px;  /* ícone = 60% do poço */
+  --traco-glifo:       2.2;   /* glifos de estado */
+  --traco-icone:       1.8;   /* ícones de ferramenta e ícones de 22px ou mais */
+  --traco-mini:        2.6;   /* ícones abaixo de 14px */
+  --traco-fino:        2;     /* o traço de 2 que as referências usam fora das classes da lei 14: a seta e a busca do país (T01/02, 20, 22) e o relógio do critério pendente (T12/05) · Icone, Glifo */
+
+  /* ── movimento · só transform e opacity ─────────────── */
+  --mov-rapido:        150ms;
+  --mov-padrao:        200ms;
+  --mov-lento:         300ms;
+  --mov-curva:         cubic-bezier(0.2, 0.8, 0.2, 1);   /* desacelera no fim */
+
+  /* ── valores que as referências usam, fora da escala de cima ──
+   * Cada um com o papel. Os que dependem de uma peça ficam com ela, embaixo. */
+  --barra-sistema:     30px;   /* a barra do Android, em toda tela */
+  --campo:             54px;   /* o campo de texto: rótulo em cima, poço de 54 */
+  --traco-borda:       1px;    /* borda, divisória, separador */
+  --traco-destaque:    2px;    /* o traço do campo focado, da falha, do escolhido */
+  --marca-topo:        207px;  /* a logo do login, presa a esta distância do topo (decisão 19) */
+  --marca-largura:     196px;  /* a largura da logo no login */
+
+  /* espaçamento de letra — os 10 dos comentários acima, e os 5 medidos */
+  --ls-rotulo-bloco:   1.5px;  /* com --t-rotulo-bloco, caixa alta */
+  --ls-rotulo-topo:    1.4px;  /* com --t-rotulo-topo, caixa alta */
+  --ls-titulo-bloco:  -0.2px;
+  --ls-titulo-tela:   -0.3px;
+  --ls-titulo-proc:   -0.4px;
+  --ls-n-cartao:      -0.4px;
+  --ls-n-identidade:  -0.6px;
+  --ls-n-progresso:   -1px;
+  --ls-n-destaque:    -1.6px;
+  --ls-n-cronometro:  -2px;
+  --ls-barra:          0.1px;  /* a hora da barra do sistema · sem uso pela decisão 43: a hora na Google Sans não tem letra a mais (0 nas 145) */
+  --ls-identidade:     0.3px;  /* serial e placa na faixa de sessão */
+  --ls-encerrar:       0.6px;  /* o ENCERRAR da faixa */
+  --ls-marca:          1.2px;  /* o CONFIGURADOR do login */
+  --ls-senha:          2px;    /* os pontos da senha */
+
+  /* movimento que o movimento.md e as telas pedem — zera no reduzir */
+  --mov-solta:         100ms;  /* o pressionado solta (movimento.md:24) · a célula do código */
+  --mov-escalonar-lista: 80ms; /* entre as linhas da busca de módulos (T05) */
+  --mov-escalonar-tambor: 40ms;/* entre as rodinhas do tambor (T07, T10) */
+
+  /* ── as medidas das peças, com o papel ── */
+  /* o glifo dentro do poço — a linha de tamanhos da folha 3 (≈ 60% do poço) */
+  --glifo-22: 13px; --glifo-24: 14px; --glifo-26: 16px; --glifo-28: 17px;
+  --glifo-30: 18px; --glifo-32: 19px; --glifo-34: 20px; --glifo-44: 26px;
+  --marcador-11: 11px;   /* o quadrado de escolha da folha 3 e das linhas de empresa */
+  --escala-toque: 0.98;  /* o primário afunda 2% no toque (movimento.md:24) */
+  --escala-surge: 0.8;   /* o que surge no lugar parte de 80% (o quadrado do checkbox, T01) */
+  --entrelinha-texto: 1.4;    /* texto corrido de peça (o do checkbox, das linhas de opção) */
+  --entrelinha-legenda: 1.45; /* legenda de 12px */
+  --entrelinha-apoio: 16px;   /* o texto de apoio de 12 — o apoio embaixo do título, a descrição, a legenda —, uma altura só no app inteiro, a do Material 3 pro texto pequeno (a lei do texto de apoio) · os rótulos em caixa alta, com espaçamento entre letras, ficam de fora */
+
+  /* ── as peças das oito folhas (cada um com o papel e quem usa) ── */
+
+  /* ── alturas de linha e de peça ─────────────────────────────── */
+  --linha-tocavel: 54px;             /* a linha tocável solta, em cartão próprio (folha 1) · LinhaTocavel */
+  --linha-secao-mapa: 54px;          /* a linha de seção do mapa do checklist (T13), com poço de 32 · LinhaSecaoMapa · sem uso: o checklist não tem mapa, e a seção é o cartão de 58 (--secao-checklist) */
+  --linha-secao-mapa-legenda: 60px;  /* a mesma linha, com a legenda embaixo do nome (F · não bloqueia, T13) · LinhaSecaoMapa · sem uso: o checklist não tem mapa */
+  --linha-fila: 62px;                /* a linha da fila que já subiu (T15), com poço de 30 · LinhaFila */
+  --linha-rechecagem: 54px;          /* a linha da re-checagem da Seção F (T15), no mínimo · LinhaRechecagem */
+  --linha-requisito: 40px;           /* a linha de cada requisito da senha (T01) · Requisito */
+  --linha-contagem: 58px;            /* a linha da lista com contagem, o pacote baixando (T03) · LinhaContagem */
+  --linha-declarada: 26px;           /* a linha do que não se aplica, no fato declarado (T10) · Declarado */
+  --celula-codigo: 58px;             /* a altura de cada célula do código de recuperação (T01) · Codigo */
+  --conferencia-nome: 96px;          /* a coluna do nome na linha de conferência (T11, folha 4) · LinhaChecagem */
+  --cartao-ferramenta-altura: 108px; /* a altura mínima do cartão de ferramenta de meia largura, no menu (T04) · CartaoFerramenta */
+  --cartao-ferramenta-altura-linha-espera: 100px; /* a do Finalizar com checklist que espera, na linha inteira: 8 a menos que o --cartao-ferramenta-altura (T04/01, 02, 05, 07, 08, 14) · CartaoFerramenta */
+  --botao-secundario: 52px;          /* o botão que não é o primário: o secundário da linha (T15) e o Sair da conta na folha (T04/05) · BotaoSecundario, BotaoDaFolha */
+  --tira-contexto: 52px;             /* a tira de contexto do menu: a empresa e a conta (T04) · TiraDeContexto */
+  --folha-minima: 430px;             /* a folha da conta abre com pelo menos esta altura (T04/05) · Folha */
+  --mostrador-altura: 88px;          /* o mostrador do sinal (T08), no mínimo · Mostrador */
+  --mostrador-nome: 32px;            /* o nome do sinal reserva duas linhas · Mostrador */
+
+  /* ── recheios e folgas ──────────────────────────────────────── */
+  --sobreposto-recheio: 18px;        /* o recheio do que vem por cima da tela: o topo da folha e os lados do diálogo · Folha, Dialogo */
+  --vazio-recheio-bloco: 22px;       /* o recheio de cima e de baixo do vazio declarado · Vazio */
+  --vazio-recheio-lado: 18px;        /* o recheio dos lados do vazio declarado · Vazio */
+  --par-intervalo: 18px;             /* entre o lido, o separador, o cadastro e a explicação do par comparado · ParComparado */
+  --escolhido-motivo-respiro: 22px;  /* o recheio de cima e de baixo do escolhido com o motivo (T06) · BlocoEscolhido */
+  --separador-motivo: 60%;           /* a largura do separador curto antes do motivo (T06) · BlocoEscolhido */
+  --cartao-acao-folga: 18px;         /* entre o rótulo, o erro e a ação no cartão que pede ação (T15) · CartaoAcao */
+  --marca-folga: 18px;               /* entre a logo e o CONFIGURADOR (T01) · Marca */
+  --marca-traco: 22px;               /* o comprimento de cada traço em volta do CONFIGURADOR · sem uso: os fios crescem até as bordas da marca (--marca-largura) */
+  --marca-proporcao: 271 / 57;       /* a proporção do logo-mobs2.svg: a altura fica reservada antes do arquivo carregar · Marca */
+
+  /* ── a barra do sistema (o desenho do Android atual · lei 22, decisão 43: a hora na --fonte-sistema, 13 do --t-secundario; a geometria de dentro dos ícones fica no SVG, e o tamanho de cada um e o traço do Wi-Fi são token) ── */
+  --barra-sistema-recuo: 26px;       /* a hora, a 26 da borda esquerda, recuada da curva da tela (decisão 43) · BarraDoSistema */
+  --barra-sistema-recuo-direita: 32px; /* a bateria, a 32 da borda direita, recuada da curva da tela (decisão 43) · BarraDoSistema */
+  --barra-sistema-desce: 6px;        /* o recheio de cima que põe a hora e os ícones 3px abaixo do centro da barra, com os 30 mantidos (decisão 43) · BarraDoSistema */
+  --barra-sistema-espaco-wifi: 5px;  /* entre o sinal e o Wi-Fi (decisão 43) · BarraDoSistema */
+  --barra-sistema-espaco-bateria: 5.5px; /* entre o Wi-Fi e a bateria (decisão 43) · BarraDoSistema */
+  --barra-icone: 10.4px;             /* a altura do Wi-Fi e da bateria na barra (decisão 43) · BarraDoSistema */
+  --barra-sinal: 14.7px;             /* a largura do sinal, as quatro cápsulas de 2,1 a cada 4,2 (decisão 43) · BarraDoSistema */
+  --barra-sinal-altura: 9.7px;       /* a altura do sinal, a da cápsula mais alta (decisão 43) · BarraDoSistema */
+  --barra-wifi: 12.8px;              /* a largura do Wi-Fi (decisão 43) · BarraDoSistema */
+  --barra-wifi-traco: 2.3;           /* o traço dos dois arcos do Wi-Fi, em unidades do desenho (decisão 43) · BarraDoSistema */
+  --barra-bateria: 20.4px;           /* a largura da bateria: o corpo de 18,3 e o pininho, separado (decisão 43) · BarraDoSistema */
+  --barra-bateria-casca: 0.45;       /* a opacidade do contorno e do polo da bateria, mais apagados que a carga · BarraDoSistema · sem uso pela decisão 43: a bateria é cheia e branca */
+
+  /* ── a conta ────────────────────────────────────────────────── */
+  --avatar-tira: 32px;               /* o avatar da conta na tira de contexto · Avatar */
+  --avatar-conta: 52px;              /* o avatar na folha da conta · Avatar */
+  --ls-avatar-conta: 1px;            /* as iniciais no avatar de 52 · Avatar */
+  --t-nome-conta: 18px;              /* o nome da pessoa no cartão da conta · CartaoDaConta */
+  --toque-apagado: 0.7;              /* o botão sem fundo (o avatar da tira) apaga no toque, como o SoIcone · TiraDeContexto */
+
+  /* ── texto: tamanho, letra e entrelinha ─────────────────────── */
+  --t-placa: 18px;                   /* a placa na linha de ônibus (T06) · LinhaOnibus */
+  --t-passo: 15px;                   /* o nome de cada passo do encerramento (T16) · Encerramento */
+  --ls-dado: 0.2px;                  /* o dado curto no lugar da identidade: o valor do cartão largo do menu (serial, placa, próximo passo), a placa na linha do histórico, o fato da faixa sem serial (sem sessão, módulo com falha) · CartaoFerramenta, LinhaHistorico, Faixa */
+  --ls-par-valor: 1.4px;             /* o código do par comparado (o chassi), pra ler dígito a dígito · ParComparado */
+  --ls-versao: 1px;                  /* a letra da versão, na prova · Prova */
+  --entrelinha-numero: 1;            /* número de instrumento sozinho na linha: a caixa é a própria letra · Mostrador, PrazoDaConta, BlocoEscolhido, LeituraPequena, Calibracao, o instrumento do item reprovado (T13/09) */
+  --entrelinha-cartao: 1.25;         /* o nome, o rótulo e o título dentro de cartão ou caixa: o cartão de ferramenta, o vazio declarado · CartaoFerramenta, Vazio */
+  --entrelinha-titulo-cartao: 1.2;   /* o título de 22 do cartão que pede ação · CartaoAcao */
+  --entrelinha-nome: 1.3;            /* o nome que pode quebrar em duas linhas: o do sinal no mostrador e o título da linha dupla de 50 (a assertiva da sessão) · Mostrador, LinhaChecagem */
+  --entrelinha-detalhe: 1.35;        /* a linha de 12 embaixo do nome, numa linha de lista: a causa da reprovada e a descrição do elo da cadeia · LinhaChecagem, Cadeia */
+  --entrelinha-frase: 1.5;           /* a frase que explica, na caixa apagada: a do vazio declarado e o resumo dos instrumentos apagados · Vazio, Declarado */
+  --entrelinha-dialogo: 1.45;        /* a frase do diálogo, de 14 · Dialogo */
+  --entrelinha-texto-livre: 1.45;    /* o texto que o técnico escreve em várias linhas (a justificativa, T13) · CampoTexto */
+  --entrelinha-mostrador: 1.15;      /* o valor do sinal, que pode quebrar · Mostrador */
+  --entrelinha-leitura: 0.95;        /* o número de 48 da leitura: a caixa aperta a letra · Leitura */
+  --entrelinha-cronometro: 0.92;     /* o número de 62 do prazo do evento · Prazo */
+
+  /* ── números de instrumento ─────────────────────────────────── */
+  --n-pequeno: 22px;                 /* o número da leitura de meia largura e o do valor em poço (T07, T13, T10) · LeituraPequena, Calibracao */
+  --ls-n-poco: -0.3px;               /* o número do valor em poço, o tambor de texto (T10) · Calibracao */
+  --n-unidade-pequena: 11px;         /* a unidade junto do número de 22 da leitura de meia largura (°C) · LeituraPequena */
+  --n-tambor: 34px;                  /* o dígito na célula do tambor do hodômetro (T07) · Tambor */
+  --ls-n-tambor: -0.6px;             /* o espaçamento do dígito do tambor · Tambor */
+  --tambor-celula: 52px;             /* a altura da célula de cada rodinha do tambor (T07) · Tambor */
+  --tambor-unidade: 32px;            /* a largura da unidade (km) ao lado das células do tambor · Tambor */
+  --n-cartao-secao: 18px;            /* o valor do cartão de meia largura da seção aberta · CartaoValor · sem uso: o checklist não tem cartões de valor, e a seção aberta tem os itens de linha */
+  --n-unidade-cartao: 10px;          /* a unidade junto do valor de 18 (V, sat, de 4) · CartaoValor · sem uso: o checklist não tem cartões de valor */
+  --n-mostrador: 17px;               /* o valor do sinal que respondeu · Mostrador */
+  --n-mostrador-vazio: 22px;         /* o traço do sinal apagado · Mostrador */
+  --n-prova-cadeia: 20px;            /* a versão gravada e relida (T09) · Prova */
+  --n-prova-sessao: 22px;            /* a versão que sobreviveu ao reinício (T16) · Prova */
+
+  /* ── a escala: a barra em poço, uma altura por uso ──────────── */
+  --escala-leitura: 26px;            /* a barra da leitura de largura inteira (T07) · Escala */
+  --escala-pequena: 14px;            /* a barra da leitura de meia largura (T07, T13) · Escala */
+  --escala-prazo: 20px;              /* a barra do prazo do evento (T14) · Escala */
+  --escala-placar: 18px;             /* a barra do placar da homologação (T13) · Escala */
+  --risco-leitura: 6px;              /* o risco comum na leitura de largura inteira · Escala */
+  --risco-leitura-forte: 13px;       /* o risco forte (limite da faixa ou meio) na leitura de largura inteira · Escala */
+  --risco-pequena: 5px;              /* o risco comum numa barra pequena: a leitura de meia largura e os quartos do prazo da conta · Escala, PrazoDaConta */
+  --risco-pequena-forte: 8px;        /* o risco do meio numa barra pequena: a leitura de meia largura e o prazo da conta · Escala, PrazoDaConta */
+  --risco-prazo: 7px;                /* o risco comum na barra do prazo do evento · Escala */
+  --risco-prazo-forte: 10px;         /* o risco do meio na barra do prazo do evento · Escala */
+  --risco-placar: 6px;               /* o risco comum no placar da homologação · Escala */
+  --risco-placar-forte: 9px;         /* o risco do meio no placar da homologação · Escala */
+  --marcador-leitura: 4px;           /* o marcador do valor na leitura de largura inteira e no prazo do evento · Escala */
+  --marcador-pequeno: 3px;           /* o marcador do valor numa barra baixa: a leitura de meia largura, o placar, a barra do cartão, o agora do prazo da conta · Escala, PrazoDaConta */
+  --barra-cartao: 9px;               /* a barra do cartão da seção aberta, e o lugar do traço quando não há faixa · CartaoValor · sem uso: o checklist não tem cartões de valor */
+
+  /* ── a cadeia, o encerramento e o segmentado ────────────────── */
+  --traco-trilho: 2px;               /* o trilho que liga um poço ao próximo, na cadeia e no encerramento · Trilho */
+  --cadeia-elo: 72px;                /* a altura de um elo da cadeia com trilho (T09 · cadeia concluída) · Cadeia */
+  --cadeia-elo-justo: 70px;          /* o elo quando a cadeia divide a tela com o aviso da recusa (T09/01) · Cadeia */
+  --encerramento-passo: 62px;        /* a altura de um passo do encerramento com trilho (T16 · encerrando) · Encerramento */
+  --encerramento-passo-justo: 58px;  /* o passo quando a tela abre espaço pro corte ou pro sem homologar (T16/01, 03, 06) · Encerramento */
+  --encerramento-fim: 34px;          /* o último passo do encerramento, sem trilho · Encerramento */
+  --segmento: 5px;                   /* o segmento feito ou pendente do segmentado · Segmentado */
+  --segmento-atual: 8px;             /* o segmento do passo atual, mais alto que os outros · Segmentado */
+
+  /* ── glifo, ícone e foto fora da linha de tamanhos ──────────── */
+  --glifo-confere: 15px;             /* o check solto do "confere" na régua da diferença (T10/01, Lei 4 · exceção) · Calibracao */
+  --glifo-cartao-acao: 22px;         /* o glifo solto ao lado do rótulo do cartão que pede ação (T15) · CartaoAcao */
+  --ferramenta-traco-sem-rede: 9px;  /* o traço no poço do cartão que espera a rede (T04 · Últimas instalações); o da espera é --e-10 · CartaoFerramenta */
+  --visor-foto: 46px;                /* o visor do cartão de foto · CartaoFoto · sem uso: o checklist não tem cartões de foto, e a foto a tirar é o item de tocar com a câmera */
+  --traco-visor: 13px;               /* o traço do visor que ainda espera a foto · CartaoFoto · sem uso: o checklist não tem cartões de foto */
+  --miniatura-foto: 44px;            /* a miniatura da foto da prova (T10) · FotoProva · sem uso (medido): a foto da prova leva o poço de 44 (--poco-44), sem miniatura */
+  --icone-foto: 22px;                /* o ícone dentro da miniatura da foto · FotoProva · sem uso (medido): o ícone da foto da prova tem 20, no poço de 44 */
+
+  /* ── movimento ──────────────────────────────────────────────── */
+  --escala-dialogo: 0.98;            /* o diálogo nasce de 98% e cresce a 100% (movimento.md, por cima da tela) · Dialogo */
+
+  /* ── o que as telas T01 a T04 pediram (cada um com o papel e quem usa) ── */
+  --passo-folga: 18px;             /* entre os blocos de um passo da recuperação: o cabeçalho do passo, o título, o conteúdo, a legenda (T01/02–08) · T01 */
+  --entrelinha-titulo-proc: 1.15;  /* o título de 28 do passo, que quebra em duas linhas ('Para onde mandamos / o código?', T01/02–08) · T01 */
+  --t-contato-email: 18px;         /* o e-mail no cartão do canal; o telefone vai em --n-cartao (T01/02) · T01 */
+  --campo-senha-nova: 58px;        /* o campo da senha nova, sem rótulo e com o texto à vista (T01/08) · T01 */
+  --t-senha-nova: 20px;            /* a senha nova à vista no campo (T01/08) · T01 */
+  --so-leitor-caixa: 1px;          /* a caixa do texto que só o leitor de tela ouve: o h1 "Entrar" escondido da referência (T01/00, 01) e o h1 "Menu" da T04 · T01, T04 */
+  --instrumento-recheio: 18px;         /* o recheio de cima e de baixo do poço dos instrumentos da T03: o download, o concluído e a idade do pacote · T03 */
+  --n-unidade-progresso: 17px;         /* a unidade junto do número de 40 no concluído e na idade do pacote (T03/02, 03, 04); no download (00) ela é --n-unidade-g · T03 */
+  --barra-idade: 14px;                 /* a altura da barra de idade do pacote, o elemento-assinatura (T03/03, 04) · T03 */
+  --idade-preenchido: var(--borda-poco); /* o preenchido da régua de idade, o tempo que passou, no pacote que ainda vale (T03/03): o cinza da borda do poço, #332C49 · no claro, a borda funda do poço, #BCBEC8, o mesmo contraste contra o trilho (1,5:1) · T03 */
+  --entrelinha-nota-secundaria: 1.55;  /* a frase de 13 da nota tracejada que diz o bloqueio (T03/04) · Nota (corpo secundario) */
+
+  /* ── o que as telas T05 a T08 pediram (cada um com o papel e quem usa) ── */
+  --linha-modulo-fim: 56px;         /* a última linha da lista dos outros módulos por perto, com a folga do pé do cartão (T05/00, 04) · LinhaModulo (fim) */
+  --linha-modulo-escolha-fim: 76px; /* a última linha da lista de escolha de módulos, com a folga do pé do cartão (T05/01) · LinhaModulo (escolha, fim) */
+  --linha-precheck-fim: 43px;       /* a última linha da pré-checagem inteira aprovada, com a folga do pé do cartão (T05/05) · LinhaChecagem (folgaFim 'pre-checagem') */
+  --linha-onibus-fim: 78px;         /* a última linha de ônibus da lista, com a folga do pé do cartão: 6 a mais que as de 72 (T06/00) · LinhaOnibus (fim), como o --linha-modulo-escolha-fim da T05 · sem uso: a última linha tem os 72 das outras, só sem a divisória */
+  --escolhido-justo-respiro: 22px;  /* o recheio de cima e de baixo do bloco escolhido que não cresce, em cima da prova do vínculo (T06/01, 03) · BlocoEscolhido (justo) */
+  --escolhido-apagado-respiro: 18px;/* o mesmo recheio quando o escolhido apaga, porque o chassi lido desmente o cadastro (T06/02) · BlocoEscolhido (justo, apagado) */
+  --linha-acao: 50px;               /* a linha de ação solta, em cartão próprio: o que se pede e o que acompanha (T06/02, T13/07) · LinhaTocavel (acao) */
+  --entrelinha-frase-garantia: 1.55; /* a frase de 14 da caixa do que fica, antes de apagar (NADA SE PERDE, T08/00) · T08 */
+
+  /* ── o sistema · a rolagem: o celular não mostra a barra do navegador; quem mostra a rolagem é o indicador do sistema, fino, por cima do conteúdo, que aparece enquanto rola e some ── */
+  --rolagem-largura: 3px;     /* a espessura do indicador de rolagem */
+  --rolagem-recuo: 2px;       /* a distância do indicador até a borda do que rola */
+  --rolagem-minimo: 32px;     /* a altura mínima do indicador, numa lista muito longa */
+  --rolagem-cor: var(--tinta-apagada); /* a cor do indicador */
+  --rolagem-espera: 900ms;    /* quanto o indicador fica depois que a rolagem para, antes de sumir (não é movimento: não zera no reduzir) */
+  --camada-sistema: 2;        /* o que é do sistema fica por cima do app: o indicador de rolagem, e a barra do sistema, que a faixa que desce e a que sobe passam por baixo */
+
+  /* ── o que a T05 (os estados) e a T09 pediram (cada um com o papel e quem usa) ── */
+  --linha-precheck-fim-parada: 45px; /* a última linha da pré-checagem que terminou numa falha ou parou no caso, com a folga do pé do cartão (T05/06–09, 11, 12, 14, 15) · LinhaChecagem (folgaFim 'pre-checagem-parada') */
+  --ls-rotulo-topo-fora: 1.2px;      /* a letra do rótulo de topo do serial fora do cadastro, em 12 (T05/06: 'M2C-0999 · fora do cadastro') · T05 */
+  --marca-vazio-busca: 44px;         /* o quadrado tracejado com o traço, em cima do vazio da busca (T05/03) · T05 (pecas.jsx, VazioDaBusca) */
+  --entrelinha-frase-busca: 1.45;    /* a frase de 14 do vazio da busca, centrada ('Aproxime o aparelho do módulo…', T05/03) · T05 (pecas.jsx, VazioDaBusca) */
+  --cadeia-elo-correndo: 86px;  /* a altura de um elo da cadeia curta enquanto ela grava, o quadrado de agora num dos poços (T09/09, 10, 14, 15, 19 e 20 · a manutenção) · Cadeia (altura 'correndo') */
+  --cadeia-elo-gravando: 78px;  /* o elo da cadeia inteira enquanto ela grava: a etapa da vez com a barra e a contagem, 8 a menos que o da cadeia curta, pra cadeia caber sem rolar (T09/00 e 21 a 26 · decisões 57 e 61) · Cadeia (altura 'gravando') */
+  --cadeia-elo-pausada: 68px;   /* o elo quando a cadeia pausou e divide a tela com o contador e o aviso (T09/02 e 03 · a cadeia pausada) · Cadeia (altura 'pausada') */
+
+  /* ── o que as folhas da T04 pediram ── */
+  --icone-poco-44: 22px;   /* o ícone no poço de 44: o módulo e o ativo que a sessão prendeu, no cartão da folha (T04/10, 11), e o Bluetooth riscado do bloco da busca que não começa (T05/16, 17; riscado pela lei 21) · T04 (pecas.jsx, CartaoPreso), T05 (pecas.jsx, VazioDaBusca) */
+  --t-preso: 18px;         /* a identidade do que a sessão prendeu, o serial ou a placa, no cartão da folha (T04/10, 11) · T04 (pecas.jsx, CartaoPreso) */
+
+  /* ── o ícone riscado (lei 21): o olho e todo ícone riscado ── */
+  --risco-corte: 4.6;         /* a largura do vão em volta do risco do ícone riscado (lei 14 e 21) · o vão vem desenhado no jogo de ícones (03-design-system/icones: o fio de 4,6 na cor do fundo onde o ícone mora) · sem uso no CSS: o valor é o do desenho */
+
+  /* ── o que as telas T11, T13, T15 e T16 pediram (cada um com o papel e quem usa) ── */
+  --linha-conferencia-fim: 72px; /* a última linha da lista de conferência, com a folga do pé do cartão: 22 a mais que as de 50 (T11/00–02) · sem uso: a última linha tem os 50 das outras */
+  --escala-item: 22px;          /* a barra do instrumento do item reprovado, no nível do item (T13/09) · Escala (tam item) */
+  --risco-item-forte: 12px;     /* o risco forte (os limites da faixa) na barra do item reprovado (T13/09) · Escala (tam item) */
+  --ls-colunas-mapa: 1.2px;     /* a letra do cabeçalho das colunas SEÇÃO / RESOLVIDO sobre o mapa do checklist (T13/00, 11) · T13 · sem uso: o checklist não tem mapa nem cabeçalho das colunas */
+  --entrelinha-titulo-item: 1.2; /* o título de 28 do nível do item do checklist, que quebra em duas linhas (T13/07 a 09) · T13 */
+  --icone-visor: 46px;          /* a câmera no visor da câmera do app: a do painel (T10/06, e a riscada da 11) e a do item manual (T13/07, 08) · VisorCamera */
+  --botao-secundario-compacto: 46px;    /* o botão secundário dentro do cartão com mais de um erro (T15/02); o toque de 48 cresce por fora · BotaoSecundario (compacto) */
+  --cartao-acao-recheio-compacto: 18px; /* o recheio de cima e de baixo do cartão que pede ação com mais de um erro (T15/02) · CartaoAcao (compacto) */
+  --escala-envio: 16px;                 /* a barra do envio da fila, o item que sobe agora (T15/01) · Escala (tam envio) */
+  --cartao-envio-folga: 18px;           /* entre o rótulo, o item que sobe e a legenda, no cartão SUBINDO AGORA (T15/01) · T15 (pecas.jsx, Subindo) */
+  --entrelinha-frase-caixa: 1.45; /* a frase de 13 embaixo do rótulo, nas caixas do fim da sessão: o que não rodou (NÃO RODARAM, T16/04) e o que ficou bloqueado (A HOMOLOGAÇÃO FICA BLOQUEADA, T16/05) · Nota (corpo pulado), Aviso (bloqueio) */
+
+  /* ── o movimento fino (cada um com o papel e quem usa; o que zera no reduzir vai também no bloco do reduzir, embaixo) ── */
+  --mov-fator: 1; /* o fator do movimento que segue um processo: o trecho dura o passo do processo (o ritmo, de ritmos.js) vezes ele — 1, e 0 no reduzir: a barra salta pro valor de cada passo, e o processo segue no mesmo ritmo · Escala (segue): a baixa da T03, o prazo da T14 (Prazo) e o envio da T15 */
+
+  /* ── a espera do reenvio da T01 ── */
+  --n-espera: 15px; /* a contagem do reenvio no lugar da seta, na linha de opção que espera (T01/04: 0:44, tabular, 700) · LinhaDeOpcao (espera) */
+
+  /* ── o que os estados do celular pediram (cada um com o papel e quem usa) ── */
+  --visor-explicacao: 260px; /* a largura máxima da explicação embaixo da frase, no visor da câmera do app sem a permissão (T10/11: Sem a foto, a calibração não semeia.) · VisorCamera (semPermissao) */
+
+  /* ── o que o checklist e as telas dele pediram (cada um com o papel e quem usa) ── */
+  --conferencia-par-folga: 3px; /* entre o motivo e o resto do item, na pergunta pelos dependentes (T09/10) · o par da T11/00 usa 2 (--e-2) · T09 (t09-pergunta-item) */
+  --secao-checklist: 58px;  /* o cartão de seção do checklist fechado, e a cabeça dele aberto; também o veredito do homologado (T13/00 a 14, folhas 4 e 7) · SecaoDoChecklist, VereditoDoChecklist */
+  --barra-checklist: 6px;   /* a barra fina embaixo do título do checklist: o que já passou; o número fica no título (T13/00 a 14, folha 5) · BarraDoChecklist */
+
+  /* ── o que o login de quem abre o app pediu (cada um com o papel e quem usa) ── */
+  --traco-limpar: 2; /* o traço do xis de limpar do usuário lembrado, de 18 (T01/16, folha 6: stroke-width 2) — fora das classes da lei 14 · Icone (limpar), Campo (lembrado) */
+
+  /* ── o toque do rodapé (decisão 38: o botão e o link a 8, o link com 44 crescendo só pra baixo; cada um com o papel e quem usa) ── */
+  --toque-desenho: 44px;        /* o desenho do tocável de texto que não é o primário: o link do rodapé e do diálogo, a saída de 44 do diálogo e o ENCERRAR da faixa — o mínimo da lei; o toque de 48 (--alvo-min) cresce por fora, só pro lado livre, embaixo (decisão 38, folha 2) · Rodape, Dialogo, Faixa */
+  --rodape-alto-com-link: 13px; /* o alto do rodapé que tem o link embaixo do primário, no lugar dos 14: com o vão de 8 e o link de 44, o rodapé fica com a mesma altura (decisão 38, folha 2) · Rodape (e o do login, T01) */
+  --link-recuo: 5px;            /* o link de 44 do rodapé e do diálogo come 5 embaixo (margin 0 0 −5 0), pro lado livre: fecha a conta do rodapé com o alto de 13 e o vão de 8 (decisão 38, folha 2) · Rodape, Dialogo */
+  --rodape-pe-teclado: 13px;    /* o pé do rodapé com o teclado do aparelho aberto (T01/03): o primário fica a 13 do teclado, como do topo, e o link sai; a barra de gestos mora dentro do teclado (decisão 62) · Rodape */
+
+  /* ── o arraste da folha e a linha com o porquê (cada um com o papel e quem usa; o corte do ícone riscado, --risco-corte, fica com o do olho, em cima) ── */
+  --folha-arraste-folga: 8px;   /* o quanto o dedo anda pra baixo na folha antes de o toque virar arraste — antes disso é toque, e a linha embaixo do dedo responde (o touch slop do Android, 8dp · proposta do protótipo, lei 20) · Folha */
+  --folha-arraste-limite: 56px; /* o arraste que fecha a folha: soltando mais de 56 abaixo do lugar dela, ela fecha; antes disso, volta (o limiar de posição do ModalBottomSheet do Material 3, 56dp · proposta do protótipo, lei 20) · Folha */
+  --linha-com-porque: 58px;     /* a linha de lista com a segunda linha de 12 embaixo do título — o porquê do critério —, 8 em cima e embaixo e o poço de 32: o que o servidor recebeu (T12/01, 04, 05) · LinhaChecagem (recebimento); a folha Outras ações (T11/03) usa a linha de opção de 72, como a T01 */
+
+  /* ── o modo claro (cada um com o papel e quem usa) ── */
+  --interruptor-largura: 52px;         /* o trilho do interruptor, o padrão do Material 3: 52 × 32 (a altura é o --poco-32) · Interruptor (folha 10, T04/05) */
+  --interruptor-desligado: 0.6667;     /* a bolinha desligada, 16 de 24: a bolinha tem 24 e encolhe por transform — o movimento só usa transform e opacity · Interruptor */
+  --interruptor-apertado: 1.1667;      /* a bolinha apertada, 28 de 24, enquanto o dedo está em cima · Interruptor */
+
+  /* ── o token do papel (a lei: cada peça usa o token do seu papel) ── */
+  --folha-topo:        #332C49;   /* o fio de cima da folha que sobe (folha 2, T04/05 a 14, T01, T11/03): no escuro, o mesmo da luz do poço · no claro, a cor da folha — nenhuma linha em cima dela · Folha */
+  /* no claro, a luz do poço é branca (o poço mais fundo) · as peças abaixo sumiriam no branco com
+   * ela: cada uma tem o token do seu papel, igual ao da luz do poço no escuro */
+  --trilho-antes:      #332C49;   /* o trilho da cadeia antes de gravar (T09/05, 06, 07) · Cadeia */
+  --traco-vazio-busca: #332C49;   /* o tracinho dentro do vazio da busca (T05/02, 03) · T05 (VazioDaBusca) */
+  --borda-dialogo:     #332C49;   /* a borda do diálogo · Dialogo */
+}
+
+/* ── o tema claro · NEUTRO FRIO · só as cores ───────────────────────────
+ * Cinzas com um fio de azul-violeta, no espírito da Linear: branco nos cartões,
+ * a página em #F7F7F9, bordas finas, texto #1F2023 · o tom frio conversa com o
+ * roxo, que fica nos ícones, no veredito, no botão e no logo · o lima não aparece
+ * no claro · o poço continua rebaixado: a sombra em cima (--poco-fundo), as
+ * laterais no meio e a luz embaixo (--borda-poco), em branco (o poço
+ * mais fundo, #E5E6EB, com a sombra #BCBEC8, parece afundado) · o véu continua preto a 32% · as barras do sistema ficam escuras.
+ * As superfícies rebaixadas GRANDES (campo, painel, bloco, faixa do topo, busca)
+ * usam --fundo-rebaixado, bem mais leve que o poço · o poço fica só pro quadradinho do
+ * ícone, o check e o trilho, e é ele que dá a personalidade.
+ * A estrutura é a mesma do escuro: só as cores mudam · no claro,
+ * nada lê mais fraco que no escuro — os riscos (--marca, --marca-limite,
+ * --marca-vazia), a faixa da régua e o trecho feito (--lima-faixa, --lima-borda) sobem.
+ * Os tokens que apontam pra outro token (--idade-preenchido, --rolagem-cor) se
+ * repetem aqui: um var() é resolvido onde o token é declarado, e no :root ele
+ * ficaria com a cor do escuro. */
+[data-tema="claro"] {
+  --fundo-pagina: #F7F7F9;
+  --fundo-faixa: #FFFFFF;
+  --fundo-cartao: #FFFFFF;
+  --fundo-apagado: #F1F1F4;
+  --fundo-botao: #F3F3F7;
+  --fundo-botao-no-rebaixado: #FFFFFF;
+  --poco: #E5E6EB;
+  --poco-fundo: #BCBEC8;
+  --fundo-rebaixado: #F2F3F6;
+  --rebaixado-sombra: #D6D8DE;
+  --rebaixado-lado: #E4E5EA;
+  --rebaixado-luz: #FFFFFF;
+  --borda-poco: #FFFFFF;
+  --borda: #E2E3E8;
+  --divisoria: #ECEDF1;
+  --separador: #E2E3E8;
+  --borda-rodape: #E2E3E8;
+  --poco-lado: #DADBE2;
+  --elevado: #F0F0F3;
+  --tinta: #1F2023;
+  --tinta-forte: #2F3037;
+  --tinta-secundaria: #4B4D57;
+  --tinta-apagada: #686B78;
+  --marca-limite: #6E7180;
+  --marca: #8E91A0;
+  --marca-vazia: #9A9DAB;
+  --borda-neutra: #C9CBD4;
+  --borda-botao: #E2E3E8;
+  --borda-interruptor: #B5B7C2;
+  --andamento: #402070;
+  --andamento-alerta: #8E2C21;
+  --lima: #5B3A99;
+  --roxo: #402070;
+  --roxo-pressionado: #4A2A80;
+  --vermelho: #B5382A;
+  --lima-faixa: rgba(91, 58, 153, 0.22);
+  --lima-feito: rgba(91, 58, 153, 0.5);
+  --lima-borda: rgba(91, 58, 153, 0.8);
+  --vermelho-faixa: rgba(224, 106, 90, 0.18);
+  --vermelho-borda: rgba(224, 106, 90, 0.8);
+  --veu: rgba(6, 5, 10, 0.32);
+  --texto-primario: #FFFFFF;
+  --logo: #402070;
+  --folha-topo: #FFFFFF;
+  --trilho-antes: #E6E7EC;
+  --traco-vazio-busca: #E6E7EC;
+  --borda-dialogo: #E6E7EC;
+  --idade-preenchido: var(--poco-fundo);
+  --rolagem-cor: var(--tinta-apagada);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --mov-rapido: 0ms; --mov-padrao: 0ms; --mov-lento: 0ms; --mov-solta: 0ms; --mov-escalonar-lista: 0ms; --mov-escalonar-tambor: 0ms; --mov-fator: 0; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte);
+  background: var(--fundo-pagina);
+  color: var(--tinta);
+  font-variant-numeric: tabular-nums;
+}
+
+a { color: inherit; text-decoration: none; }   /* cor de link nunca é global */

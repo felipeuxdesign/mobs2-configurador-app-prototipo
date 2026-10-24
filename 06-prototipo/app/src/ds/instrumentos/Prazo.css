@@ -1,0 +1,20 @@
+.ds-prazo { padding: var(--e-12); gap: var(--e-6); }
+.ds-prazo-numero { display: flex; align-items: baseline; justify-content: center; gap: var(--e-4); }
+.ds-prazo-tempo {
+  font-size: var(--n-cronometro); font-weight: 700; letter-spacing: var(--ls-n-cronometro);
+  line-height: var(--entrelinha-cronometro);
+}
+.ds-prazo-detalhe { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }
+/* T14/02: o prazo estourado — o número em vermelho, e as frases do
+ * que isso quer dizer, uma por linha, na entrelinha da legenda de 12 */
+.ds-prazo-falha .ds-prazo-tempo { color: var(--vermelho); }
+.ds-prazo-frase-falha { color: var(--vermelho); font-weight: 700; }
+.ds-prazo-frases { display: flex; flex-direction: column; line-height: var(--entrelinha-apoio); }   /* o apoio de 12, com 16 */
+
+/* a fila que drena (T14/01): a linha fina de 4 embaixo da frase, colada nela (2 acima,
+ * dentro do vão de 6), sobre o poço; o que resta em lima, esvaziando da direita pra esquerda */
+.ds-prazo-fila { position: relative; height: var(--e-4); margin-top: calc(-1 * var(--e-2)); background: var(--poco); overflow: hidden; }
+.ds-prazo-fila-resta {
+  position: absolute; inset: 0; background: var(--lima-feito);
+  transform-origin: left center; transition-property: transform; transition-timing-function: linear;
+}

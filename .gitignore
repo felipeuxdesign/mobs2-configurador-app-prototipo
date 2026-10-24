@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.vite/
+06-prototipo/app/prints/
+06-prototipo/prints/tmp/
+.claude/
+__pycache__/

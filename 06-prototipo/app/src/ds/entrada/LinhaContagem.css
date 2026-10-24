@@ -1,0 +1,10 @@
+.ds-linha-contagem {
+  display: flex; align-items: center; gap: var(--e-10);
+  height: var(--linha-contagem); border-bottom: var(--traco-borda) solid var(--divisoria);
+}
+.ds-linha-contagem.ds-sem-divisoria { border-bottom: 0; }
+.ds-linha-contagem-nome { flex-grow: 1; font-size: var(--t-link); font-weight: 600; color: var(--tinta); }
+.ds-linha-contagem-valor { font-size: var(--t-corpo); font-weight: 700; color: var(--tinta); }
+.ds-linha-contagem-ok .ds-linha-contagem-valor { color: var(--tinta-secundaria); }
+.ds-linha-contagem-espera .ds-linha-contagem-nome,
+.ds-linha-contagem-espera .ds-linha-contagem-valor { color: var(--tinta-apagada); }

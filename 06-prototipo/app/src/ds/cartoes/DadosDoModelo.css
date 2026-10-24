@@ -1,0 +1,16 @@
+/* Os dados do modelo (folha 4 · T06/01, 10 e 11): a caixa de poço que cresce,
+ * 20 · 16 por dentro, e 18 entre os dados, o separador e a frase — o mesmo
+ * intervalo do par comparado (--par-intervalo).
+ * O rótulo em 10/700, caixa alta, em --tinta-apagada; o valor em 20/700, com a
+ * letra do dado curto (--ls-dado), em --tinta; a frase em 13/600, em
+ * --tinta-secundaria, sem entrelinha aberta, como a referência desenha. */
+.ds-dados-modelo {
+  flex-grow: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center;
+  gap: var(--par-intervalo); padding: var(--e-20) var(--e-16);
+}
+.ds-dados-modelo-antes-do-rodape { margin-bottom: var(--respiro); }
+.ds-dados-modelo-dado { display: flex; flex-direction: column; gap: var(--e-4); }
+.ds-dados-modelo-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); }
+.ds-dados-modelo-valor { font-size: var(--t-titulo-bloco); font-weight: 700; letter-spacing: var(--ls-dado); color: var(--tinta); }
+.ds-dados-modelo-separador { display: block; height: var(--traco-borda); background: var(--separador); }
+.ds-dados-modelo-frase { font-size: var(--t-secundario); font-weight: 600; color: var(--tinta-secundaria); }

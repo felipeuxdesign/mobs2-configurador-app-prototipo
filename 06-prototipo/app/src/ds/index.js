@@ -1,0 +1,22 @@
+// O design system — uma vez, usado em tudo (06-prototipo/CLAUDE.md, regra 1).
+import './base.css'
+import './tipo.css'
+export { Poco } from './primitivos/Poco.jsx'
+export { Glifo, ESTADOS } from './primitivos/Glifo.jsx'
+export { Icone, ICONES } from './primitivos/Icone.jsx'
+export { Quadrado, Led } from './primitivos/Marcador.jsx'
+export { Tocavel } from './primitivos/Tocavel.jsx'
+export { Primario } from './primitivos/Primario.jsx'
+export { SoIcone } from './primitivos/SoIcone.jsx'
+export { Link } from './primitivos/Link.jsx'
+export { Checkbox } from './primitivos/Checkbox.jsx'
+export { Rolagem } from './primitivos/Rolagem.jsx'
+export { Desenho, DESENHOS } from './primitivos/Desenho.jsx'
+
+// as seis famílias — as telas importam tudo daqui
+export * from './chrome/index.js'
+export * from './linhas/index.js'
+export * from './cartoes/index.js'
+export * from './instrumentos/index.js'
+export * from './entrada/index.js'
+export * from './checklist/index.js'

@@ -1,0 +1,22 @@
+.ds-campo-texto { display: flex; flex-direction: column; gap: var(--e-6); }
+.ds-campo-texto-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-secundaria); }
+.ds-foco .ds-campo-texto-rotulo { color: var(--lima); }
+
+.ds-campo-texto-poco {
+  min-height: var(--alvo-min);
+  padding: var(--e-10) var(--e-12) calc(var(--e-10) + var(--traco-destaque) - var(--traco-borda));
+  background: var(--fundo-rebaixado);
+  border-top: var(--traco-borda) solid var(--rebaixado-sombra);
+  border-bottom: var(--traco-borda) solid var(--rebaixado-luz);
+  border-left: var(--traco-borda) solid var(--rebaixado-lado);
+  border-right: var(--traco-borda) solid var(--rebaixado-lado);
+}
+/* o recheio de baixo é o mesmo no foco: o traço de 2 é desenhado por cima da borda de 1 (TracoFoco.css) */
+.ds-campo-texto-entrada {
+  display: block; width: 100%; field-sizing: content; min-height: 0; margin: 0; padding: 0;
+  resize: none; overflow: hidden; background: transparent; border: 0; outline: none;
+  color: var(--tinta); font-family: inherit; font-size: var(--t-corpo); font-weight: 500;
+  line-height: var(--entrelinha-texto-livre);
+}
+/* T13/42: o que o campo vazio pede */
+.ds-campo-texto-entrada::placeholder { color: var(--marca-limite); opacity: 1; }

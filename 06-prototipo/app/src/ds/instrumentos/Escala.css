@@ -1,0 +1,70 @@
+/* A escala: a barra em poço (o desenho do poço, Lei 4), com a faixa, os
+ * riscos e o marcador por cima, nessa ordem. As posições chegam da conta,
+ * em --de, --ate, --p e --pos (0 a 100). */
+.ds-escala {
+  position: relative; flex-shrink: 0; overflow: hidden;
+  height: var(--ds-escala-alto);
+  background: var(--poco);
+  border-top: var(--traco-borda) solid var(--poco-fundo);
+  border-bottom: var(--traco-borda) solid var(--borda-poco);
+  border-left: var(--traco-borda) solid var(--poco-lado);
+  border-right: var(--traco-borda) solid var(--poco-lado);
+}
+.ds-escala-leitura { --ds-escala-alto: var(--escala-leitura); --ds-risco: var(--risco-leitura); --ds-risco-forte: var(--risco-leitura-forte); --ds-marcador: var(--marcador-leitura); }
+.ds-escala-pequena { --ds-escala-alto: var(--escala-pequena); --ds-risco: var(--risco-pequena); --ds-risco-forte: var(--risco-pequena-forte); --ds-marcador: var(--marcador-pequeno); }
+.ds-escala-prazo   { --ds-escala-alto: var(--escala-prazo);   --ds-risco: var(--risco-prazo);   --ds-risco-forte: var(--risco-prazo-forte);   --ds-marcador: var(--marcador-leitura); }
+.ds-escala-placar  { --ds-escala-alto: var(--escala-placar);  --ds-risco: var(--risco-placar);  --ds-risco-forte: var(--risco-placar-forte);  --ds-marcador: var(--marcador-pequeno); }
+/* T13/09: a barra do instrumento do item reprovado, no nível do item — 22, com o marcador de 4 da leitura */
+.ds-escala-item    { --ds-escala-alto: var(--escala-item);    --ds-risco: var(--risco-leitura); --ds-risco-forte: var(--risco-item-forte);   --ds-marcador: var(--marcador-leitura); }
+/* T15/01: a barra do envio da fila — 16 de alto, os riscos e o marcador da barra pequena */
+.ds-escala-envio   { --ds-escala-alto: var(--escala-envio);   --ds-risco: var(--risco-pequena); --ds-risco-forte: var(--risco-pequena-forte); --ds-marcador: var(--marcador-pequeno); }
+/* T03: a barra do download da sincronização é o placar sem as bordas dos lados */
+.ds-escala-sem-lados { border-left: 0; border-right: 0; }
+/* T07: o poço vazio do sinal que não chegou, com o traço de 10 no meio (T07/02) */
+.ds-escala-vazia { display: flex; align-items: center; justify-content: center; }
+.ds-escala-vazia-traco { display: block; width: var(--e-10); height: var(--traco-borda); background: var(--marca-vazia); }   /* o tracinho vazio */
+
+/* a faixa esperada (ou o preenchido) */
+.ds-escala-faixa {
+  position: absolute; top: 0; bottom: 0;
+  left: calc(var(--de) * 1%); width: calc((var(--ate) - var(--de)) * 1%);
+  background: var(--lima-faixa);
+}
+.ds-escala-faixa-de { border-left: var(--traco-borda) solid var(--lima-borda); }
+.ds-escala-faixa-ate { border-right: var(--traco-borda) solid var(--lima-borda); }
+
+/* os riscos, presos no topo */
+.ds-escala-risco {
+  position: absolute; top: 0; left: calc(var(--p) * 1%);
+  width: var(--traco-borda); height: var(--ds-risco); background: var(--marca);
+}
+.ds-escala-risco-forte { height: var(--ds-risco-forte); background: var(--marca-limite); }
+
+/* o marcador: a agulha é a camada da largura da barra que anda (translateX);
+ * parado, ela não tem transform */
+.ds-escala-agulha { position: absolute; inset: 0; }
+.ds-escala-marcador {
+  position: absolute; top: 0; bottom: 0; width: var(--ds-marcador);
+  left: min(calc(var(--pos) * 1%), calc(100% - var(--ds-marcador)));
+  background: var(--andamento);   /* o "agora" na régua (R-22): o creme no escuro, o roxo no claro */
+}
+.ds-escala-falha .ds-escala-marcador { background: var(--vermelho); }
+
+/* o movimento: o valor que muda depois de montar. O layout já está no
+ * valor novo; o trecho parte de onde o olho via (--ds-escala-desde, em px, na
+ * agulha; --ds-escala-escala, a fração, no preenchido) e chega em transform
+ * nenhum. Sem preenchimento: acabou, não sobra animação viva. Os
+ * nomes a e b se revezam pra o trecho seguinte recomeçar sem remontar.
+ * A leitura que chega (corre): --mov-lento, desacelerando. */
+.ds-escala-faixa { transform-origin: left center; }
+.ds-escala-anda-a { animation: ds-escala-anda-a var(--mov-lento) var(--mov-curva); }
+.ds-escala-anda-b { animation: ds-escala-anda-b var(--mov-lento) var(--mov-curva); }
+.ds-escala-enche-a { animation: ds-escala-enche-a var(--mov-lento) var(--mov-curva); }
+.ds-escala-enche-b { animation: ds-escala-enche-b var(--mov-lento) var(--mov-curva); }
+/* o processo que anda em passos (segue): linear, no tempo do passo (ritmos.js)
+ * vezes o --mov-fator — 0 no reduzir: salta pro valor do passo, no mesmo ritmo */
+.ds-escala-segue { animation-duration: calc(var(--ds-escala-passo) * var(--mov-fator)); animation-timing-function: linear; }
+@keyframes ds-escala-anda-a { from { transform: translateX(var(--ds-escala-desde)); } }
+@keyframes ds-escala-anda-b { from { transform: translateX(var(--ds-escala-desde)); } }
+@keyframes ds-escala-enche-a { from { transform: scaleX(var(--ds-escala-escala)); } }
+@keyframes ds-escala-enche-b { from { transform: scaleX(var(--ds-escala-escala)); } }

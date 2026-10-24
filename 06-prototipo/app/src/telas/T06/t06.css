@@ -1,0 +1,29 @@
+/* T06 · Selecionar ativo — só tokens. A barra do sistema na cor da faixa, a
+ * faixa da sessão sem ativo, o miolo (que rola entre a faixa e o rodapé
+ * quando passa de 800 — a lista do pacote tem 10) e o rodapé. O miolo
+ * rola sem a barra de rolagem do navegador, que nenhuma referência desenha. */
+.t06 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); }
+
+.t06-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto; scrollbar-width: none;
+  display: flex; flex-direction: column; gap: var(--e-14);
+  padding: var(--e-14) var(--respiro) var(--respiro) var(--respiro);
+}
+
+/* a frase que diz o que fazer, embaixo da busca */
+.t06-instrucao { flex-shrink: 0; font-size: var(--t-link); font-weight: 500; line-height: var(--entrelinha-texto); color: var(--tinta-secundaria); }
+
+/* a lista do pacote não encolhe: o miolo rola. O último grupo antes do rodapé
+ * não tem margem: os 16 até ele são o recheio do miolo (--respiro) — a margem
+ * somaria folga dupla, 32, no fim da rolagem (T06/00) */
+.t06-lista { flex-shrink: 0; }
+
+/* na confirmação, o bloco que cresce até o rodapé e é o último guarda 16 até ele,
+ * como as referências desenham: a trava (04 a 06) por esta classe, e os dados do
+ * modelo (01, 10 e 11) pela folga da própria peça (DadosDoModelo · antesDoRodape) */
+.t06-antes-do-rodape { margin-bottom: var(--respiro); }
+
+/* a lei R-26 (o cartão de mensagem tem o tamanho do conteúdo): no Confirmar o vínculo (01, 10, 11) e
+ * nas travas (04, 06), o escolhido e os dados do modelo não esticam até o rodapé — a placa e o motivo
+ * ficam no alto, o vazio fica fora deles · da tela: o escolhido que cresce vale na T05 */
+.t06 .ds-escolhido, .t06 .ds-dados-modelo { flex-grow: 0; flex-shrink: 0; }

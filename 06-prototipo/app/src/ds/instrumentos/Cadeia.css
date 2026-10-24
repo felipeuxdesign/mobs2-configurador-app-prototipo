@@ -1,0 +1,72 @@
+.ds-cadeia { flex-shrink: 0; display: flex; flex-direction: column; --ds-cadeia-elo: var(--cadeia-elo); --ds-cadeia-fecho: var(--e-14); }
+.ds-cadeia-justa { --ds-cadeia-elo: var(--cadeia-elo-justo); --ds-cadeia-fecho: var(--e-12); }
+/* T09: a cadeia inteira gravando (00, 21 a 26), a curta da manutenção (09, 10, 14, 15, 19, 20) e a pausada (02, 03) */
+.ds-cadeia-gravando { --ds-cadeia-elo: var(--cadeia-elo-gravando); --ds-cadeia-fecho: var(--e-14); }
+.ds-cadeia-correndo { --ds-cadeia-elo: var(--cadeia-elo-correndo); --ds-cadeia-fecho: var(--e-14); }
+.ds-cadeia-pausada { --ds-cadeia-elo: var(--cadeia-elo-pausada); --ds-cadeia-fecho: var(--e-12); }
+.ds-cadeia-elo { display: flex; gap: var(--e-12); min-height: var(--ds-cadeia-elo); }
+.ds-cadeia-elo-ultimo { min-height: 0; }
+.ds-cadeia-texto {
+  flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--e-2);
+  padding: var(--e-4) 0 var(--ds-cadeia-fecho) 0;
+}
+.ds-cadeia-linha { display: flex; align-items: baseline; justify-content: space-between; gap: var(--e-10); }
+.ds-cadeia-nome { font-size: var(--t-destaque); font-weight: 600; color: var(--tinta); }
+.ds-cadeia-valor { font-size: var(--t-secundario); font-weight: 700; color: var(--tinta-secundaria); }
+.ds-cadeia-descricao { font-size: var(--t-legenda); font-weight: 500; color: var(--tinta-apagada); line-height: var(--entrelinha-apoio); }
+
+/* o valor aceso (`valorAceso`): o bloco relido no fim da cadeia curta (T09/10), em branco */
+.ds-cadeia-valor.ds-cadeia-valor-aceso { color: var(--tinta); }
+/* o que corre: o valor em branco */
+.ds-cadeia-elo-corre .ds-cadeia-valor { color: var(--tinta); }
+/* o elo que falhou acende */
+.ds-cadeia-elo-falha .ds-cadeia-valor, .ds-cadeia-elo-falha .ds-cadeia-descricao { color: var(--vermelho); }
+/* o bloco que não cabe, antes de gravar (T09/07): só o valor acende; a descrição é a do bloco, não uma causa */
+.ds-cadeia-elo-falha .ds-cadeia-descricao.ds-cadeia-descricao-neutra { color: var(--tinta-apagada); }
+/* os que não foram alcançados, apagados */
+.ds-cadeia-elo-resto .ds-cadeia-nome, .ds-cadeia-elo-resto .ds-cadeia-valor { color: var(--tinta-apagada); }
+/* a cadeia antes de gravar (T09/05, 06, 07): o relógio em --marca-limite, o nome
+ * em --tinta-forte, o valor em --tinta-secundaria (o de sempre) e o trilho em --trilho-antes */
+.ds-cadeia-elo-antes .ds-cadeia-nome { color: var(--tinta-forte); }
+.ds-cadeia-elo-antes .ds-glifo { color: var(--marca-limite); }
+.ds-cadeia-elo-antes .ds-trilho-linha { background: var(--trilho-antes); }   /* o token do papel */
+/* a cadeia curta da manutenção (T09/09): o último elo guarda a altura, e a frase vem embaixo */
+.ds-cadeia-curta .ds-cadeia-elo-ultimo { min-height: var(--ds-cadeia-elo); }
+/* a cadeia que fecha o miolo (T09/05 a 07): o último elo sem o fecho, que só faria o quadro rolar */
+.ds-cadeia-sem-fecho .ds-cadeia-elo-ultimo .ds-cadeia-texto { padding-bottom: 0; }
+
+/* T09/04, 11, 12: a linha que o elo confere depois de gravado, embaixo da
+ * descrição — a 8 dela, o traço da divisória em cima e 8 de recheio · o nome em 13/600 --tinta-forte, o
+ * valor em 13/700 --tinta, e em --vermelho quando ainda não */
+.ds-cadeia-extra {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--e-10);
+  margin-top: var(--e-8); padding-top: var(--e-8); border-top: var(--traco-borda) solid var(--divisoria);
+}
+.ds-cadeia-extra-nome { font-size: var(--t-secundario); font-weight: 600; color: var(--tinta-forte); }
+.ds-cadeia-extra-valor { font-size: var(--t-secundario); font-weight: 700; color: var(--tinta); }
+.ds-cadeia-extra-valor.ds-cadeia-extra-falha { color: var(--vermelho); }
+/* o valor que troca de tipo na frente de quem olha (o sim, o ainda não, o conferindo que volta): esmaece em 150 */
+.ds-cadeia-extra-nasce { animation: ds-cadeia-esmaece var(--mov-rapido) var(--mov-curva); }
+/* T09/12 · o o que conferir sem a caixa, dentro do elo, a 10 da linha de cima */
+.ds-cadeia-texto > .ds-o-que-conferir { margin-top: var(--e-10); }
+
+/* a cadeia gravando (folha 5 · T09/00, 09, 21 a 26): a etapa da vez troca a descrição pela barra
+ * de 6 — o trilho em --borda, o feito em --lima-feito — e, a 6 embaixo, pela contagem: 12/600 na
+ * entrelinha de apoio, o que já foi em --tinta-secundaria, o que falta em --tinta-apagada */
+.ds-cadeia-etapa { display: flex; flex-direction: column; gap: var(--e-6); padding-top: var(--e-4); }
+.ds-cadeia-barra { position: relative; display: block; height: var(--e-6); background: var(--borda); overflow: hidden; }
+.ds-cadeia-barra-feito { position: absolute; inset: 0; background: var(--lima-feito); transform-origin: left center; }
+/* o trecho de um passo: do valor de antes ao novo, linear, no passo × --mov-fator (0 no reduzir:
+ * salta pro valor) · acabou, fica o transform do valor, sem nada vivo */
+.ds-cadeia-barra-anda { animation: ds-cadeia-barra-anda calc(var(--ds-cadeia-barra-passo) * var(--mov-fator)) linear; }
+@keyframes ds-cadeia-barra-anda { from { transform: scaleX(var(--ds-cadeia-barra-de)); } }
+.ds-cadeia-conta {
+  display: flex; justify-content: space-between; gap: var(--e-10);
+  font-size: var(--t-legenda); font-weight: 600; line-height: var(--entrelinha-apoio); color: var(--tinta-secundaria);
+}
+.ds-cadeia-falta { color: var(--tinta-apagada); }
+/* a linha do que gravou entra no lugar da barra, esmaecendo em 150, quando a etapa confere na frente de quem olha */
+.ds-cadeia-descricao-surge { animation: ds-cadeia-esmaece var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-cadeia-esmaece { from { opacity: 0; } }
+/* o quadrado de agora sem a barra: a Conexão gravada esperando o servidor (T09/11), 10 */
+.ds-cadeia-elo-sem-barra .ds-trilho-34 .ds-glifo-agora { width: var(--e-10); height: var(--e-10); }

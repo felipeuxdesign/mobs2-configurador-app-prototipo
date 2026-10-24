@@ -1,0 +1,11 @@
+/* Os botões dos espécimes de movimento: da vitrine, não do app (sem hover, sem
+ * foco desenhado — o que responde é o toque, como no app). */
+.vitrine-mov-pilha { display: flex; flex-direction: column; gap: var(--e-10); }
+.vitrine-mov-controles { display: flex; flex-wrap: wrap; gap: var(--e-8); margin-top: var(--e-12); }
+.vitrine-mov-botao {
+  font: inherit; font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta);
+  background: var(--fundo-cartao); border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+  padding: var(--e-6) var(--e-10); cursor: default; outline: none;
+}
+.vitrine-mov-botao:active { background: var(--elevado); }
+.vitrine-mov-nota { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-secundaria); margin-top: var(--e-6); }

@@ -1,0 +1,21 @@
+.ds-icone { display: flex; line-height: 0; flex-shrink: 0; }
+.ds-icone svg { width: 100%; height: 100%; }
+.ds-icone-acao svg { stroke-width: var(--traco-icone); }
+.ds-icone-fechar svg { stroke-width: var(--traco-glifo); }
+.ds-icone-mini svg { stroke-width: var(--traco-mini); }
+.ds-icone-limpar svg { stroke-width: var(--traco-limpar); }
+.ds-icone-fino svg { stroke-width: var(--traco-fino); }
+.ds-icone-tam-12 { width: var(--e-12); height: var(--e-12); }
+.ds-icone-tam-14 { width: var(--e-14); height: var(--e-14); }
+.ds-icone-tam-16 { width: var(--e-16); height: var(--e-16); }
+.ds-icone-tam-18 { width: var(--glifo-30); height: var(--glifo-30); }
+.ds-icone-tam-20 { width: var(--e-20); height: var(--e-20); }
+.ds-icone-cor-secundaria { color: var(--tinta-secundaria); }
+.ds-icone-cor-apagada { color: var(--tinta-apagada); }
+.ds-icone-cor-marca-limite { color: var(--marca-limite); }
+.ds-icone-cor-lima { color: var(--lima); }
+.ds-icone-cor-tinta { color: var(--tinta); }
+.ds-icone-cor-vermelho { color: var(--vermelho); }
+.ds-icone-cor-marca { color: var(--marca); }
+/* o risco dos ícones riscados — o olho da senha, o Bluetooth, a câmera — vem no desenho do jogo (lei 21, Desenho.jsx):
+   o fio do vão é pintado na cor do fundo onde o ícone mora (--fundo-do-icone, o poço por padrão) */

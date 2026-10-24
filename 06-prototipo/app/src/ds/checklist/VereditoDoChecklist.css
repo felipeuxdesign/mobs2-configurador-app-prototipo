@@ -1,0 +1,13 @@
+/* O veredito do checklist homologado (folha 7): o cartão de 58 das seções,
+ * com o check lima no poço de 32 e o veredito em lima, 700. */
+.ds-veredito-ck {
+  flex-shrink: 0; display: flex; align-items: center; gap: var(--e-12);
+  min-height: var(--secao-checklist); padding: 0 var(--e-12);
+  background: var(--fundo-cartao); border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+}
+.ds-veredito-ck-texto { display: flex; flex-direction: column; gap: var(--e-2); min-width: 0; }
+.ds-veredito-ck-titulo { font-size: var(--t-link); font-weight: 700; color: var(--lima); }
+.ds-veredito-ck-relatorio { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }
+/* nasce do toque no Finalizar: esmaece no lugar */
+.ds-veredito-ck-surge { animation: ds-veredito-ck-esmaece var(--mov-rapido) var(--mov-curva) backwards; }
+@keyframes ds-veredito-ck-esmaece { from { opacity: 0; } to { opacity: 1; } }

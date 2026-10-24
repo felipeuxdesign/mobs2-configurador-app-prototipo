@@ -1,0 +1,36 @@
+.ds-campo { display: flex; flex-direction: column; gap: var(--e-6); }
+.ds-campo-rotulo { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-secundaria); }
+.ds-foco .ds-campo-rotulo { color: var(--lima); }
+
+/* o campo é rebaixado; o vão do olho riscado (o desenho do jogo) é pintado na cor dele */
+.ds-campo-poco {
+  --fundo-do-icone: var(--fundo-rebaixado);
+  height: var(--campo); display: flex; align-items: center;
+  background: var(--fundo-rebaixado);
+  border-top: var(--traco-borda) solid var(--rebaixado-sombra);
+  border-bottom: var(--traco-borda) solid var(--rebaixado-luz);
+  border-left: var(--traco-borda) solid var(--rebaixado-lado);
+  border-right: var(--traco-borda) solid var(--rebaixado-lado);
+}
+/* sem ação, o texto ocupa o poço inteiro, a 14 da borda (a folha: o próprio input é o poço) */
+.ds-campo-entrada {
+  flex-grow: 1; min-width: 0; align-self: stretch; margin: 0;
+  padding: 0 var(--e-14); background: transparent; border: 0; outline: none;
+  color: var(--tinta); font-family: inherit; font-size: var(--t-botao); font-weight: 600;
+}
+/* com ação, o poço leva o recheio e o vão até o botão; o texto fica no recheio
+ * do próprio input, o do navegador (a folha: input solto dentro do poço) */
+.ds-campo-com-acao .ds-campo-poco { padding: 0 var(--e-14); gap: var(--e-10); }
+.ds-campo-com-acao .ds-campo-entrada { align-self: auto; padding: revert; }
+.ds-campo-oculto { letter-spacing: var(--ls-senha); }
+/* o botão de 44 encosta no recheio: sai 6 pra dentro dele */
+.ds-campo-acao { display: flex; flex-shrink: 0; margin-right: calc(-1 * var(--e-6)); }
+/* o usuário lembrado (folha 6, T01/16): o poço sem o recheio da direita, e o xis
+ * de 44 sai os mesmos 6 pra fora dele — como a folha e a T01/16 desenham */
+.ds-campo-lembrado .ds-campo-poco { padding-right: 0; }
+
+/* a troca da senha escondida ↔ visível: o texto esmaece no lugar (T01 · animacao.md, 150ms) */
+.ds-troca-a { animation: ds-troca-a var(--mov-rapido) var(--mov-curva); }
+.ds-troca-b { animation: ds-troca-b var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-troca-a { from { opacity: 0; } }
+@keyframes ds-troca-b { from { opacity: 0; } }

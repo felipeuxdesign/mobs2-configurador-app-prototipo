@@ -1,0 +1,15 @@
+.ds-link-conteudo {
+  position: relative; flex-shrink: 0; align-self: flex-start; height: var(--linha-padrao);
+  display: grid; align-items: center; justify-items: start;
+  font-size: var(--t-corpo); font-weight: 600; touch-action: manipulation; user-select: none;
+}
+.ds-link-conteudo::before { content: ''; position: absolute; left: 0; right: 0; top: calc((var(--linha-padrao) - var(--alvo-min)) / 2); bottom: calc((var(--linha-padrao) - var(--alvo-min)) / 2); }
+.ds-link-conteudo > span {
+  grid-area: 1 / 1;
+  text-decoration: underline; text-decoration-color: var(--marca-vazia); text-underline-offset: var(--e-4);
+}
+.ds-link-conteudo-texto { color: var(--tinta-forte); }
+.ds-link-conteudo-toque { color: var(--tinta); opacity: 0; transition: opacity var(--mov-solta) var(--mov-curva); }
+.ds-link-conteudo-toque[data-texto]::before { content: attr(data-texto); }
+.ds-link-conteudo:active .ds-link-conteudo-toque, .ds-link-conteudo.ds-forca-toque .ds-link-conteudo-toque { opacity: 1; transition: none; }
+.ds-link-conteudo.ds-forca-toque .ds-link-conteudo-texto { opacity: 0; }

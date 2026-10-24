@@ -1,0 +1,35 @@
+/* T13 · o instrumento do item reprovado (pecas.jsx); o visor da câmera é a peça ds/checklist/VisorCamera */
+
+/* o instrumento: o poço com o traço de baixo vermelho (a caixa de poço com a falha) */
+.t13-instrumento {
+  flex-grow: 1; flex-shrink: 1; min-height: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--e-12); padding: var(--e-20) var(--e-16);
+}
+.t13-instrumento-rotulo {
+  font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--vermelho);
+}
+.t13-instrumento-numero {
+  font-size: var(--n-destaque); font-weight: 700; letter-spacing: var(--ls-n-destaque); line-height: var(--entrelinha-numero);
+}
+.t13-instrumento-unidade {
+  font-size: var(--n-unidade-g); font-weight: 500; color: var(--tinta-secundaria); padding-left: var(--e-4);
+}
+.t13-instrumento .ds-escala { width: 100%; }
+.t13-instrumento-legendas {
+  width: 100%; display: flex; justify-content: space-between;
+  font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-apagada);
+}
+.t13-instrumento-faixa { color: var(--lima); }
+.t13-instrumento-texto { text-align: center; }
+.t13-instrumento-frase { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-secundaria); }
+/* o relido (30 a 33): o rótulo sem a falha, e o check pequeno com o veredito, o do
+ * relido da T10 (o ícone em linha com o texto de 13: 15, e desce 1) */
+.t13-instrumento-rotulo-relido { color: var(--tinta-secundaria); }
+.t13-instrumento-relido {
+  display: flex; align-items: center; gap: var(--e-6);
+  font-size: var(--t-secundario); font-weight: 700; color: var(--tinta);
+}
+.t13-instrumento-relido .ds-glifo { width: var(--glifo-confere); height: var(--glifo-confere); position: relative; top: var(--traco-borda); }
+/* o não resolvido (34 a 37): o mesmo, com o xis e a frase em vermelho, o não confere da T10/10 */
+.t13-instrumento-nao-resolvido { color: var(--vermelho); }

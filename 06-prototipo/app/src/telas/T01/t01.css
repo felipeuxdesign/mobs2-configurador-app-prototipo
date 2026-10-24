@@ -1,0 +1,144 @@
+/* T01 · Login — medido nas catorze referências (02-telas/T01-login/referencias/html).
+ * Só tokens: os que faltavam estão no tokens.css, pelo papel. */
+
+.t01 { position: relative; height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* o nome da tela pro leitor, que ninguém vê (o h1 'Entrar' da referência) */
+.t01-titulo-oculto {
+  position: absolute; width: var(--so-leitor-caixa); height: var(--so-leitor-caixa); margin: calc(-1 * var(--so-leitor-caixa));
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* o quadro embaixo da barra: o miolo e o rodapé. Com a folha ou o diálogo por
+ * cima, fica inerte inteiro (Login.jsx) */
+.t01-fundo { flex-grow: 1; min-height: 0; display: flex; flex-direction: column; }
+
+/* o miolo: rola entre a barra e o rodapé quando passa de 800 */
+.t01-miolo { flex-grow: 1; min-height: 0; display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; }
+
+/* ── a entrada · 00 e 01 ── */
+.t01-miolo-entrada { padding: 0 var(--e-20); }
+/* a marca presa a 207 do topo: o formulário cresce embaixo dela sem movê-la.
+ * Os blocos que crescem não encolhem abaixo do que mostram: se o miolo não
+ * couber (a janela baixa), ele rola, e nada se sobrepõe. */
+.t01-marca {
+  flex-grow: 1; display: flex; flex-direction: column; align-items: center;
+  padding-top: calc(var(--marca-topo) - var(--barra-sistema));
+}
+.t01-campos { flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-16); }
+.t01-aviso { flex-shrink: 0; display: flex; flex-direction: column; margin-bottom: var(--e-4); }
+.t01-lembrar { flex-shrink: 0; display: flex; flex-direction: column; margin: var(--e-8) 0; }
+
+/* ── a recuperação · 02 a 08, 12 e 13 ── */
+/* a resposta ao envio fica numa linha só; se não couber, reticências (decisão 31):
+ * 03 a 07, 12, 13 e 17 */
+.t01-destino { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.t01-miolo-passo { padding: var(--e-36) var(--e-20) 0 var(--e-20); gap: var(--passo-folga); }
+/* O link "Não recebi o código" fecha o miolo com o desenho de 44 e o toque de
+ * 48: os 2 do toque que passam do desenho sairiam do miolo e o fariam
+ * rolar 2. O miolo ganha esses 2 embaixo e os devolve com a margem, por cima
+ * do recheio vazio do rodapé: nada se move, e o miolo não rola. */
+.t01-miolo-passo {
+  padding-bottom: calc((var(--alvo-min) - var(--linha-padrao)) / 2);
+  margin-bottom: calc((var(--linha-padrao) - var(--alvo-min)) / 2);
+}
+.t01-titulo {
+  flex-shrink: 0; font-size: var(--t-titulo-proc); font-weight: 700;
+  letter-spacing: var(--ls-titulo-proc); line-height: var(--entrelinha-titulo-proc);
+}
+
+/* 02 · 20 · 21 · a primeira etapa: as duas abas, o dado e o
+ * texto fixo, na sobra entre o título e a legenda. Nenhum token novo: as medidas da
+ * referência caem nos que já existem, pelo valor */
+.t01-etapa { flex-grow: 1; min-height: 0; display: flex; flex-direction: column; gap: var(--e-14); }
+.t01-abas { flex-shrink: 0; display: flex; gap: var(--e-8); }
+.t01-aba.ds-tocavel { flex: 1; height: var(--botao-secundario); justify-content: center; }
+/* a escolhida: o traço de 2 desenhado por cima da borda de 1, sem mudar o tamanho */
+.t01-aba.t01-aba-escolhida {
+  border-bottom-color: var(--lima);
+  box-shadow: inset 0 calc(var(--traco-borda) - var(--traco-destaque)) 0 var(--lima);
+}
+.t01-aba-rotulo { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-apagada); }
+.t01-aba-escolhida .t01-aba-rotulo { color: var(--lima); }
+
+.t01-dado-grupo { flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-10); }
+.t01-dado-com-motivo { display: flex; flex-direction: column; gap: var(--e-6); }
+.t01-dado-linha { display: flex; gap: var(--e-8); }
+.t01-pais.ds-tocavel { flex: 0 0 auto; width: auto; height: var(--alvo-primario); padding: 0 var(--e-12); gap: var(--e-8); }
+.t01-pais-sigla { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-apagada); }
+.t01-pais-codigo { font-size: var(--t-botao); font-weight: 700; color: var(--tinta); }
+.t01-dado { flex: 1; min-width: 0; height: var(--alvo-primario); padding: 0 var(--e-12); display: flex; align-items: center; }
+/* fora do formato: o traço de 2 em vermelho, por cima da borda de 1, e a capa do foco fora */
+.t01-dado.t01-dado-falha {
+  border-bottom-color: var(--vermelho);
+  box-shadow: inset 0 calc(var(--traco-borda) - var(--traco-destaque)) 0 var(--vermelho);
+}
+.t01-dado.t01-dado-falha::after { display: none; }
+.t01-dado-entrada {
+  flex-grow: 1; min-width: 0; margin: 0; padding: 0; background: transparent; border: 0; outline: none;
+  color: var(--tinta); font-family: inherit; font-size: var(--t-botao); font-weight: 700;
+  /* os números tabulares da página, como a Busca: o navegador não os passa pra entrada sozinho */
+  font-variant-numeric: inherit;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* 21 · o e-mail num ponto a menos que o telefone, como a referência desenha */
+.t01-dado-entrada.t01-dado-entrada-email { font-size: var(--t-destaque); }
+.t01-motivo { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--vermelho); }
+.t01-texto-fixo { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-secundaria); }
+
+/* 22 · o seletor de país: a busca e os países, num cartão de opções */
+.t01-seletor { display: flex; flex-direction: column; gap: var(--e-10); }
+.t01-linha-pais.ds-tocavel {
+  gap: var(--e-10); height: var(--alvo-min);
+  border-bottom: var(--traco-borda) solid var(--divisoria);
+}
+.t01-linha-pais.ds-tocavel:last-child { border-bottom: 0; }
+.t01-linha-pais-nome { flex: 1; font-size: var(--t-link); font-weight: 600; color: var(--tinta-forte); }
+.t01-linha-pais-escolhida .t01-linha-pais-nome { color: var(--tinta); }
+.t01-linha-pais-codigo { font-size: var(--t-corpo); font-weight: 700; color: var(--tinta-secundaria); }
+.t01-linha-pais-marca { width: var(--glifo-30); display: flex; justify-content: center; }
+
+.t01-legenda-dupla { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding-bottom: var(--e-6); font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); }
+.t01-legenda-dupla-fato { font-weight: 500; color: var(--tinta-apagada); }
+.t01-legenda-dupla-resta { font-weight: 700; color: var(--tinta-secundaria); }
+
+/* 03 · 05 · 06 · 07 · as células e o cartão, centrados na sobra */
+.t01-codigo-grupo { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: var(--e-20); }
+.t01-cartao-codigo { display: flex; flex-direction: column; align-items: center; gap: var(--e-4); padding: var(--e-16); }
+.t01-cartao-codigo-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); }
+/* em falha (o código errado, na frente de quem olha): o traço de 2 desenhado por cima da borda de
+ * 1, no lugar do de 2 da caixa de poço em falha — o cartão não cresce, e nada sai do lugar */
+.t01-cartao-codigo.ds-caixa-poco.ds-caixa-falha {
+  border-bottom-width: var(--traco-borda);
+  box-shadow: inset 0 calc(var(--traco-borda) - var(--traco-destaque)) 0 var(--vermelho);
+}
+.t01-cartao-codigo-falha .t01-cartao-codigo-rotulo { color: var(--vermelho); }
+.t01-cartao-codigo-numero {
+  font-size: var(--n-destaque); font-weight: 700; letter-spacing: var(--ls-n-destaque);
+  line-height: var(--entrelinha-numero); color: var(--tinta);
+}
+.t01-cartao-codigo-numero-falha { color: var(--vermelho); }
+.t01-cartao-codigo-frase { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+/* a legenda do prazo e do reenvio: a linha fica mesmo sem texto (Lei 3) */
+.t01-legenda { flex-shrink: 0; min-height: 1lh; font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+
+/* 08 · o código conferido, o campo e os seis requisitos */
+.t01-conferido-lugar { flex-shrink: 0; display: flex; flex-direction: column; }
+.t01-conferido { display: flex; align-items: center; gap: var(--e-10); height: var(--linha-padrao); }
+.t01-conferido-marca { width: var(--e-20); flex-shrink: 0; display: flex; justify-content: center; }
+.t01-conferido-marca .ds-icone { width: var(--glifo-confere); height: var(--glifo-confere); }
+.t01-conferido-texto { flex-grow: 1; font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-apagada); }
+.t01-conferido-valor { font-size: var(--t-corpo); font-weight: 700; color: var(--tinta-secundaria); }
+
+.t01-senha-nova-lugar { flex-shrink: 0; display: flex; flex-direction: column; }
+.t01-senha-nova {
+  height: var(--campo-senha-nova); display: flex; align-items: center; padding: 0 var(--e-14);
+}
+.t01-senha-nova-entrada {
+  flex-grow: 1; min-width: 0; margin: 0; padding: revert; background: transparent; border: 0; outline: none;
+  color: var(--tinta); font-family: inherit; font-size: var(--t-senha-nova); font-weight: 700;
+}
+.t01-requisitos { flex-grow: 1; display: flex; flex-direction: column; }
+
+/* ── por cima da tela: a folha (04, 11) e o diálogo (09), sobre a tela de onde nasceram ── */
+.t01-sobre { position: absolute; top: var(--barra-sistema); right: 0; bottom: 0; left: 0; z-index: 1; display: flex; flex-direction: column; }

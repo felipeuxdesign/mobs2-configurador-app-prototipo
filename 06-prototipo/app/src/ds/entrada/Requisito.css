@@ -1,0 +1,23 @@
+.ds-requisitos { display: flex; flex-direction: column; }
+.ds-requisito {
+  display: flex; align-items: center; gap: var(--e-10);
+  height: var(--linha-requisito); border-bottom: var(--traco-borda) solid var(--borda-rodape);
+}
+.ds-requisitos > .ds-requisito:last-child { border-bottom: 0; }
+
+/* a marca: a coluna de 20, o círculo e o check no mesmo lugar */
+.ds-requisito-marca { width: var(--e-20); flex-shrink: 0; display: grid; place-items: center; }
+.ds-requisito-marca > span, .ds-requisito-texto > span { grid-area: 1 / 1; transition: opacity var(--mov-rapido) var(--mov-curva); }
+.ds-requisito-check { display: flex; opacity: 0; }
+.ds-requisito-cumprido .ds-requisito-check { opacity: 1; }
+.ds-requisito-cumprido .ds-requisito-falta { opacity: 0; }
+
+/* o texto clareia: apagado enquanto falta, secundário quando cumpre */
+.ds-requisito-texto { flex-grow: 1; display: grid; font-size: var(--t-corpo); font-weight: 500; }
+.ds-requisito-texto-falta { color: var(--tinta-apagada); }
+.ds-requisito-texto-cumprido { color: var(--tinta-secundaria); opacity: 0; }
+.ds-requisito-texto-cumprido::before { content: attr(data-texto); }
+.ds-requisito-cumprido .ds-requisito-texto-cumprido { opacity: 1; }
+.ds-requisito-cumprido .ds-requisito-texto-falta { opacity: 0; }
+
+.ds-requisito-nota { flex-shrink: 0; font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-apagada); }

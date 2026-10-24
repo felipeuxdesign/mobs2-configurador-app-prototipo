@@ -1,0 +1,51 @@
+.ds-prova {
+  flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: var(--e-6);
+  padding: var(--e-12) var(--e-14); background: var(--fundo-rebaixado);
+  border-top: var(--traco-borda) solid var(--rebaixado-sombra); border-bottom: var(--traco-destaque) solid var(--lima);
+  border-left: var(--traco-borda) solid var(--rebaixado-lado); border-right: var(--traco-borda) solid var(--rebaixado-lado);
+}
+.ds-prova-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--lima); }
+.ds-prova-versao { font-size: var(--n-prova-cadeia); font-weight: 700; letter-spacing: var(--ls-versao); color: var(--tinta); }
+.ds-prova-sessao .ds-prova-versao { font-size: var(--n-prova-sessao); }
+.ds-prova-legenda { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+
+/* ── o veredito que espera a prova ── */
+/* só a legenda espera (T11/02): guarda o lugar, sem texto */
+.ds-prova-aguarda-legenda .ds-prova-legenda { visibility: hidden; }
+/* a prova inteira espera (T16/02): o traço no cinza neutro (só a cor), o rótulo, a versão e a
+ * legenda guardando o lugar sem texto, e a contagem por cima da versão, no meio dela, com a
+ * tinta e o tamanho do número do aviso (Aviso · com contagem) */
+.ds-prova-aguarda, .ds-prova-chega-tudo { position: relative; }
+.ds-prova.ds-prova-aguarda { border-bottom-color: var(--tinta-secundaria); }
+.ds-prova-aguarda .ds-prova-rotulo, .ds-prova-aguarda .ds-prova-versao, .ds-prova-aguarda .ds-prova-legenda { visibility: hidden; }
+.ds-prova-lugar { display: grid; justify-items: center; align-items: center; }
+.ds-prova-lugar > * { grid-area: 1 / 1; }
+.ds-prova-conta { pointer-events: none; }
+.ds-prova-conta-numero { font-size: var(--t-titulo-bloco); font-weight: 700; color: var(--tinta); }
+.ds-prova-conta-unidade { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-secundaria); }
+.ds-prova-conta-sai [data-texto]::before { content: attr(data-texto); }
+/* a prova chega: o que esperava esmaece no lugar, em 150 (desacelera); o cinza do traço sai
+ * por uma camada por cima do lima, e a contagem sai no mesmo esmaecer. Com reduzir, direto */
+.ds-prova-chega .ds-prova-legenda,
+.ds-prova-chega-tudo .ds-prova-rotulo, .ds-prova-chega-tudo .ds-prova-versao { animation: ds-prova-esmaece var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-prova-esmaece { from { opacity: 0; } }
+.ds-prova-capa {
+  position: absolute; pointer-events: none;
+  left: calc(-1 * var(--traco-borda)); right: calc(-1 * var(--traco-borda)); bottom: calc(-1 * var(--traco-destaque)); height: var(--traco-destaque);
+  background: var(--tinta-secundaria); opacity: 0;
+  animation: ds-prova-sai var(--mov-rapido) var(--mov-curva);
+}
+.ds-prova-conta-sai { opacity: 0; animation: ds-prova-sai var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-prova-sai { from { opacity: 1; } }
+/* surge (o gesto do Aviso): a prova que aparece depois de a tela abrir esmaece no lugar,
+ * inteira, em 150 (desacelera); o espaço abre direto. Sem preenchimento: acabou, nada fica vivo */
+.ds-prova-surge { animation: ds-prova-esmaece var(--mov-rapido) var(--mov-curva); }
+
+/* o traço que se desenha (T16/02): a borda lima vira o cinza do poço por baixo, e o
+ * lima vem por uma camada exatamente em cima dela, que se desenha da esquerda pra direita */
+.ds-prova.ds-prova-desenha { position: relative; border-bottom-color: var(--rebaixado-luz); }
+.ds-prova-traco {
+  position: absolute; pointer-events: none;
+  left: calc(-1 * var(--traco-borda)); right: calc(-1 * var(--traco-borda)); bottom: calc(-1 * var(--traco-destaque)); height: var(--traco-destaque);
+  background: var(--lima);
+}

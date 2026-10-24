@@ -1,0 +1,25 @@
+/* A câmera do app (T13/07, 08 e 17 a 20): o poço que cresce no que sobra, só
+ * com a câmera no meio (decisão 60) — a frase do que enquadrar é da tela,
+ * embaixo do título; sem a permissão, a câmera riscada, no mesmo lugar. */
+.ds-visor {
+  flex-grow: 1; flex-shrink: 1; min-height: 0; position: relative; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--e-14); padding: var(--e-16);
+}
+.ds-visor .ds-icone.ds-visor-camera { width: var(--icone-visor); height: var(--icone-visor); }
+
+/* com a foto (decisão 63, T13/44 a 48 e 15): a camada cobre o quadro por dentro das bordas, sem o
+ * padding e sem o vão da câmera ao vivo · em cima a foto, no que sobra, cortando o que passa · embaixo, o
+ * registro (FotoProva) · o fundo é o do quadro */
+.ds-visor-camada {
+  position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden;
+  background: inherit;
+}
+.ds-visor-foto { flex: 1 1 0; min-height: 0; position: relative; overflow: hidden; background: var(--fundo-rebaixado); }
+.ds-visor-foto-svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
+/* a foto e o registro esmaecem no lugar da imagem ao vivo, em 150, desacelerando; o Tirar de novo, o
+ * contrário · com reduzir movimento, o tempo é zero: troca direta */
+.ds-visor-camada-entrando { animation: ds-visor-entra var(--mov-rapido) var(--mov-curva) both; }
+.ds-visor-camada-saindo { animation: ds-visor-sai var(--mov-rapido) var(--mov-curva) both; }
+@keyframes ds-visor-entra { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ds-visor-sai { from { opacity: 1; } to { opacity: 0; } }

@@ -1,0 +1,25 @@
+.ds-nota { flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-4); padding: var(--e-12); }
+.ds-nota-antes-do-rodape { margin-bottom: var(--respiro); }
+.ds-nota-titulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); }
+.ds-nota-frase { font-size: var(--t-legenda); font-weight: 500; line-height: var(--entrelinha-apoio); color: var(--tinta-apagada); }
+.ds-nota-fato .ds-nota-titulo { color: var(--tinta-secundaria); }
+.ds-nota-fato .ds-nota-frase { font-size: var(--t-secundario); line-height: var(--entrelinha-legenda); color: var(--tinta-forte); }   /* a de 13 fica na entrelinha dela: a de 16 é do apoio de 12 */
+/* T11/01: o achado da leitura, o conteúdo que o app não classifica */
+.ds-nota.ds-nota-achado { gap: var(--e-2); padding: var(--e-10) var(--e-12); border-color: var(--borda-neutra); }   /* o tracejado do vazio, como a referência desenha */
+.ds-nota-achado .ds-nota-titulo { color: var(--tinta-secundaria); }
+.ds-nota-achado .ds-nota-frase { font-size: var(--t-secundario); line-height: var(--entrelinha-texto); color: var(--tinta-secundaria); }
+/* T03: a frase de 13, em 400, da nota que diz o bloqueio (T03/04) */
+.ds-nota-corpo-secundario .ds-nota-frase { font-size: var(--t-secundario); font-weight: 400; line-height: var(--entrelinha-nota-secundaria); }
+/* T16/04: a frase de 13, em 500 e --tinta-secundaria, do que não rodou · uma peça só, sem o
+ * rótulo, e as duas linhas equilibradas: o balance na caixa, não na frase. Como a
+ * T16/04 monta, a caixa é um bloco e a frase corre dentro dela, em linha: cada linha tem a altura da
+ * linha da caixa (o texto do app, que ela herda) e não só a entrelinha da frase — sem isso, a frase sobe
+ * 1,5 e a caixa encolhe 3 (medido contra o HTML) */
+.ds-nota.ds-nota-corpo-pulado { display: block; text-wrap: balance; }
+.ds-nota-corpo-pulado .ds-nota-frase { display: inline; font-size: var(--t-secundario); line-height: var(--entrelinha-frase-caixa); color: var(--tinta-secundaria); }
+/* T13/09: a frase de 13, em 400, na entrelinha da frase da caixa apagada (o item que não se marca à mão) */
+.ds-nota-corpo-item .ds-nota-frase { font-size: var(--t-secundario); font-weight: 400; line-height: var(--entrelinha-frase); }
+/* o tom aguarda, sem uso nas telas nem na folha (era a CAN que esperava o bloco do ativo na T07,
+ * decisão 61) — 10 · 12 em volta, a frase de 12 em 400, na entrelinha do apoio de 12 */
+.ds-nota.ds-nota-aguarda { padding: var(--e-10) var(--e-12); }
+.ds-nota-aguarda .ds-nota-frase { font-weight: 400; line-height: var(--entrelinha-apoio); }   /* o apoio de 12, com 16 */

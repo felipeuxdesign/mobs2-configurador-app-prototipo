@@ -1,0 +1,17 @@
+/* A linha de empresa (folha 4, T04/07 e 08): 72 no mínimo com 10 em cima e
+ * embaixo, poço de 30 com o marcador de 11, o nome e a idade do pacote,
+ * a contagem à direita com o rótulo em cima. */
+.ds-empresa { gap: var(--e-12); min-height: var(--linha-escolha); padding: var(--e-10) 0; border-bottom: var(--traco-borda) solid var(--divisoria); }
+.ds-empresa-sem-divisoria { border-bottom: 0; }
+.ds-empresa-corpo { flex-grow: 1; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-empresa-nome { font-size: var(--t-destaque); font-weight: 600; color: var(--tinta-forte); }
+.ds-empresa-pacote { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+.ds-empresa-contagem { display: flex; flex-direction: column; align-items: flex-end; gap: var(--e-2); flex-shrink: 0; }
+.ds-empresa-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); }
+.ds-empresa-numero { font-size: var(--t-destaque); font-weight: 700; color: var(--tinta-secundaria); }
+
+/* a atual: o nome em --tinta e o pacote sobe pra --tinta-secundaria */
+.ds-empresa-atual .ds-empresa-nome { color: var(--tinta); }
+.ds-empresa-atual .ds-empresa-pacote { color: var(--tinta-secundaria); }
+/* a que espera o envio terminar (T04/08): só o nome apaga; a contagem fica */
+.ds-empresa-espera .ds-empresa-nome { color: var(--tinta-apagada); }

@@ -1,0 +1,49 @@
+.ds-faixa {
+  height: var(--faixa-sessao); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--e-16);
+  background: var(--fundo-faixa);
+  border-bottom: var(--traco-borda) solid var(--separador);
+}
+.ds-faixa-sem-sessao { border-bottom: 0; }
+/* no menu (a faixa é uma peça só), os mesmos 52 com a
+ * linha de baixo, e a borda de cima --borda-rodape, embaixo da tira (T04/00) */
+.ds-faixa-menu { border-top: var(--traco-borda) solid var(--borda-rodape); }
+/* sem sessão, no menu (T04/01): um traço em cima e um embaixo, nos 50, como a faixa da sessão: a tira não tem o
+   traço de baixo, que ficaria colado no de cima desta faixa (a linha dupla) */
+.ds-faixa-menu.ds-faixa-sem-sessao { height: var(--faixa-sessao-menu); border-bottom: var(--traco-borda) solid var(--separador); }
+/* em falha, a linha é vermelha, de 2, nos mesmos 52 — no menu também (T04/03) */
+.ds-faixa-falha { border-bottom: var(--traco-destaque) solid var(--vermelho); }
+
+.ds-faixa-id { display: flex; align-items: center; gap: var(--e-10); min-width: 0; }
+.ds-faixa-serial { font-size: var(--t-destaque); font-weight: 700; letter-spacing: var(--ls-identidade); white-space: nowrap; color: var(--tinta); }
+.ds-faixa-divisor { display: block; width: var(--traco-borda); height: var(--e-16); background: var(--separador); flex-shrink: 0; }
+.ds-faixa-placa { font-size: var(--t-link); font-weight: 500; white-space: nowrap; color: var(--tinta-secundaria); }
+.ds-faixa-sem-ativo { color: var(--tinta-apagada); }
+.ds-faixa-fato { font-size: var(--t-corpo); font-weight: 600; letter-spacing: var(--ls-dado); white-space: nowrap; color: var(--tinta-apagada); }
+.ds-faixa-falha .ds-faixa-fato { font-size: var(--t-destaque); font-weight: 700; color: var(--vermelho); }
+
+/* o ENCERRAR (decisão 38): o desenho de 44, no lugar dos 48 — no menu, a
+ * caixa fica a 8 da conta, na tira logo em cima. O toque de 48 cresce só pra baixo, os 4 que faltam,
+ * pro lado livre, dentro da faixa: o que se vê não muda */
+.ds-faixa-acao {
+  position: relative; height: var(--toque-desenho); flex-shrink: 0;
+  display: flex; align-items: center; padding-left: var(--e-12);
+  font-size: var(--t-secundario); font-weight: 700; letter-spacing: var(--ls-encerrar); color: var(--tinta-secundaria);
+}
+.ds-faixa-acao::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: var(--alvo-min); }
+/* no menu, com a linha vermelha de 2 embaixo, o ENCERRAR desce 1 (a diferença entre a linha de 2 e a
+ * de 1): fica no mesmo lugar da faixa do menu sem falha, 4 abaixo da borda de cima (T04/03, folha 2) */
+.ds-faixa-menu.ds-faixa-falha .ds-faixa-acao { margin-top: calc(var(--traco-destaque) - var(--traco-borda)); }
+/* a lei 17: o ENCERRAR que não pode agir agora fica em tinta apagada, sem o pressionado.
+ * Ele se apaga e volta sem piscar: a tinta troca direto (a cor não anima), e a camada do
+ * pressionado sai de uma vez — nada solta por cima da tinta apagada, e na volta ela nasce em 0 */
+.ds-faixa-acao-desabilitada { color: var(--tinta-apagada); cursor: default; }
+.ds-faixa-acao-desabilitada .ds-chrome-camadas-toque { display: none; }
+
+/* o movimento (Faixa.jsx): só transform, e por baixo da barra do sistema, que fica por cima
+ * · a faixa que ainda não nasceu nesta tela (T05, antes de a pré-checagem aprovar): montada, sem caixa */
+.ds-faixa.ds-faixa-ausente { display: none; }
+/* · a faixa que encerra (T16): a aberta de antes fica por cima da sem sessão, no mesmo lugar, e sobe */
+.ds-faixa-revela { position: relative; }
+.ds-faixa-saindo { position: absolute; top: 0; right: 0; left: 0; }

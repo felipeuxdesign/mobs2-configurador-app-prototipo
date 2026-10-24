@@ -1,0 +1,26 @@
+/* o botão da linha (folha 6, BotaoDaLinha.jsx): o desenho do botão secundário · o fill --fundo-botao, a borda --borda-botao, o texto em --tinta */
+.ds-botao-linha {
+  display: flex; align-items: center; justify-content: center; white-space: nowrap;
+  background: var(--fundo-botao); border: var(--traco-borda) solid var(--borda-botao); border-radius: var(--raio);
+  font-weight: 700; color: var(--tinta);
+  touch-action: manipulation; user-select: none;
+  transition: transform var(--mov-solta) var(--mov-curva);
+}
+.ds-botao-linha:active:not(:disabled) { transform: scale(var(--escala-toque)); transition: none; }
+/* o alvo mínimo do Material 3: o desenho fica com 30, 36 ou 40, e o toque cresce até 48 por
+ * uma camada sem desenho, centrada, só na altura — a área cabe sem bater em outro alvo (medido) */
+.ds-botao-linha { position: relative; }
+.ds-botao-linha::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: var(--alvo-min); transform: translateY(-50%); }
+/* desligado, sem o fill: fundo e borda de cartão, texto apagado (T13/39, o Tocando…) */
+.ds-botao-linha:disabled { background: var(--fundo-cartao); border-color: var(--borda); color: var(--tinta-apagada); }
+.ds-botao-linha-resposta { flex: 1; height: var(--e-40); }
+.ds-botao-linha-teste { flex-shrink: 0; height: var(--poco-30); padding: 0 var(--e-12); }
+.ds-botao-linha-letra-secundario { font-size: var(--t-secundario); }
+.ds-botao-linha-letra-corpo { font-size: var(--t-corpo); }
+.ds-respostas-linha { display: flex; gap: var(--e-8); }
+/* 'pergunta' (T09/10, 14 e 15): o Reenviar de cada dependente, 36 de alto,
+ * 14/700 · desligado, o fundo da faixa, a borda da divisória e o texto em --marca, como a referência */
+.ds-botao-linha-pergunta { flex-shrink: 0; height: var(--e-36); padding: 0 var(--e-14); }
+.ds-botao-linha-pergunta:disabled { background: var(--fundo-faixa); border-color: var(--divisoria); color: var(--marca); }
+/* R-21: em cima do rebaixado, o fill do rebaixado (como o BotaoSecundario) */
+:is(.ds-cartao-acao, .ds-caixa-poco, .ds-prova) .ds-botao-linha:not(:disabled) { background: var(--fundo-botao-no-rebaixado); }

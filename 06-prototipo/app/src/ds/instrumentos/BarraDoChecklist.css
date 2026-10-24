@@ -1,0 +1,12 @@
+/* A barra do checklist (folha 5): 6 de alto, o fundo da borda do cartão e o
+ * lima do que já passou, que cresce da esquerda (scaleX). */
+.ds-barra-ck { flex-shrink: 0; height: var(--barra-checklist); background: var(--borda); overflow: hidden; }
+.ds-barra-ck-passou {
+  display: block; height: 100%; background: var(--lima-feito);
+  transform-origin: left center; transform: scaleX(var(--ds-barra-ck-parte));
+  transition: transform var(--mov-lento) var(--mov-curva);
+}
+/* a volta do nível do item: nasce no que tinha e avança até o novo — sem
+ * preenchimento, acabou, não sobra animação viva */
+.ds-barra-ck-avanca { animation: ds-barra-ck-avanca var(--mov-lento) var(--mov-curva); }
+@keyframes ds-barra-ck-avanca { from { transform: scaleX(var(--ds-barra-ck-de)); } }

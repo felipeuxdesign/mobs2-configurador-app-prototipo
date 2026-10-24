@@ -1,0 +1,25 @@
+/* O traço de foco dos campos (folha 6, T01 animacao.md). Em foco, o traço de
+ * baixo do poço vira 2 de lima e acende da esquerda pra direita: uma capa com o
+ * desenho do traço apagado (o poço e o traço de 1) cobre o lima e encolhe pra
+ * direita (scaleX 1 → 0, 150ms); perdendo o foco, ela volta, o mesmo movimento
+ * ao contrário. Fora do foco a capa tem as mesmas cores do que cobre, e
+ * some no olho. Só transform se move; com reduzir movimento, aparece aceso.
+ * O traço de 2 é desenhado por cima da borda de 1: a borda fica em 1,
+ * só troca a cor, e 1 de lima por dentro dela a completa (a sombra de dentro) —
+ * o poço não muda de tamanho, e o texto não sai do lugar. O foco é um só, o que
+ * a tela diz, ou o do próprio campo (foco.js): o que está dentro do poço
+ * e não é o campo (o olho) não acende nada. */
+.ds-traco-foco { position: relative; }
+.ds-traco-foco::after {
+  content: ''; position: absolute; left: 0; right: 0; pointer-events: none;
+  bottom: calc(-1 * var(--traco-borda)); height: var(--traco-destaque);
+  background: var(--fundo-rebaixado); border-bottom: var(--traco-borda) solid var(--rebaixado-luz);
+  transform-origin: right; transform: scaleX(1);
+  transition: transform var(--mov-rapido) var(--mov-curva);
+}
+/* `ds-foco` no próprio poço: o campo de busca, que é o poço inteiro (Busca) */
+.ds-foco .ds-traco-foco, .ds-traco-foco.ds-foco {
+  border-bottom-color: var(--lima);
+  box-shadow: inset 0 calc(var(--traco-borda) - var(--traco-destaque)) 0 var(--lima);
+}
+.ds-foco .ds-traco-foco::after, .ds-traco-foco.ds-foco::after { transform: scaleX(0); }

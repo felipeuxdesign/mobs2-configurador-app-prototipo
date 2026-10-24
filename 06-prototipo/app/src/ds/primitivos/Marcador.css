@@ -1,0 +1,19 @@
+/* o marcador de escolha, um só (decisão 29): o vazado de 11 com a borda em
+   --marca-vazia; o cheio é uma camada lima por cima, que cobre a borda e surge
+   no toque (animacao.md da T01, T02 e T13: opacidade e escala de 80% a 100%, em
+   --mov-rapido). Parado, o marcado é o quadrado lima inteiro de 11. */
+.ds-quadrado {
+  position: relative; display: block; flex-shrink: 0;
+  width: var(--marcador-11); height: var(--marcador-11);
+  border: var(--traco-borda) solid var(--marca-vazia);
+}
+.ds-quadrado::after {
+  content: ''; position: absolute; inset: calc(var(--traco-borda) * -1); background: var(--lima);
+  opacity: 0; transform: scale(var(--escala-surge));
+  transition: opacity var(--mov-rapido) var(--mov-curva), transform var(--mov-rapido) var(--mov-curva);
+}
+.ds-quadrado-cheio::after { opacity: 1; transform: scale(1); }
+.ds-led { display: block; width: var(--e-8); height: var(--e-8); border-radius: 50%; flex-shrink: 0; }
+.ds-led-viva { background: var(--lima); }
+.ds-led-sem-sessao { background: var(--marca); }
+.ds-led-falha { background: var(--vermelho); }

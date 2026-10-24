@@ -1,0 +1,25 @@
+/* T10 · Calibração — só a montagem da tela; o desenho de cada bloco é da peça.
+ * A barra do sistema na cor da faixa, a faixa da sessão, o miolo e o rodapé. */
+.t10 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* o miolo: entre a faixa e o rodapé, rola quando passa de 800. O valor
+ * alvo cresce no que sobra (a peça); nada encolhe, então o que não couber rola.
+ * A folga de 16 até o rodapé é o recheio dele; a caixa do que não se aplica
+ * fica no pé, com a folga dela (aoPe), como as referências desenham. */
+.t10 .tela-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--e-12);
+  padding: var(--e-14) var(--e-16) var(--respiro) var(--e-16);
+}
+.t10 .tela-miolo > * { flex-shrink: 0; }
+
+/* o título do passo: a grandeza que se calibra agora */
+.t10-titulo {
+  font-size: var(--t-titulo-proc); font-weight: 700;
+  line-height: var(--entrelinha-titulo-proc); letter-spacing: var(--ls-titulo-proc);
+}
+
+/* o ativo que não calibra nada (a 11): o rótulo da seção, o título em duas
+   linhas e a frase do cadastro, em --tinta-secundaria */
+.t10-rotulo { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-secundaria); }
+.t10-frase { font-size: var(--t-link); font-weight: 500; line-height: var(--entrelinha-legenda); color: var(--tinta-secundaria); }

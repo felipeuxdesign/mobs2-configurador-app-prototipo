@@ -1,0 +1,17 @@
+/* O tambor. No texto, ele herda a letra de quem o usa. Nas células, cada
+ * roda tem a sua célula em poço, e a da unidade fica no fundo apagado, acesa. */
+.ds-tambor-celulas { display: flex; align-items: stretch; gap: var(--e-2); }
+.ds-tambor-celula {
+  position: relative; flex-grow: 1; height: var(--tambor-celula);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--fundo-rebaixado);
+  border-top: var(--traco-borda) solid var(--rebaixado-sombra);
+  border-bottom: var(--traco-borda) solid var(--rebaixado-luz);
+  font-size: var(--n-tambor); font-weight: 700; letter-spacing: var(--ls-n-tambor);
+}
+.ds-tambor-celula-unidade { background: var(--fundo-apagado); color: var(--lima); }
+.ds-tambor-unidade {
+  width: var(--tambor-unidade); height: var(--tambor-celula);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--t-secundario); font-weight: 700; color: var(--tinta-apagada);
+}

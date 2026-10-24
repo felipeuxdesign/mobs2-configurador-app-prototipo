@@ -1,0 +1,34 @@
+/* As peças só da T05 (pecas.jsx). Só tokens (tokens.css). */
+
+/* T05/03 · o bloco do nenhum encontrado: a caixa de poço cresce no lugar
+ * da lista, centrada, com a marca tracejada de 44 em cima */
+.t05-vazio {
+  flex-grow: 1; min-height: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--e-12);
+  padding: var(--e-24) var(--e-20); text-align: center;
+}
+.t05-vazio-marca {
+  width: var(--marca-vazio-busca); height: var(--marca-vazio-busca);
+  display: flex; align-items: center; justify-content: center;
+  border: var(--traco-borda) dashed var(--borda-neutra);   /* o tracejado do vazio */
+}
+.t05-vazio-marca::after { content: ''; display: block; width: var(--e-14); height: var(--traco-borda); background: var(--traco-vazio-busca); }   /* o token do papel */
+.t05-vazio-titulo { font-size: var(--t-titulo-bloco); font-weight: 700; line-height: var(--entrelinha-cartao); color: var(--tinta); }
+.t05-vazio-frase { font-size: var(--t-corpo); font-weight: 500; line-height: var(--entrelinha-frase-busca); color: var(--tinta-secundaria); }
+/* T05/03 · embaixo da frase, as variantes sem Bluetooth: 13/500 na tinta apagada, na mesma entrelinha de 1,45 */
+.t05-vazio-aviso { font-size: var(--t-secundario); font-weight: 500; line-height: var(--entrelinha-frase-busca); color: var(--tinta-apagada); }
+/* o mundo real · T05/16 e 17 · no lugar da marca, o poço de 44 com o Bluetooth
+ * cortado de 22, no traço das ações (o ícone no poço de 44, como o da T04) */
+.t05-vazio-icone.ds-icone { width: var(--icone-poco-44); height: var(--icone-poco-44); }
+/* T05/05 · a busca que corre de novo: no poço de 44, o quadrado branco de
+ * agora com 16 (componentes.md · o poço numa leitura em andamento) */
+.t05-vazio-agora.ds-glifo-agora { width: var(--e-16); height: var(--e-16); }
+
+/* a amostra T05/16: o quadrado de 44 do vazio da busca é rebaixado, como a área em volta,
+   com as bordas do rebaixado · o vão do risco do Bluetooth é pintado na cor dele · no escuro, os mesmos valores */
+.t05-vazio .ds-poco {
+  --fundo-do-icone: var(--fundo-rebaixado);
+  background: var(--fundo-rebaixado);
+  border-top-color: var(--rebaixado-sombra); border-bottom-color: var(--rebaixado-luz);
+  border-left-color: var(--rebaixado-lado); border-right-color: var(--rebaixado-lado);
+}

@@ -1,0 +1,23 @@
+.ds-encerramento { flex-shrink: 0; display: flex; flex-direction: column; --ds-encerramento-passo: var(--encerramento-passo); }
+.ds-encerramento-justo { --ds-encerramento-passo: var(--encerramento-passo-justo); }
+.ds-encerramento-passo { display: flex; gap: var(--e-12); min-height: var(--ds-encerramento-passo); }
+.ds-encerramento-ultimo { min-height: var(--encerramento-fim); }
+.ds-encerramento-texto {
+  flex-grow: 1; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--e-10);
+  padding-top: var(--e-6);
+}
+.ds-encerramento-coluna { display: flex; flex-direction: column; gap: var(--e-4); min-width: 0; }
+.ds-encerramento-nome { font-size: var(--t-passo); font-weight: 600; color: var(--tinta); }
+.ds-encerramento-legenda {
+  font-size: var(--t-legenda); font-weight: 500; color: var(--tinta-secundaria);
+  line-height: var(--entrelinha-apoio); padding-bottom: var(--e-12);
+}
+.ds-encerramento-situacao { flex-shrink: 0; font-size: var(--t-secundario); font-weight: 700; color: var(--tinta-secundaria); }
+/* a legenda que passa ao passo que corre, na frente de quem olha: esmaece no
+ * lugar, sem preenchimento — acabou, nada fica animando */
+.ds-encerramento-legenda-surge { animation: ds-encerramento-legenda-esmaece var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-encerramento-legenda-esmaece { from { opacity: 0; } }
+
+.ds-encerramento-corre .ds-encerramento-situacao { color: var(--tinta); }
+.ds-encerramento-falha .ds-encerramento-situacao { color: var(--vermelho); }
+.ds-encerramento-resto .ds-encerramento-nome, .ds-encerramento-resto .ds-encerramento-situacao { color: var(--tinta-apagada); }

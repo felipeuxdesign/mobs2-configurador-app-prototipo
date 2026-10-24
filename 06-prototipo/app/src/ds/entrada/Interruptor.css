@@ -1,0 +1,45 @@
+/* a linha: 56 de alto (o toque passa dos 48), o cartão da folha da Conta, o rótulo 15/600 */
+.ds-interruptor {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+  height: var(--alvo-primario); padding: 0 var(--e-12) 0 var(--e-14);
+  background: var(--fundo-cartao);
+  border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+  touch-action: manipulation; user-select: none; text-align: left;
+}
+.ds-interruptor-rotulo { display: flex; align-items: center; gap: var(--e-10); font-size: var(--t-link); font-weight: 600; color: var(--tinta); }
+/* a linha solta (o pé do painel do palco): sem o cartão — quem dá a altura e a letra é quem usa */
+.ds-interruptor.ds-interruptor-solto { height: auto; padding: 0; background: none; border: 0; border-radius: 0; }
+
+/* o trilho: 52 × 32, o contorno de 2 em --borda-interruptor sobre o --poco · o roxo do ligado é uma
+   camada por cima, que cobre o contorno e entra por opacity */
+.ds-interruptor-trilho {
+  position: relative; flex-shrink: 0; display: block;
+  width: var(--interruptor-largura); height: var(--poco-32); border-radius: var(--poco-32);
+  background: var(--poco); border: var(--traco-destaque) solid var(--borda-interruptor);   /* o contorno tem token próprio; a bolinha segue em --marca-limite */
+}
+.ds-interruptor-trilho::before {
+  content: ''; position: absolute; inset: calc(-1 * var(--traco-destaque)); border-radius: inherit;
+  background: var(--roxo); opacity: 0;
+  transition: opacity var(--mov-padrao) var(--mov-curva);
+}
+.ds-interruptor-ligado .ds-interruptor-trilho::before { opacity: 1; }
+
+/* a bolinha: 24, no meio da altura (a 4 da borda) · desligada, encolhida a 16 e com o centro a 16
+   da borda (a 8 dela); ligada, a 4 da borda direita · a cor do ligado é uma camada por cima */
+.ds-interruptor-bolinha {
+  position: absolute; top: var(--e-2); left: var(--e-2); display: block;
+  width: var(--poco-24); height: var(--poco-24); border-radius: 50%;
+  background: var(--marca-limite);
+  transform: translateX(0) scale(var(--interruptor-desligado));
+  transition: transform var(--mov-padrao) var(--mov-curva);
+}
+.ds-interruptor-bolinha::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: var(--texto-primario); opacity: 0;
+  transition: opacity var(--mov-padrao) var(--mov-curva);
+}
+.ds-interruptor-ligado .ds-interruptor-bolinha { transform: translateX(var(--e-20)) scale(1); }
+.ds-interruptor-ligado .ds-interruptor-bolinha::before { opacity: 1; }
+/* apertando: cresce pra 28, no lugar dela */
+.ds-interruptor:active .ds-interruptor-bolinha { transform: translateX(0) scale(var(--interruptor-apertado)); }
+.ds-interruptor-ligado:active .ds-interruptor-bolinha { transform: translateX(var(--e-20)) scale(var(--interruptor-apertado)); }

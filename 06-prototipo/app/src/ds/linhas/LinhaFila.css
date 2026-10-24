@@ -1,0 +1,15 @@
+/* A linha da fila (T15): o poço da linha (32 na de 50, 30 na de 62 · o poço na
+ * linha), o que é e de quem embaixo, o quando à direita. 62 depois de subir (folha 7), 50 esperando
+ * (folha 4, com a divisória da lista) — a altura por estado é uma diferença conhecida, em aberto. */
+.ds-linha-fila { display: flex; align-items: center; gap: var(--e-12); height: var(--linha-fila); }
+.ds-linha-fila-espera { height: var(--linha-dupla); }
+.ds-linha-fila-divisoria { border-bottom: var(--traco-borda) solid var(--divisoria); }
+.ds-linha-fila-texto { flex-grow: 1; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-linha-fila-titulo { font-size: var(--t-link); font-weight: 600; color: var(--tinta); }
+.ds-linha-fila-legenda { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+.ds-linha-fila-quando { font-size: var(--t-secundario); font-weight: 600; color: var(--tinta-secundaria); flex-shrink: 0; }
+/* esperando, o círculo é fato: --tinta-secundaria, não o --marca do Glifo 'espera' */
+.ds-linha-fila-espera .ds-glifo { color: var(--tinta-secundaria); }
+/* T15: a altura pela posição na lista, quando quem monta diz */
+.ds-linha-fila.ds-linha-fila-meio { height: var(--linha-dupla); }
+.ds-linha-fila.ds-linha-fila-fim { height: var(--linha-fila); }

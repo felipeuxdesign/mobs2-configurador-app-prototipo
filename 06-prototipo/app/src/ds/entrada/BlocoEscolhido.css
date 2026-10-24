@@ -1,0 +1,42 @@
+.ds-escolhido {
+  flex-grow: 1; min-height: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--e-8);
+  padding: var(--e-24) var(--e-16);
+  background: var(--fundo-rebaixado);
+  border-top: var(--traco-borda) solid var(--rebaixado-sombra);
+  border-left: var(--traco-borda) solid var(--rebaixado-lado);
+  border-right: var(--traco-borda) solid var(--rebaixado-lado);
+  border-bottom: var(--traco-destaque) solid var(--lima);
+}
+.ds-escolhido-falha { border-bottom-color: var(--vermelho); }
+/* T06: o tom neutro (a trava com saída, T06/05) e o apagado (o chassi desmente, T06/02) */
+.ds-escolhido-neutro { border-bottom-color: var(--borda-neutra); }
+.ds-escolhido-neutro .ds-escolhido-rotulo { color: var(--tinta-secundaria); }
+.ds-escolhido-apagado { border-bottom: var(--traco-borda) solid var(--rebaixado-luz); }
+.ds-escolhido-apagado .ds-escolhido-rotulo { color: var(--tinta-apagada); }
+/* T06: o justo não cresce — fica em cima da prova do vínculo (T06/01, 02, 03) */
+.ds-escolhido-justo { flex-grow: 0; flex-shrink: 0; padding: var(--escolhido-justo-respiro) var(--e-16); }
+.ds-escolhido-justo.ds-escolhido-apagado { padding: var(--escolhido-apagado-respiro) var(--e-16); }
+
+.ds-escolhido-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--lima); }
+.ds-escolhido-falha .ds-escolhido-rotulo { color: var(--vermelho); }
+.ds-escolhido-identidade {
+  font-size: var(--n-identidade); font-weight: 700; letter-spacing: var(--ls-n-identidade);
+  line-height: var(--entrelinha-numero); color: var(--tinta);
+}
+.ds-escolhido-detalhe { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-secundaria); }
+.ds-escolhido-separador { display: block; height: var(--traco-borda); background: var(--separador); }
+
+/* com passos (T05): a coluna inteira, o topo centrado, os passos à esquerda */
+.ds-escolhido-com-passos { align-items: stretch; gap: var(--e-10); padding: var(--e-16); }
+.ds-escolhido-com-passos .ds-escolhido-rotulo,
+.ds-escolhido-com-passos .ds-escolhido-identidade,
+.ds-escolhido-com-passos .ds-escolhido-detalhe { text-align: center; }
+.ds-escolhido-com-passos .ds-escolhido-separador { margin: var(--e-4) 0; }
+.ds-escolhido-passo { font-size: var(--t-secundario); font-weight: 400; color: var(--tinta-secundaria); }
+.ds-escolhido-passo-titulo { font-weight: 700; color: var(--tinta); }
+
+/* com motivo (T06): centrado, o separador curto, as frases em 15 */
+.ds-escolhido-com-motivo { padding: var(--escolhido-motivo-respiro) var(--e-16); }
+.ds-escolhido-com-motivo .ds-escolhido-separador { width: var(--separador-motivo); margin: var(--e-8) 0; }
+.ds-escolhido-motivo { font-size: var(--t-link); font-weight: 500; color: var(--tinta-forte); }

@@ -1,0 +1,41 @@
+/* Os valores do palco que não são do app. O palco é ilustração
+ * (08-produto-real/norma-e-ilustracao.md): os tokens do app não mudam por ele.
+ * Apoiados nos tokens do app sempre que o valor já existe lá. */
+:root {
+  /* a moldura é a silhueta, sem marca (decisão 43 · palco.md): uma borda quase-preta de 8 em volta da
+     tela — 376 × 816 por fora —, os cantos de 36 por fora e 28 na tela, concêntricos por construção, o fio de luz de 1 por
+     dentro, o contorno escuro de 1 por fora e a sombra suave embaixo — os três por sombra, que não soma no tamanho. Sem
+     metal, câmera nem botão. Em escala, tudo escala junto (a transformação do celular), nunca maior que o real */
+  --palco-borda: var(--e-8);                                   /* a borda, igual nos quatro lados */
+  --palco-celular-largura: calc(var(--tela-largura) + 2 * var(--palco-borda));
+  --palco-celular-altura: calc(var(--tela-altura) + 2 * var(--palco-borda));
+  --palco-raio-fora: 36px;                                     /* o canto por fora da borda */
+  --palco-raio-tela: calc(var(--palco-raio-fora) - var(--palco-borda)); /* 28 na tela: concêntrico com o de fora */
+  --palco-borda-cor: rgb(5 4 7);                               /* #050407, a quase-preta, mais escura que a tela */
+  --palco-fio: var(--traco-borda);                             /* o fio de luz e o contorno têm 1 */
+  --palco-fio-luz: rgb(255 255 255 / 0.14);                    /* o fio de luz, por dentro da borda */
+  --palco-contorno: rgb(0 0 0 / 0.6);                          /* o contorno escuro, por fora */
+  --palco-sombra: 0 12px 24px rgb(0 0 0 / 0.45);               /* a sombra suave embaixo (palco.md) */
+  --palco-quadrado: var(--poco-44);                             /* 44 × 44 (palco.md) */
+  --palco-coluna: 230px;
+  --palco-coluna-distancia: var(--e-40);
+  --palco-cabeca-coluna-vao: 3px;                              /* entre ESTADOS DESTA TELA e o nome da tela, no topo da coluna (os 5 quadros desenham 3, fora da grade de 2) */
+  --palco-painel: 280px;
+  --palco-painel-cabeca: 68px;                                 /* o cabeçalho do painel, por dentro; a linha de baixo é o topo do corpo (quadro 04: 68 + 1) */
+  --palco-linha-coluna: var(--poco-32);                        /* as linhas da coluna têm 32 */
+  --palco-linha-coluna-longa: var(--poco-30);                  /* a coluna longa (a T13, 20 linhas), como a cena 05 desenha: com 32 ela passa do pé do celular */
+  --palco-recuo-coluna: calc(var(--poco-24) + var(--e-10));    /* o recuo da família: o poço embaixo do nome de cima (24 + 10 = 34) */
+  --palco-linha-painel: var(--poco-34);                        /* as do painel, 34 */
+  --palco-traco-sol: 2;                                        /* o sol da linha Modo claro, no pé do painel (a cena 04: stroke-width 2) */
+  --palco-botao-voltar: var(--poco-34);
+  --palco-x: 36px;
+  --palco-codigo: var(--e-28);                                 /* a coluna do código T01 no painel */
+  --palco-margem: var(--e-16);
+  --palco-ls-rotulo: 1.6px;                                    /* ESTADOS DESTA TELA, PROTÓTIPO */
+  --palco-opacidade-pisca: 0.4;                                /* o Voltar ao fluxo pisca uma vez */
+  --palco-estreito: 900px;                                     /* abaixo disso, o modo estreito */
+  --palco-rolagem: 6px;                                        /* a barra de rolagem do palco (o painel e a coluna): fina, nas cores do palco */
+  --palco-rolagem-cor: var(--borda-neutra);                    /* a cor dela, sem trilho claro */
+  --palco-topo-coluna: var(--poco-34);                         /* o lugar fixo do topo da coluna: a frase do fluxo ou o Voltar ao fluxo (decisão 30) */
+  --palco-barra-no-celular: 0px;                               /* no celular de verdade, a barra do Android desenhada some: a do aparelho já está lá */
+}

@@ -1,0 +1,11 @@
+/* O cartão do que a sessão prendeu (pecas.jsx): o cartão de lista, com o
+ * recheio de 12, o poço de 44 e o ícone de 22 (T04/10, 11). */
+.t04-preso {
+  flex-shrink: 0; display: flex; align-items: center; gap: var(--e-12); padding: var(--e-12);
+  background: var(--fundo-cartao);
+  border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+}
+.t04-preso-icone.ds-icone { width: var(--icone-poco-44); height: var(--icone-poco-44); }
+.t04-preso-textos { display: flex; flex-direction: column; gap: var(--e-2); min-width: 0; }
+.t04-preso-identidade { font-size: var(--t-preso); font-weight: 700; color: var(--tinta); }
+.t04-preso-detalhe { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-secundaria); }

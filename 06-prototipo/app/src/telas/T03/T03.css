@@ -1,0 +1,46 @@
+/* T03 · Sincronizar — só tokens (tokens.css). */
+
+.t03 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* o miolo: entre a barra e o rodapé, rola quando passa de 800; a folga
+ * de 16 até o rodapé é o recheio dele */
+.t03 .tela-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto; scrollbar-width: none;
+  display: flex; flex-direction: column; gap: var(--e-14);
+  padding: var(--e-28) var(--e-16) var(--respiro) var(--e-16);
+}
+
+/* o cabeçalho de procedimento: a unidade em cima, o título de 28 */
+.t03-cabeca { flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-4); }
+.t03-cabeca-rotulo { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-secundaria); }
+.t03-cabeca-titulo { font-size: var(--t-titulo-proc); font-weight: 700; letter-spacing: var(--ls-titulo-proc); }
+
+/* os instrumentos, na caixa de poço (cartoes/caixas.css) */
+.t03-instrumento { flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-8); padding: var(--instrumento-recheio) var(--e-16); }
+.t03-instrumento-download { gap: var(--e-10); }
+.ds-caixa-poco.t03-instrumento-concluido { border-bottom: var(--traco-destaque) solid var(--lima); }
+.t03-instrumento-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-secundaria); }
+.t03-instrumento-frase { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-apagada); }
+.t03-lima { color: var(--lima); }
+.t03-vermelho { color: var(--vermelho); }
+
+.t03-numero { font-size: var(--n-progresso); font-weight: 700; letter-spacing: var(--ls-n-progresso); line-height: var(--entrelinha-numero); }
+.t03-numero-unidade { padding-left: var(--e-6); font-size: var(--n-unidade-g); font-weight: 500; color: var(--tinta-secundaria); }
+.t03-numero-unidade-p { font-size: var(--n-unidade-progresso); }
+
+.t03-legendas { display: flex; justify-content: space-between; font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-apagada); }
+
+/* a barra de idade do pacote: o poço sem os lados, o preenchido do tempo que
+ * passou e o traço do limite, posicionados pela conta (--p, de 0 a 100) */
+.t03-idade {
+  position: relative; flex-shrink: 0; overflow: hidden; height: var(--barra-idade);
+  background: var(--poco);
+  border-top: var(--traco-borda) solid var(--poco-fundo);
+  border-bottom: var(--traco-borda) solid var(--borda-poco);
+}
+.t03-idade-preenchido { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p) * 1%); background: var(--idade-preenchido); }
+.t03-idade-vencido .t03-idade-preenchido { background: var(--vermelho-faixa); }
+.t03-idade-limite { position: absolute; top: 0; bottom: 0; left: calc(var(--p) * 1%); width: var(--traco-borda); background: var(--marca-limite); }
+
+/* a linha do pacote: a versão e o carimbo, solta embaixo do bloco */
+.t03-pacote { flex-shrink: 0; font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }

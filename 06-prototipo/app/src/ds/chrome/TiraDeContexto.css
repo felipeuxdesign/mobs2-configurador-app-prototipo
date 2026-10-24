@@ -1,0 +1,29 @@
+.ds-tira-contexto {
+  height: var(--tira-contexto); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--e-12) 0 var(--e-16);
+}
+
+.ds-tira-contexto-empresa {
+  position: relative; height: var(--linha-padrao);
+  display: flex; align-items: center; gap: var(--e-6); padding: 0 var(--e-4) 0 0;
+}
+.ds-tira-contexto-empresa::before { content: ''; position: absolute; inset: calc((var(--linha-padrao) - var(--alvo-min)) / 2) 0; }
+.ds-tira-contexto-empresa-texto { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-secundaria); }
+
+.ds-tira-contexto-conta {
+  position: relative; width: var(--poco-44); height: var(--poco-44); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  touch-action: manipulation; user-select: none;
+  transition: opacity var(--mov-solta) var(--mov-curva);
+}
+/* nada encosta, na área de toque (leis.md): a área de 48 do avatar cresce só pra cima e pro lado,
+   o lado livre — o desenho de 44 não muda. Com o ENCERRAR de 44 logo embaixo (decisão 38), a caixa
+   do avatar já fica a 8 dele (4 do pé da tira, 1 da borda e 3 da faixa do menu), sem recuo
+   pra dentro do avatar, e a caixa conta no toque */
+.ds-tira-contexto-conta::before {
+  content: ''; position: absolute;
+  top: calc(var(--poco-44) - var(--alvo-min)); bottom: 0;
+  left: calc((var(--poco-44) - var(--alvo-min)) / 2); right: calc((var(--poco-44) - var(--alvo-min)) / 2);
+}
+.ds-tira-contexto-conta:active, .ds-tira-contexto-conta.ds-forca-toque { opacity: var(--toque-apagado); transition: none; }

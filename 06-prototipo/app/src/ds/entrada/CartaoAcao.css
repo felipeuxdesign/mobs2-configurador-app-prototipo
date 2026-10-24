@@ -1,0 +1,29 @@
+.ds-cartao-acao {
+  flex-grow: 1; min-height: 0;
+  display: flex; flex-direction: column; justify-content: center; gap: var(--cartao-acao-folga);
+  padding: var(--e-20) var(--e-16);
+  background: var(--fundo-rebaixado);
+  border-top: var(--traco-borda) solid var(--rebaixado-sombra);
+  border-left: var(--traco-borda) solid var(--rebaixado-lado);
+  border-right: var(--traco-borda) solid var(--rebaixado-lado);
+  border-bottom: var(--traco-destaque) solid var(--vermelho);
+}
+.ds-cartao-acao-cabeca { display: flex; align-items: center; gap: var(--e-10); }
+/* o glifo solto: o Glifo mede pelo poço, aqui não há poço (Lei 4, exceção do cartão) */
+.ds-cartao-acao .ds-cartao-acao-glifo { width: var(--glifo-cartao-acao); height: var(--glifo-cartao-acao); flex-shrink: 0; }
+.ds-cartao-acao-rotulo { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--vermelho); }
+.ds-cartao-acao-corpo { display: flex; flex-direction: column; gap: var(--e-6); }
+.ds-cartao-acao-titulo { font-size: var(--t-titulo-tela); font-weight: 700; line-height: var(--entrelinha-titulo-cartao); color: var(--tinta); }
+.ds-cartao-acao-descricao { font-size: var(--t-link); font-weight: 500; line-height: var(--entrelinha-texto); color: var(--tinta-secundaria); }
+
+/* T15/02: o compacto, com mais de um erro — 18 em cima e embaixo,
+   16 entre os blocos; o erro que pede ação e o botão num bloco só, a 10, com
+   14 até a divisória curta; o título de 17 e a causa de 13 */
+.ds-cartao-acao-compacto { gap: var(--e-16); padding: var(--cartao-acao-recheio-compacto) var(--e-16); }
+.ds-cartao-acao-item {
+  display: flex; flex-direction: column; gap: var(--e-10);
+  padding-bottom: var(--e-14); border-bottom: var(--traco-borda) solid var(--separador);
+}
+.ds-cartao-acao-compacto .ds-cartao-acao-corpo { gap: var(--e-2); }
+.ds-cartao-acao-compacto .ds-cartao-acao-titulo { font-size: var(--t-botao); line-height: normal; }
+.ds-cartao-acao-compacto .ds-cartao-acao-descricao { font-size: var(--t-secundario); }

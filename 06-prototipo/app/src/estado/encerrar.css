@@ -1,0 +1,8 @@
+/* O lugar do diálogo Encerrar antes de terminar? por cima da tela (encerrar.jsx):
+ * o véu começa embaixo da barra do sistema e cobre a faixa e o resto, como a
+ * T04/13 desenha. O app (.app) é a caixa de posição de toda tela; por cima de
+ * tudo o que ela tem, na ordem, e embaixo do que é do sistema (a rolagem). */
+.encerrar-sobre {
+  position: absolute; top: var(--barra-sistema); right: 0; bottom: 0; left: 0; z-index: 1;
+  display: flex; flex-direction: column;
+}

@@ -1,0 +1,15 @@
+.ds-segmentado { flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-6); }
+.ds-segmentado.ds-segmentado-folga-8 { gap: var(--e-8); }
+.ds-segmentado-cabeca { display: flex; align-items: baseline; justify-content: space-between; }
+.ds-segmentado-rotulo { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-secundaria); }
+.ds-segmentado-contador { font-size: var(--t-secundario); font-weight: 700; }
+.ds-segmentado-total { color: var(--tinta-apagada); }
+.ds-segmentado-segmentos { display: flex; gap: var(--e-2); align-items: stretch; height: var(--segmento-atual); }
+.ds-segmento { display: block; flex-grow: 1; height: var(--segmento); align-self: center; background: var(--borda); }
+.ds-segmento-feito { background: var(--lima-feito); }
+.ds-segmento-atual { height: var(--segmento-atual); align-self: auto; background: var(--andamento); }   /* a etapa atual (R-22) */
+/* o passo atual já feito (T10/01): a altura do atual, a cor do feito */
+.ds-segmento-atual-feito { height: var(--segmento-atual); align-self: auto; background: var(--lima-feito); }
+/* o passo atual reprovado (T13/09): a altura do atual, em vermelho */
+.ds-segmento-atual-falha { height: var(--segmento-atual); align-self: auto; background: var(--vermelho); }
+.ds-segmentado-legenda { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-apagada); }

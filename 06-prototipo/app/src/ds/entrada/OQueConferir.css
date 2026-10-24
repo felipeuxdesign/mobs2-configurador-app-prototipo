@@ -1,0 +1,11 @@
+/* O que conferir (folha 6): a caixa de poço, o rótulo de 10 e as causas de 13, a 8 uma da outra */
+.ds-o-que-conferir { flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-8); padding: var(--e-12) var(--e-14); }
+.ds-o-que-conferir-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-secundaria); }
+.ds-o-que-conferir-causa { font-size: var(--t-secundario); color: var(--tinta-secundaria); }
+.ds-o-que-conferir-titulo { font-weight: 700; color: var(--tinta); }
+/* sem a caixa (T09/12, dentro do elo da Conexão): sem o recheio, as linhas a 4 */
+.ds-o-que-conferir.ds-o-que-conferir-sem-caixa { gap: var(--e-4); padding: 0; }
+/* a ação ao lado do rótulo (T09/12): o link dentro do conteúdo, com o toque de 44 que não empurra a
+   linha — os 44 do desenho comem 14 em cima e embaixo, e a linha fica com a altura do rótulo */
+.ds-o-que-conferir-cabeca { display: flex; align-items: center; justify-content: space-between; gap: var(--e-10); }
+.ds-o-que-conferir-cabeca > .ds-link-conteudo { margin: calc(var(--e-14) * -1) 0; align-self: center; }

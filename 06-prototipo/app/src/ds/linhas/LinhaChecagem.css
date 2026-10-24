@@ -1,0 +1,147 @@
+/* A linha de checagem (folha 4) — uma peça, o mesmo desenho em todo estado:
+ * poço, título (e a causa embaixo), valor à direita, divisória embaixo.
+ * Variantes: compacta 38 (pré-checagem, sem uso nas telas) · passo 38 (T14) · dupla 50
+ * (assertiva da sessão) · conferência 50 (T11) · diagnóstico 50 (o módulo da T07) ·
+ * longa 44 (a CAN da T07). O estado muda a tinta. */
+.ds-checagem {
+  display: flex; align-items: center; gap: var(--e-12);
+  height: var(--linha-compacta);
+  border-bottom: var(--traco-borda) solid var(--divisoria);
+}
+.ds-checagem-sem-divisoria { border-bottom: 0; }
+.ds-checagem-corpo { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-checagem-titulo { font-size: var(--t-corpo); font-weight: 500; color: var(--tinta-forte); }
+.ds-checagem-causa { font-size: var(--t-legenda); font-weight: 500; color: var(--vermelho); line-height: var(--entrelinha-apoio); }
+.ds-checagem-valor { font-size: var(--t-secundario); font-weight: 700; color: var(--tinta-secundaria); flex-shrink: 0; }
+
+/* com a causa, a linha cresce: 6 em cima e embaixo, nunca menos de 38 */
+.ds-checagem-com-causa { height: auto; min-height: var(--linha-compacta); padding: var(--e-6) 0; }
+
+/* ── variantes ── */
+.ds-checagem-passo { gap: var(--e-10); }
+.ds-checagem-passo .ds-checagem-titulo { font-weight: 600; color: var(--tinta); }
+/* a última dos passos no prazo estourado (T14·02): 38 + 2 */
+.ds-checagem-folga-fim { height: calc(var(--linha-compacta) + var(--e-2)); }
+
+.ds-checagem-dupla { gap: var(--e-10); height: var(--linha-dupla); }
+.ds-checagem-dupla .ds-checagem-titulo { font-weight: 600; color: var(--tinta); line-height: var(--entrelinha-nome); }
+.ds-checagem-dupla .ds-checagem-valor { color: var(--tinta); }
+
+.ds-checagem-conferencia { gap: var(--e-10); height: var(--linha-dupla); }
+/* folha 4, T11: a coluna do nome mede 96 nas referências (o Extended ID); o nome fica do
+ * tamanho dele, numa linha, nunca menos que o token --conferencia-nome (96), e o valor,
+ * alinhado à direita, cai no mesmo pixel */
+.ds-checagem-conferencia .ds-checagem-corpo { flex: 0 0 auto; min-width: var(--conferencia-nome); }
+.ds-checagem-conferencia .ds-checagem-titulo { font-size: var(--t-link); font-weight: 600; color: var(--tinta); white-space: nowrap; }
+.ds-checagem-conferencia .ds-checagem-valor { flex-grow: 1; font-size: var(--t-corpo); text-align: right; }
+
+/* lei 23 · a T07: o módulo na medida da linha de conferência (50, o poço de 32, a 10)
+ * e a CAN na lista longa (44, o poço de 30, a 12); nas duas, o título em 15/600 e o valor em 14.
+ * Com a causa, a linha cresce, 6 em cima e embaixo, nunca menos que a altura dela. A tinta
+ * é a do estado, logo abaixo */
+.ds-checagem-diagnostico { gap: var(--e-10); height: var(--linha-dupla); }
+.ds-checagem-longa { height: var(--linha-padrao); }
+.ds-checagem-diagnostico .ds-checagem-titulo, .ds-checagem-longa .ds-checagem-titulo { font-size: var(--t-link); font-weight: 600; }
+.ds-checagem-diagnostico .ds-checagem-valor, .ds-checagem-longa .ds-checagem-valor { font-size: var(--t-corpo); }
+.ds-checagem-diagnostico.ds-checagem-com-causa { height: auto; min-height: var(--linha-dupla); }
+.ds-checagem-longa.ds-checagem-com-causa { height: auto; min-height: var(--linha-padrao); }
+
+/* ── estados (depois das variantes: a tinta do estado ganha) ── */
+.ds-checagem-reprovada .ds-checagem-titulo,
+.ds-checagem-parou .ds-checagem-titulo { font-weight: 600; color: var(--tinta); }
+.ds-checagem-reprovada .ds-checagem-valor,
+.ds-checagem-parou .ds-checagem-valor { color: var(--vermelho); }
+.ds-checagem-nao-se-aplica .ds-checagem-titulo,
+.ds-checagem-nao-se-aplica .ds-checagem-valor,
+.ds-checagem-ainda-nao .ds-checagem-titulo,
+.ds-checagem-ainda-nao .ds-checagem-valor { color: var(--tinta-apagada); }
+
+/* T07/05 e 07 · a linha que só informa (folha 4): o i cinza no poço, o título em 600
+ * e --tinta, a frase embaixo em --tinta-secundaria, o valor em --tinta */
+.ds-checagem-informa .ds-checagem-titulo { font-weight: 600; color: var(--tinta); }
+.ds-checagem-informa .ds-checagem-causa { color: var(--tinta-secundaria); }
+.ds-checagem-informa .ds-checagem-valor { color: var(--tinta); }
+
+/* T05 · a checagem que corre: o quadrado branco de 10 no poço de 24, o valor em --tinta */
+.ds-checagem-agora .ds-poco-24 .ds-glifo-agora { width: var(--e-10); height: var(--e-10); }
+/* a T07 (06, 10): o mesmo quadrado de 10 no poço de 32 do módulo e no de 30 da CAN */
+.ds-checagem-agora.ds-checagem-diagnostico .ds-glifo-agora, .ds-checagem-agora.ds-checagem-longa .ds-glifo-agora { width: var(--e-10); height: var(--e-10); }
+.ds-checagem-agora .ds-checagem-valor { color: var(--tinta); }
+/* T05/10 · no 'ainda não', o glifo que troca o círculo (o relógio) fica apagado */
+.ds-checagem-ainda-nao .ds-glifo-cor-secundaria { color: var(--marca-limite); }
+/* T05/05 · a última da pré-checagem inteira aprovada, com a folga do pé do cartão (43) */
+.ds-checagem.ds-checagem-fim-pre-checagem { height: var(--linha-precheck-fim); }
+/* T05 · a nota: o fato resolvido embaixo do título, apagado, sem veredito (T05/13) */
+.ds-checagem-nota { color: var(--tinta-apagada); }
+/* T05/13 · a última da aprovada inteira, com a nota: 8 em cima e embaixo */
+.ds-checagem.ds-checagem-fim-pre-checagem.ds-checagem-com-causa { height: auto; padding: var(--e-8) 0; }
+/* T05 · a última da pré-checagem que terminou numa falha ou parou no caso (45) */
+.ds-checagem.ds-checagem-fim-pre-checagem-parada { height: var(--linha-precheck-fim-parada); }
+/* T05/15 · o 'parou aqui' neutro, que não é erro: o valor sai do vermelho */
+.ds-checagem-parou.ds-checagem-tom-neutro .ds-checagem-valor { color: var(--tinta-secundaria); }
+/* T11/00 · o bloco que não bate: o xis no poço e o par embaixo do nome —
+ * o que o módulo tem em vermelho, o que o cadastro manda em --tinta-secundaria, a 3; a linha
+ * cresce com 10 em cima e embaixo, e o corpo sai da coluna fixa do nome */
+.ds-checagem.ds-checagem-com-par { height: auto; padding: var(--e-10) 0; }
+.ds-checagem-com-par .ds-checagem-corpo { flex: 0 1 auto; width: auto; gap: var(--e-2); }   /* 2 entre as linhas, como o título e a descrição da folha com opções (o --conferencia-par-folga, 3, é da pergunta da T09) */
+.ds-checagem-par { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }
+.ds-checagem-par-modulo { color: var(--vermelho); }
+/* T11/01 · o bloco que confere, com o valor em --tinta */
+.ds-checagem-conferencia.ds-checagem-valor-aceso .ds-checagem-valor { color: var(--tinta); }
+/* decisão 53 · T11 · o Extended ID, só leitura ('informa', o i cinza): o valor curto em
+ * --tinta-secundaria, como o das que conferem (01, 02, 05); com par na tela (00), as duas linhas em
+ * --tinta-secundaria. O revisar em seguida ('pendente', o relógio): a linha de cima em --tinta, o
+ * porquê embaixo em --tinta-secundaria (05) */
+.ds-checagem-conferencia.ds-checagem-informa .ds-checagem-valor,
+.ds-checagem-conferencia.ds-checagem-informa .ds-checagem-par-modulo { color: var(--tinta-secundaria); }
+.ds-checagem-conferencia.ds-checagem-pendente .ds-checagem-par-modulo { color: var(--tinta); }
+/* T11 · a leitura ainda não chegou nesta linha: o poço fica vazio (a T16) */
+.ds-checagem-lendo .ds-poco > * { opacity: 0; }
+/* T11 · na conferência, o bloco entra com o relógio no poço, e o que o
+ * módulo tem espera a leitura chegar */
+.ds-checagem-lendo.ds-checagem-lendo-relogio .ds-poco > * { opacity: 1; }
+.ds-checagem-lendo .ds-checagem-par-modulo, .ds-checagem-agora .ds-checagem-par-modulo { opacity: 0; }
+/* a leitura chega na frente de quem olha: o glifo novo esmaece
+ * pelo Glifo (esmaece), e o que chega com a leitura — o valor, a causa, a nota, o porquê e, na
+ * conferência, a linha do módulo — esmaece junto, no lugar, em 150 (desacelera). A peça percebe
+ * sozinha: aberta já lida, nada anima. Sem preenchimento; com reduzir, direto. */
+.ds-checagem-nasce { animation: ds-checagem-esmaece var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-checagem-esmaece { from { opacity: 0; } }
+/* T14 · o passo do ciclo com a causa: a causa na entrelinha do texto,
+ * e o recheio da referência — 8 no passo reprovado (T14/03, a linha de 50) e 4 no
+ * teste do cartão, a última (T14/04) */
+.ds-checagem.ds-checagem-recheio-largo { padding: var(--e-8) 0; }
+.ds-checagem.ds-checagem-recheio-justo { padding: var(--e-4) 0; }
+.ds-checagem-recheio-largo .ds-checagem-causa, .ds-checagem-recheio-justo .ds-checagem-causa { line-height: var(--entrelinha-apoio); }   /* o apoio de 12, com 16 */
+/* T16 · a assertiva da sessão: o nome fica aceso em todo estado; o
+ * veredito é do glifo e do valor. O 'ainda não' (na fila) leva o relógio e o valor
+ * em --tinta-secundaria, e não apaga (T16/02 e 05) */
+.ds-checagem-dupla.ds-checagem-nao-se-aplica .ds-checagem-titulo,
+.ds-checagem-dupla.ds-checagem-ainda-nao .ds-checagem-titulo { color: var(--tinta); }
+.ds-checagem-dupla.ds-checagem-ainda-nao .ds-checagem-valor,
+.ds-checagem-dupla.ds-checagem-ainda-nao .ds-glifo-cor-secundaria { color: var(--tinta-secundaria); }
+/* T16 · a última do cartão das assertivas, com a folga do pé do cartão (54) */
+.ds-checagem.ds-checagem-fim-assertiva { height: calc(var(--linha-dupla) + var(--e-4)); }
+/* T12 · o valor que quebra: o título fica numa linha, e o valor longo
+ * quebra em duas, alinhado à direita, na mesma altura (o recebimento de outra instalação) */
+.ds-checagem-valor-quebra .ds-checagem-titulo { white-space: nowrap; }
+.ds-checagem-valor-quebra .ds-checagem-valor { flex-shrink: 1; text-align: right; }
+/* o corpo do título não encolhe: sem isso ele cede 10 do título ao valor, e o
+ * 'Recebimento' passa da própria caixa até a borda do valor (T12) */
+.ds-checagem-valor-quebra .ds-checagem-corpo { flex-shrink: 0; }
+/* T12/01, 04, 05 (decisão 41) · o que o servidor recebeu: 58 no mínimo, 8 em cima e
+ * embaixo, o poço de 32, o título em 14/600 e o porquê embaixo, a 2, em 12; o veredito em 13/700, com a tinta
+ * do estado — conforme em --tinta, indisponível em --tinta-apagada, pendente em --tinta-secundaria, reprovado
+ * em vermelho — e o traço do indisponível em --marca-limite */
+.ds-checagem.ds-checagem-recebimento { gap: var(--e-10); height: auto; min-height: var(--linha-com-porque); padding: var(--e-8) 0; }
+.ds-checagem-recebimento .ds-checagem-titulo { font-weight: 600; color: var(--tinta); }
+.ds-checagem-porque { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }
+.ds-checagem-recebimento .ds-checagem-valor { color: var(--tinta); }
+.ds-checagem-recebimento.ds-checagem-indisponivel .ds-checagem-valor { color: var(--tinta-apagada); }
+.ds-checagem-recebimento.ds-checagem-pendente .ds-checagem-valor { color: var(--tinta-secundaria); }
+.ds-checagem-recebimento.ds-checagem-reprovada .ds-checagem-valor { color: var(--vermelho); }
+.ds-checagem-recebimento .ds-glifo-traco { background: var(--marca-limite); }
+
+/* a ação embaixo do par (T11/00, 05): a 6 do par, e a linha com 10 em cima e embaixo */
+.ds-checagem-embaixo { display: flex; margin-top: var(--e-6); }
+.ds-checagem.ds-checagem-com-embaixo { height: auto; padding: var(--e-10) 0; }

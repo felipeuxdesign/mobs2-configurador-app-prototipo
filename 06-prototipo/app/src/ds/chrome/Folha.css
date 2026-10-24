@@ -1,0 +1,29 @@
+.ds-folha {
+  flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-14);
+  padding: var(--sobreposto-recheio) var(--e-16) var(--pe-visivel) var(--e-16);
+  background: var(--fundo-faixa);
+  border-top: var(--traco-borda) solid var(--folha-topo);   /* não a --borda-poco, que no claro vira uma linha cinza em cima da folha branca */
+  transition: transform var(--mov-padrao) var(--mov-curva);
+}
+.ds-folha-fechada { transform: translateY(100%); transition-duration: var(--mov-rapido); }
+/* a lei 20: o painel se arrasta pra baixo, com o dedo (Folha.jsx). O navegador
+ * não rola nem seleciona nada na folha: o dedo que desce nela é da folha. Enquanto o dedo arrasta,
+ * o pressionado do que estava embaixo dele some — o toque virou arraste, e não chega em nada */
+.ds-folha { touch-action: none; user-select: none; }
+.ds-folha[data-arrastando] .ds-tocavel:active::after { opacity: 0; }
+.ds-folha[data-arrastando] .ds-so-icone:active { opacity: 1; }
+.ds-folha[data-arrastando] .ds-link:active .ds-link-toque { opacity: 0; }
+/* a folha com escolha (T04/07, 21): o primário embaixo da lista também não afunda no arraste */
+.ds-folha[data-arrastando] .ds-primario:active:not(:disabled) { transform: none; }
+.ds-folha[data-arrastando] .ds-primario:active:not(:disabled)::after { opacity: 0; }
+.ds-folha-minima { min-height: var(--folha-minima); }
+.ds-folha-folga-12 { gap: var(--e-12); }
+.ds-folha-subtitulo { font-size: var(--t-secundario); font-weight: 500; line-height: var(--entrelinha-legenda); color: var(--tinta-secundaria); }
+
+.ds-folha-puxador { display: flex; justify-content: center; margin: calc(var(--e-6) * -1) 0 var(--e-2) 0; }
+.ds-folha-puxador > span { display: block; width: var(--e-36); height: var(--e-4); border-radius: var(--raio); background: var(--borda-neutra); }
+
+.ds-folha-cabeca { display: flex; align-items: center; justify-content: space-between; }
+.ds-folha-titulo { font-size: var(--t-titulo-bloco); font-weight: 700; letter-spacing: var(--ls-titulo-bloco); color: var(--tinta); }
+/* o X de 44 encosta 10 pra fora do recheio: o desenho fica alinhado ao conteúdo */
+.ds-folha-fechar { display: flex; margin-right: calc(var(--e-10) * -1); }

@@ -1,0 +1,49 @@
+/* T04 · Menu — só a montagem da tela; o desenho de cada bloco é da peça. */
+.t04 {
+  position: relative; height: 100%; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: var(--fundo-pagina);
+}
+
+/* o título que só o leitor de tela ouve (a referência tem o h1 "Menu" escondido) */
+.t04-titulo {
+  position: absolute; width: var(--so-leitor-caixa); height: var(--so-leitor-caixa); margin: calc(var(--so-leitor-caixa) * -1);
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* o menu embaixo da barra: o topo, o título escondido e o miolo. Com a folha ou
+ * o diálogo aberto, o topo e o miolo ficam inertes atrás do véu (index.jsx). */
+.t04-fundo { flex-grow: 1; min-height: 0; display: flex; flex-direction: column; }
+
+/* o topo do menu mora num fieldset, que desabilita a tira e a faixa de uma vez
+ * quando a folha ou o diálogo abre (T04/05 a 11): sem o desenho e sem o papel
+ * do fieldset (role presentation), o topo fica igual. Desabilitado, nenhum
+ * toque chega nele. */
+.t04-topo { flex-shrink: 0; min-width: 0; margin: 0; padding: 0; border: 0; }
+.t04-topo:disabled { pointer-events: none; }
+
+/* o miolo: a grade rola entre o topo e o pé, se passar de 800. Isolado:
+ * a camada do toque dos cartões fica dentro dele, e o véu passa por cima. */
+.t04-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto; isolation: isolate;
+  padding: var(--e-14) var(--e-16) var(--e-24) var(--e-16);
+}
+
+/* A região de composição permanece abaixo da tira, com a linha das referências
+ * 05 a 09. --veu-topo estende só o fundo sobre a tira e essa linha, sem mover
+ * folha ou diálogo. A barra do sistema escurece pela própria peça. */
+.t04-sobre {
+  --veu-topo: calc(var(--tira-contexto) + var(--traco-borda));
+  position: absolute; left: 0; right: 0; bottom: 0;
+  top: calc(var(--barra-sistema) + var(--tira-contexto));
+  border-top: var(--traco-borda) solid var(--separador);
+  display: flex; flex-direction: column;
+}
+
+/* Nas folhas do módulo e do ativo (T04/10, 11), a composição continua abaixo
+ * da faixa, sem borda extra. O fundo se estende sobre tira e faixa. */
+.t04-sobre-faixa { --veu-topo: calc(var(--tira-contexto) + var(--faixa-sessao)); top: calc(var(--barra-sistema) + var(--tira-contexto) + var(--faixa-sessao)); border-top: 0; }
+
+/* No aviso e no ENCERRAR, a composição já começa abaixo da barra do sistema,
+ * sem extensão ou borda extra. O diálogo conserva seu centro. */
+.t04-sobre-tudo { --veu-topo: initial; top: var(--barra-sistema); border-top: 0; }   /* initial: o véu usa o 0 de reserva, uma medida (o 0 sem unidade não entra no calc) */

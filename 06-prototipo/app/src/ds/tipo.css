@@ -1,0 +1,25 @@
+/* A escala de letra (tokens.css · tipo e números). Um tamanho, um
+ * espaçamento de letra; o peso fica com a peça. */
+.t-rotulo-bloco { font-size: var(--t-rotulo-bloco); letter-spacing: var(--ls-rotulo-bloco); }
+.t-rotulo-topo  { font-size: var(--t-rotulo-topo); letter-spacing: var(--ls-rotulo-topo); }
+.t-legenda      { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); }
+.t-secundario   { font-size: var(--t-secundario); }
+.t-corpo        { font-size: var(--t-corpo); }
+.t-link         { font-size: var(--t-link); }
+.t-destaque     { font-size: var(--t-destaque); }
+.t-botao        { font-size: var(--t-botao); }
+.t-titulo-bloco { font-size: var(--t-titulo-bloco); letter-spacing: var(--ls-titulo-bloco); }
+.t-titulo-tela  { font-size: var(--t-titulo-tela); letter-spacing: var(--ls-titulo-tela); }
+.t-titulo-proc  { font-size: var(--t-titulo-proc); letter-spacing: var(--ls-titulo-proc); }
+.n-cartao       { font-size: var(--n-cartao); letter-spacing: var(--ls-n-cartao); }
+.n-identidade   { font-size: var(--n-identidade); letter-spacing: var(--ls-n-identidade); }
+.n-progresso    { font-size: var(--n-progresso); letter-spacing: var(--ls-n-progresso); }
+.n-destaque     { font-size: var(--n-destaque); letter-spacing: var(--ls-n-destaque); }
+.n-cronometro   { font-size: var(--n-cronometro); letter-spacing: var(--ls-n-cronometro); }
+.n-unidade-p    { font-size: var(--n-unidade-p); line-height: var(--entrelinha-apoio); }
+.n-unidade-g    { font-size: var(--n-unidade-g); }
+.peso-500 { font-weight: 500; } .peso-600 { font-weight: 600; } .peso-700 { font-weight: 700; }
+.tinta { color: var(--tinta); } .tinta-forte { color: var(--tinta-forte); }
+.tinta-secundaria { color: var(--tinta-secundaria); } .tinta-apagada { color: var(--tinta-apagada); }
+.tinta-lima { color: var(--lima); } .tinta-vermelho { color: var(--vermelho); }
+.caixa-alta { text-transform: none; } /* os textos já vêm em caixa alta do textos.md */

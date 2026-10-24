@@ -1,0 +1,8 @@
+/* O indicador de rolagem do sistema: fino, por cima do
+   conteúdo, sem ocupar lugar. Aparece enquanto rola e some depois da espera. */
+.ds-rolagem {
+  position: absolute; z-index: var(--camada-sistema); width: var(--rolagem-largura);
+  border-radius: calc(var(--rolagem-largura) / 2); background: var(--rolagem-cor);
+  opacity: 0; pointer-events: none; transition: opacity var(--mov-lento) var(--mov-curva);
+}
+.ds-rolagem-visivel { opacity: 1; transition: none; }

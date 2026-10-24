@@ -1,0 +1,42 @@
+/* A moldura de espécime é a das folhas: 360 de largura, recheio 16 (0 no
+ * chrome, 15 no recorte de tela), fundo da página e borda tracejada. */
+.vitrine { background: var(--poco); min-height: 100%; padding: var(--e-40); }
+.vitrine-um { padding: 0; }
+.vitrine-folha { margin-bottom: var(--e-40); }
+.vitrine-titulo { font-size: var(--t-titulo-tela); font-weight: 700; color: var(--tinta); margin: 0 0 var(--e-24); }
+.vitrine-grade { display: flex; flex-wrap: wrap; gap: var(--e-40); align-items: flex-start; }
+.vitrine-especime { width: var(--tela-largura); display: flex; flex-direction: column; gap: var(--e-10); }
+.vitrine-rotulo { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-secundaria); }
+.vitrine-legenda { font-size: var(--t-legenda); font-weight: 500; color: var(--tinta-apagada); line-height: var(--entrelinha-apoio); }
+.vitrine-moldura {
+  width: var(--tela-largura); padding: var(--e-16); background: var(--fundo-pagina);
+  border: var(--traco-borda) dashed var(--borda); display: flex; flex-direction: column; overflow: hidden;
+}
+.vitrine-moldura-chrome { padding: 0; }
+/* o recorte de uma tela: 15 de recheio e 1 de borda, o cartão com os 328 da tela */
+.vitrine-moldura-tela { padding: calc(var(--e-16) - var(--traco-borda)); }
+/* o lote da bancada: as molduras uma embaixo da outra, em x = 0 como a do
+ * espécime sozinho, e cada uma levada ao pixel inteiro (Vitrine.jsx). Sem altura
+ * mínima: a posição não depende da janela. Em colunas, o Chrome antialiasa o
+ * SVG um pouco diferente fora de x = 0 (medido: até 27 níveis no círculo). */
+.vitrine-lote {
+  padding: 0; min-height: 0; width: var(--tela-largura);
+}
+.vitrine-lote > .vitrine-moldura { margin-bottom: var(--e-40); }
+
+/* a folha 9: o espécime no claro, numa caixa com o data-tema da raiz do app e o fundo da página do claro */
+.vitrine-claro { padding: var(--e-16); background: var(--fundo-pagina); color: var(--tinta); }
+/* a folha 9: o secundário ligado e o desligado, um embaixo do outro, a 8 */
+.vitrine-coluna { display: flex; flex-direction: column; gap: var(--e-8); }
+
+/* o campo do que aconteceu com a altura que a T13 dá a ele (t13.css): 64, como a T13/42 e a folha 6 desenham */
+.vitrine-campo-da-t13 .ds-campo-texto-poco { min-height: calc(var(--alvo-min) + var(--e-16)); }
+
+/* as fotos da folha 7 (decisão 63): o quadro da câmera com a foto, nas alturas da folha, pela proporção
+ * da moldura no cartão de 328 — 218 (a foto do problema) e 294 (a do módulo) —, e cada foto de exemplo
+ * com 239, o mesmo corte do quadro (o SVG preenche na largura e corta em cima e embaixo) */
+.vitrine-quadro-218, .vitrine-quadro-294 { display: flex; flex-direction: column; }
+.vitrine-quadro-218 { aspect-ratio: 328 / 218; }
+.vitrine-quadro-294 { aspect-ratio: 328 / 294; }
+.vitrine-foto-exemplo { position: relative; overflow: hidden; aspect-ratio: 328 / 239; background: var(--fundo-rebaixado); }
+.vitrine-foto-exemplo > svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }

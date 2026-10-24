@@ -1,0 +1,48 @@
+/* A seção do checklist (folhas 4 e 7): um cartão de 58 com a cabeça tocável,
+ * fechado e aberto. O poço de 32 com o glifo de 18 (a folha desenha 18, não
+ * os 19 da linha de tamanhos: o glifo do poço de 30). Aberto, os itens embaixo
+ * da cabeça, atrás de uma divisória, a 12 dos lados. */
+.ds-secao-ck {
+  position: relative; isolation: isolate; flex-shrink: 0; display: flex; flex-direction: column;
+  background: var(--fundo-cartao); border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+}
+/* cada cartão é uma camada só (isolation), e a aberta fica por cima: as de baixo descem
+ * por baixo dela enquanto os itens esmaecem, e o toque num item dela nunca cai na que desce (SecoesDoChecklist) */
+.ds-secao-ck-aberta { z-index: 1; }
+
+.ds-tocavel.ds-secao-ck-cabeca { min-height: var(--secao-checklist); padding: 0 var(--e-12); gap: var(--e-12); }
+/* a camada do toque fica por dentro da borda: o raio de dentro, em cima; embaixo, só fechada */
+.ds-tocavel.ds-secao-ck-cabeca::after { border-radius: calc(var(--raio) - var(--traco-borda)); }
+.ds-secao-ck-aberta .ds-tocavel.ds-secao-ck-cabeca::after { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+
+.ds-secao-ck-texto { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-secao-ck-titulo { font-size: var(--t-link); font-weight: 600; color: var(--tinta); }
+.ds-secao-ck-quem { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }
+.ds-secao-ck-contagem { flex-shrink: 0; font-size: var(--t-secundario); font-weight: 700; color: var(--tinta); }
+.ds-secao-ck-de { font-weight: 600; color: var(--tinta-apagada); }
+
+/* o veredito da seção: o círculo do que o técnico resolve em --tinta-secundaria, o relógio do servidor em --marca-limite */
+.ds-secao-ck-pendente .ds-glifo.ds-secao-ck-glifo { color: var(--tinta-secundaria); }
+.ds-secao-ck-aguarda .ds-glifo.ds-secao-ck-glifo { color: var(--marca-limite); }
+/* a seção lendo: o quadrado de agora de 11 no poço de 32, como a T13/38 e a folha 7 desenham */
+.ds-secao-ck-lendo .ds-glifo-agora.ds-secao-ck-glifo { width: var(--marcador-11); height: var(--marcador-11); }
+
+/* a seta: pro lado fechada, pra cima aberta — gira no lugar (transform), em --mov-padrao */
+.ds-icone.ds-secao-ck-seta { transition: transform var(--mov-padrao) var(--mov-curva); }
+.ds-secao-ck-aberta .ds-icone.ds-secao-ck-seta { transform: rotate(-90deg); }
+
+/* os itens: a divisória em cima, 12 dos lados */
+.ds-secao-ck-corpo {
+  display: flex; flex-direction: column;
+  margin: 0 var(--e-12); border-top: var(--traco-borda) solid var(--divisoria);
+}
+/* aberto por um toque, os itens esmaecem no lugar */
+.ds-secao-ck-corpo-entra { animation: ds-secao-ck-esmaece var(--mov-padrao) var(--mov-curva) backwards; }
+@keyframes ds-secao-ck-esmaece { from { opacity: 0; } to { opacity: 1; } }
+
+/* a lista das seis: 8 entre os cartões; as de baixo descem por transform quando uma abre ou fecha.
+ * O clip guarda o que se move dentro da lista: sem ele, o cartão ainda no lugar de antes
+ * aumenta o que o miolo rola, e o Chrome só desfaz isso no próximo toque — a lista
+ * pula debaixo do dedo, e o toque cai no vizinho */
+.ds-secoes-ck { display: flex; flex-direction: column; gap: var(--e-8); flex-shrink: 0; overflow: clip; }
+.ds-secoes-ck > .ds-secao-ck { transition: transform var(--mov-padrao) var(--mov-curva); }

@@ -1,0 +1,37 @@
+/* Duas classes em tudo: o cartão ganha do .ds-tocavel sem depender da ordem. */
+.ds-ferramenta.ds-tocavel { border-radius: var(--raio); background: var(--fundo-cartao); border: var(--traco-borda) solid var(--borda); }
+.ds-ferramenta-meia.ds-tocavel {
+  flex-direction: column; align-items: stretch; justify-content: space-between; gap: var(--e-8);
+  padding: var(--e-12); min-height: var(--cartao-ferramenta-altura);
+}
+.ds-ferramenta-largo.ds-tocavel { grid-column: span 2; gap: var(--e-12); padding: var(--e-14) var(--e-12); }
+/* o de meia largura que ocupa a linha (T04 · Finalizar com checklist): o mesmo desenho, nas duas colunas */
+.ds-ferramenta-linha.ds-tocavel { grid-column: span 2; }
+.ds-ferramenta-decide.ds-tocavel { border-color: var(--lima); }
+.ds-ferramenta-espera.ds-tocavel { background: var(--fundo-apagado); border: var(--traco-borda) dashed var(--borda-neutra); }   /* o tracejado do vazio: o --borda-neutra, nunca o --divisoria, que some */
+/* a espera tem o mesmo respiro mínimo do ligado (o gap de 8 do de meia largura), e o
+ * título de duas linhas para a 8 do poço · o Finalizar que espera, na linha inteira, devolve a sobra:
+ * a altura mínima de 100, pra o fim da tela não descer */
+.ds-ferramenta-linha.ds-ferramenta-espera.ds-tocavel { min-height: var(--cartao-ferramenta-altura-linha-espera); }
+
+/* meia largura: o poço (e o contador no canto) em cima, o nome embaixo */
+.ds-ferramenta-topo { display: flex; align-items: flex-start; justify-content: space-between; }
+.ds-ferramenta-nome { display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-ferramenta-titulo { font-size: var(--t-corpo); font-weight: 600; line-height: var(--entrelinha-cartao); color: var(--tinta); }
+.ds-ferramenta-causa { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-apagada); }
+/* a causa no cartão ligado é o próximo passo, aceso (T04/19: *registrado · falta encerrar a sessão*) */
+.ds-ferramenta-disponivel .ds-ferramenta-causa { color: var(--tinta-secundaria); }
+
+/* largo: o rótulo de topo e o valor */
+.ds-ferramenta-leitura { flex-grow: 1; display: flex; flex-direction: column; gap: var(--e-2); min-width: 0; }
+.ds-ferramenta-rotulo { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-secundaria); }
+.ds-ferramenta-valor { font-size: var(--t-destaque); font-weight: 700; letter-spacing: var(--ls-dado); color: var(--tinta); }
+.ds-ferramenta-decide .ds-ferramenta-valor { color: var(--lima); }
+
+/* sem rede, o traço no poço é um a menos que o da espera (folha 4 e T04 · Últimas instalações) */
+.ds-ferramenta-sem-rede .ds-glifo-traco { width: var(--ferramenta-traco-sem-rede); }
+
+/* na espera, o que o cartão diz fica apagado */
+.ds-ferramenta-espera .ds-ferramenta-titulo,
+.ds-ferramenta-espera .ds-ferramenta-rotulo,
+.ds-ferramenta-espera .ds-ferramenta-valor { color: var(--tinta-apagada); }

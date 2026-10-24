@@ -1,0 +1,59 @@
+.ds-aviso { flex-shrink: 0; display: flex; align-items: center; gap: var(--e-12); padding: var(--e-10) var(--e-12); }
+.ds-aviso-texto { flex-grow: 1; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-aviso-titulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-secundaria); }
+.ds-aviso-falha .ds-aviso-titulo { color: var(--vermelho); }
+.ds-aviso-frase { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-forte); }
+.ds-aviso-numero { flex-shrink: 0; font-size: var(--t-titulo-bloco); font-weight: 700; color: var(--tinta); }
+.ds-aviso-unidade { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-secundaria); }
+/* sem poço (T04/08, Lei 7 · exceção): só o texto, com 12 em volta */
+.ds-aviso-sem-poco { padding: var(--e-12); }
+.ds-aviso-sem-poco .ds-aviso-frase { line-height: var(--entrelinha-texto); }
+/* T11/02 · o veredito que confere: sem poço, 12 · 14, o rótulo de topo e o traço em lima */
+.ds-aviso.ds-aviso-veredito { padding: var(--e-12) var(--e-14); border-bottom: var(--traco-destaque) solid var(--lima); }
+.ds-aviso-veredito .ds-aviso-titulo { font-size: var(--t-rotulo-topo); letter-spacing: var(--ls-rotulo-topo); color: var(--lima); }
+/* T16/05 · o bloqueio: sem poço, 14 em volta, o rótulo de topo e a frase de duas orações (Lei 7 · exceção) */
+.ds-aviso.ds-aviso-bloqueio { padding: var(--e-14); }
+.ds-aviso-bloqueio .ds-aviso-texto { gap: var(--e-6); }
+.ds-aviso-bloqueio .ds-aviso-titulo { font-size: var(--t-rotulo-topo); letter-spacing: var(--ls-rotulo-topo); }
+.ds-aviso-bloqueio .ds-aviso-frase { color: var(--tinta-secundaria); line-height: var(--entrelinha-frase-caixa); }
+/* a quem acionar, embaixo da frase (T16/05): a frase de 13 em --tinta e 600 */
+.ds-aviso-acao { font-size: var(--t-secundario); font-weight: 600; color: var(--tinta); line-height: var(--entrelinha-frase-caixa); }
+/* o mundo real · T01/14 · o neutro com o traço cinza embaixo: o SEM CONEXÃO do login */
+.ds-aviso.ds-aviso-traco { border-bottom: var(--traco-destaque) solid var(--tinta-secundaria); }
+
+/* ── o movimento fino ── */
+/* surge: o aviso que aparece depois de a tela abrir esmaece no lugar, em 150 (desacelera) */
+.ds-aviso-surge { animation: ds-aviso-esmaece var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-aviso-esmaece { from { opacity: 0; } }
+/* aguarda: o veredito que espera a prova. A caixa no desenho do quadro final;
+ * o traço de baixo no cinza do aviso neutro com traço (só a cor: a espessura é a do final), o poço
+ * vazio, o rótulo e a frase guardando o lugar sem texto, e o número do final guardado embaixo da
+ * contagem, que fica por cima, no mesmo lugar e na mesma tinta do número */
+.ds-aviso-aguarda, .ds-aviso-chega { position: relative; }
+.ds-aviso.ds-aviso-aguarda.ds-caixa-falha, .ds-aviso.ds-aviso-aguarda.ds-aviso-veredito { border-bottom-color: var(--tinta-secundaria); }
+.ds-aviso-aguarda .ds-poco > * { opacity: 0; }
+.ds-aviso-aguarda .ds-aviso-titulo, .ds-aviso-aguarda .ds-aviso-frase, .ds-aviso-aguarda > .ds-aviso-numero { visibility: hidden; }
+/* T11/04: o veredito que espera diz o que corre, em --tinta-secundaria, sobre o traço do poço */
+.ds-aviso.ds-aviso-aguarda.ds-aviso-aguarda-diz { border-bottom-color: var(--rebaixado-luz); }
+.ds-aviso-aguarda.ds-aviso-aguarda-diz .ds-aviso-titulo { visibility: visible; color: var(--tinta-secundaria); }
+.ds-aviso-aguarda-diz > .ds-poco { opacity: 0; }   /* o lugar do poço guardado, sem desenho (nada muda de lugar) */
+.ds-aviso-conta {
+  position: absolute; inset: 0; padding: inherit; pointer-events: none;
+  display: flex; align-items: center; justify-content: flex-end;
+}
+.ds-aviso-conta-sai [data-texto]::before { content: attr(data-texto); }
+/* a prova chega (a última linha acendeu): a palavra e a frase esmaecem, já na cor delas; o cinza
+ * do traço sai por uma camada por cima da cor do veredito; a contagem que não vira número sai no
+ * mesmo esmaecer. Tudo em 150, desacelerando; acabou, não fica nada vivo. Com reduzir, direto. */
+.ds-aviso-chega .ds-aviso-titulo, .ds-aviso-chega .ds-aviso-frase { animation: ds-aviso-esmaece var(--mov-rapido) var(--mov-curva); }
+.ds-aviso-capa {
+  position: absolute; pointer-events: none;
+  left: calc(-1 * var(--traco-borda)); right: calc(-1 * var(--traco-borda)); bottom: calc(-1 * var(--traco-destaque)); height: var(--traco-destaque);
+  background: var(--tinta-secundaria); opacity: 0;
+  animation: ds-aviso-sai var(--mov-rapido) var(--mov-curva);
+}
+.ds-aviso-conta-sai { opacity: 0; animation: ds-aviso-sai var(--mov-rapido) var(--mov-curva); }
+/* a caixa que dizia *CONFERINDO* (T11/04): o poço do veredito entra esmaecendo, e a camada é do cinza do poço */
+.ds-aviso-chega-disse > .ds-poco { animation: ds-aviso-esmaece var(--mov-rapido) var(--mov-curva); }
+.ds-aviso-chega-disse .ds-aviso-capa { background: var(--rebaixado-luz); }   /* a camada cobre o traço de baixo da caixa, que é a luz do rebaixado */
+@keyframes ds-aviso-sai { from { opacity: 1; } }

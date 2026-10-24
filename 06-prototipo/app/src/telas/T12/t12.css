@@ -1,0 +1,19 @@
+/* T12 · Últimas instalações — só a montagem da tela; o desenho de cada bloco é da peça.
+ * A barra do sistema na cor da faixa, a faixa da sessão (ou sem sessão), o miolo e o rodapé. */
+.t12 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* o miolo: entre a faixa e o rodapé, rola quando passa de 800 — na 03, a
+ * lista com o aviso passa 11 do lugar. A folga de 16 até o rodapé é o
+ * recheio dele. Na lista, 14 entre os blocos; no detalhe, 12. */
+.t12 .tela-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--e-14);
+  padding: var(--e-14) var(--e-16) var(--respiro) var(--e-16);
+}
+.t12 .tela-miolo > * { flex-shrink: 0; }
+.t12 .t12-miolo-detalhe { gap: var(--e-12); }
+
+/* o cabeçalho do detalhe: a placa e o veredito (o cabeçalho do conteúdo, forte), e
+ * embaixo a linha módulo · quando · técnico, a 4 (01-momento-detalhe-da-instalacao.html:33) */
+.t12-cabeca { display: flex; flex-direction: column; gap: var(--e-4); }
+.t12-cabeca-linha { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-secundaria); }

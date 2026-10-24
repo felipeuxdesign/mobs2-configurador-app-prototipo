@@ -1,0 +1,16 @@
+.ds-poco {
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  background: var(--poco);
+  border-top: var(--traco-borda) solid var(--poco-fundo);
+  border-bottom: var(--traco-borda) solid var(--borda-poco);
+  border-left: var(--traco-borda) solid var(--poco-lado);
+  border-right: var(--traco-borda) solid var(--poco-lado);
+}
+.ds-poco-22 { width: var(--poco-22); height: var(--poco-22); }
+.ds-poco-24 { width: var(--poco-24); height: var(--poco-24); }
+.ds-poco-26 { width: var(--poco-26); height: var(--poco-26); }
+.ds-poco-28 { width: var(--poco-28); height: var(--poco-28); }
+.ds-poco-30 { width: var(--poco-30); height: var(--poco-30); }
+.ds-poco-32 { width: var(--poco-32); height: var(--poco-32); }
+.ds-poco-34 { width: var(--poco-34); height: var(--poco-34); }
+.ds-poco-44 { width: var(--poco-44); height: var(--poco-44); }

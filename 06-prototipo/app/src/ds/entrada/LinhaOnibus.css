@@ -1,0 +1,11 @@
+.ds-linha-onibus {
+  display: flex; align-items: center; gap: var(--e-12);
+  height: var(--linha-escolha); border-bottom: var(--traco-borda) solid var(--divisoria);
+}
+.ds-linha-onibus.ds-sem-divisoria { border-bottom: 0; }
+.ds-linha-onibus-id { flex-grow: 1; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-linha-onibus-placa { font-size: var(--t-placa); font-weight: 700; letter-spacing: var(--ls-identidade); color: var(--tinta-forte); }
+.ds-linha-onibus-modelo { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+.ds-linha-onibus-frota { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: var(--e-2); }
+.ds-linha-onibus-frota-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); }
+.ds-linha-onibus-frota-numero { font-size: var(--t-destaque); font-weight: 700; color: var(--tinta-secundaria); }

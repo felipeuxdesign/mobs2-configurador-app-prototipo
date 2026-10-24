@@ -1,0 +1,41 @@
+.ds-primario {
+  position: relative; height: var(--alvo-primario); width: 100%; border-radius: var(--raio);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--t-botao); font-weight: 700; color: var(--texto-primario);
+  background: var(--roxo); overflow: hidden; touch-action: manipulation; user-select: none;
+  transition: transform var(--mov-solta) var(--mov-curva);
+}
+.ds-primario::after {
+  content: ''; position: absolute; inset: 0; background: var(--roxo-pressionado); opacity: 0;
+  transition: opacity var(--mov-solta) var(--mov-curva);
+}
+.ds-primario-texto { position: relative; z-index: 1; }
+.ds-primario:active:not(:disabled), .ds-primario.ds-forca-toque { transform: scale(var(--escala-toque)); transition: none; }
+.ds-primario:active:not(:disabled)::after, .ds-primario.ds-forca-toque::after { opacity: 1; transition: none; }
+.ds-primario-desabilitado {
+  background: var(--fundo-cartao); border: var(--traco-borda) solid var(--borda); color: var(--tinta-apagada);
+}
+/* o primário que acabou de nascer de um toque (decisão 64): nos 300ms do toque duplo, o toque
+ * não faz nada, nem o pressionado — o botão fica como está */
+.ds-primario.ds-primario-nascendo:active:not(:disabled) { transform: none; }
+.ds-primario.ds-primario-nascendo:active:not(:disabled)::after { opacity: 0; }
+
+/* ── o movimento fino ── */
+/* o desabilitado não tem roxo: o pressionado sai de uma vez quando o toque o
+ * desabilita, e só o afundar solta (o transform, em --mov-solta) */
+.ds-primario-desabilitado::after { transition: none; }
+/* o texto novo esmaece no lugar, em 150 (desacelera); o de antes já saiu */
+.ds-primario-texto-nasce { animation: ds-primario-esmaece var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-primario-esmaece { from { opacity: 0; } }
+/* o botão que acende com o mesmo texto, por uma camada: o rosto apagado de antes — o
+ * fundo, a borda e o texto na tinta apagada — fica por cima e esmaece em 150; acabou, fica
+ * em 0, sem desenho e sem nada vivo. Com outro texto, não há camada: o texto esmaece. Com reduzir, direto. */
+.ds-primario-antes {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--fundo-cartao); border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+  color: var(--tinta-apagada); opacity: 0;
+  animation: ds-primario-apaga var(--mov-rapido) var(--mov-curva);
+}
+.ds-primario-antes::before { content: attr(data-texto); }
+@keyframes ds-primario-apaga { from { opacity: 1; } }

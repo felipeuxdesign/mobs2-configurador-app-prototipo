@@ -1,0 +1,18 @@
+.ds-evento {
+  background: var(--fundo-cartao); border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+  padding: var(--e-10) var(--e-12); display: flex; flex-direction: column; gap: var(--e-6); flex-shrink: 0;
+}
+.ds-evento-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-secundaria); }
+.ds-evento-linha { display: flex; align-items: center; justify-content: space-between; }
+.ds-evento-texto { font-size: var(--t-secundario); color: var(--tinta-apagada); }
+.ds-evento-feito .ds-evento-texto, .ds-evento-pronto .ds-evento-texto { color: var(--tinta-secundaria); }
+.ds-evento-falha .ds-evento-texto { font-weight: 600; color: var(--vermelho); }
+/* à direita, o relógio e o valor no mesmo lugar: o valor entra por opacidade */
+.ds-evento-direita { display: grid; justify-items: end; align-items: center; }
+.ds-evento-direita > * { grid-area: 1 / 1; transition: opacity var(--mov-rapido) var(--mov-curva); }
+.ds-evento-relogio .ds-glifo { color: var(--marca-limite); }
+.ds-evento-feito .ds-evento-relogio { opacity: 0; }
+.ds-evento-valor { font-size: var(--t-corpo); font-weight: 700; color: var(--tinta); opacity: 0; }
+.ds-evento-feito .ds-evento-valor, .ds-evento-falha .ds-evento-valor { opacity: 1; }
+.ds-evento-falha .ds-evento-valor { font-size: var(--t-secundario); color: var(--vermelho); }
+.ds-evento-traco { display: block; width: var(--e-10); height: var(--traco-borda); background: var(--marca-limite); }

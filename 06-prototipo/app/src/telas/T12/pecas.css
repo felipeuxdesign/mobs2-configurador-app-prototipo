@@ -1,0 +1,7 @@
+/* T12 · o grupo: o rótulo de 10/700 em caixa alta em cima do cartão — a 4 na
+ * lista (00-tela.html:39), a 6 nas seções do detalhe (01, 04 e 05). O último da
+ * lista não guarda os 16 do 00-tela.html:85: seriam folga dupla com o recheio
+ * do miolo. */
+.t12-grupo { flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-4); }
+.t12-grupo-secao { gap: var(--e-6); }
+.t12-grupo-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); }

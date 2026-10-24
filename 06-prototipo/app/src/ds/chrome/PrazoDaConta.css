@@ -1,0 +1,33 @@
+.ds-prazo-conta {
+  display: flex; flex-direction: column; gap: var(--e-8); padding: var(--e-14);
+  background: var(--fundo-rebaixado);
+  border-top: var(--traco-borda) solid var(--rebaixado-sombra);
+  border-bottom: var(--traco-borda) solid var(--rebaixado-luz);
+  border-left: var(--traco-borda) solid var(--rebaixado-lado);
+  border-right: var(--traco-borda) solid var(--rebaixado-lado);
+}
+.ds-prazo-conta-cabeca { display: flex; align-items: baseline; justify-content: space-between; }
+.ds-prazo-conta-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-secundaria); }
+.ds-prazo-conta-valor { font-size: var(--n-cartao); font-weight: 700; line-height: var(--entrelinha-numero); color: var(--tinta); }
+.ds-prazo-conta-unidade { padding-left: var(--e-4); font-size: var(--t-corpo); font-weight: 500; color: var(--tinta-secundaria); }
+
+/* a barra fecha como o poço, com as quatro bordas: as pontas marcam o 0 e o 7 */
+.ds-prazo-conta-barra {
+  position: relative; height: var(--e-14); overflow: hidden;
+  background: var(--poco);
+  border-top: var(--traco-borda) solid var(--poco-fundo);
+  border-bottom: var(--traco-borda) solid var(--borda-poco);
+  border-left: var(--traco-borda) solid var(--poco-lado);
+  border-right: var(--traco-borda) solid var(--poco-lado);
+}
+.ds-prazo-conta-resta {
+  position: absolute; left: 0; top: 0; bottom: 0; width: var(--prazo-resta);
+  background: var(--vermelho-faixa); border-right: var(--traco-borda) solid var(--vermelho-borda);
+}
+.ds-prazo-conta-agora { position: absolute; left: var(--prazo-resta); top: 0; bottom: 0; width: var(--marcador-pequeno); background: var(--andamento-alerta); }   /* o marcador numa barra em alerta acompanha o alerta (R-22) */
+.ds-prazo-conta-risco { position: absolute; top: 0; width: var(--traco-borda); height: var(--risco-pequena); background: var(--marca-vazia); }
+.ds-prazo-conta-risco-meio { height: var(--risco-pequena-forte); background: var(--marca-limite); }
+
+.ds-prazo-conta-escala { display: flex; justify-content: space-between; font-size: var(--t-rotulo-topo); font-weight: 600; color: var(--tinta-apagada); }
+.ds-prazo-conta-escala-resta { color: var(--vermelho); }
+.ds-prazo-conta-legenda { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }

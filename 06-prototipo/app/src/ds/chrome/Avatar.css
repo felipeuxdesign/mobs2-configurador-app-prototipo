@@ -1,0 +1,15 @@
+.ds-avatar {
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  background: var(--fundo-cartao);
+  border: var(--traco-borda) solid var(--borda); border-radius: 50%;
+  font-weight: 700; color: var(--tinta-forte);
+}
+.ds-avatar-tira { width: var(--avatar-tira); height: var(--avatar-tira); font-size: var(--t-rotulo-topo); letter-spacing: var(--ls-rotulo-topo); }
+/* o RV no centro do círculo: a letra de 1,4 empurrava o conjunto 0,7 pra esquerda, e a métrica
+ * da Barlow descia as maiúsculas 1,1 — o recheio de 2 embaixo e de 1,4 (a própria letra) à esquerda, com 32 */
+.ds-avatar-tira { box-sizing: border-box; padding: 0 0 calc(var(--e-2) / 2) var(--ls-rotulo-topo); }
+/* medido na tela, o RV pequeno fica 1 px alto com o recheio de 2 embaixo — o de 1
+ * o põe no centro da tinta; e o grande, da folha da conta, recebe à esquerda a própria letra (1), que
+ * o espaçamento empurrava pra esquerda */
+.ds-avatar-conta { box-sizing: border-box; padding: 0 0 calc(var(--e-2) * 0.75) var(--ls-avatar-conta); }
+.ds-avatar-conta { width: var(--avatar-conta); height: var(--avatar-conta); font-size: var(--t-destaque); letter-spacing: var(--ls-avatar-conta); }

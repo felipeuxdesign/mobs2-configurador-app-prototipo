@@ -1,0 +1,55 @@
+/* T15 · Fila de saída — só a montagem da tela e as peças só dela (pecas.jsx);
+ * o desenho de cada bloco do DS é da peça. Só tokens (tokens.css). A barra do sistema na cor da faixa, a faixa da
+ * sessão, o miolo e o rodapé. */
+.t15 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* o miolo: entre a faixa e o rodapé, rola quando passa de 800. Os blocos
+ * ficam a 12; o cartão do topo cresce até o espaço livre e nunca fica menor
+ * que o que ele diz. A folga de 16 até o rodapé é o recheio do miolo. */
+.t15 .tela-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto; scrollbar-width: none;
+  display: flex; flex-direction: column; gap: var(--e-12);
+  padding: var(--e-14) var(--e-16) var(--respiro) var(--e-16);
+}
+.t15 .tela-miolo > * { flex-shrink: 0; }
+/* a lista embaixo do cartão leva mais 16 até o rodapé, como as referências desenham (00, 01, 02) */
+.t15-lista { margin-bottom: var(--respiro); }
+
+/* o rótulo de cada seção, só tipografia (O RESTO ANDA SOZINHO, NA FILA E RECEBIDAS) */
+.t15-rotulo { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); }
+/* a Seção F em re-checagem (04): o rótulo em --tinta-secundaria, a 8 da lista */
+.t15-rechecagem { display: flex; flex-direction: column; gap: var(--e-8); }
+.t15-rechecagem .t15-rotulo { color: var(--tinta-secundaria); }
+
+/* ── as peças da T15 (pecas.jsx) ── */
+
+/* a legenda dentro do cartão */
+.t15-legenda { font-size: var(--t-secundario); font-weight: 600; color: var(--tinta-apagada); }
+.t15-legenda-centro { text-align: center; }
+
+/* o cartão SUBINDO AGORA: a caixa de poço, o traço lima embaixo, e o mesmo
+ * recheio do cartão que pede ação no lugar dele (20 · 16) */
+.t15-subindo {
+  flex-grow: 1; min-height: 0;
+  display: flex; flex-direction: column; justify-content: center; gap: var(--cartao-envio-folga);
+  padding: var(--e-20) var(--e-16);
+}
+.ds-caixa-poco.t15-subindo { border-bottom: var(--traco-destaque) solid var(--lima); }
+.t15-subindo-cabeca { display: flex; align-items: center; gap: var(--e-10); }
+.t15-subindo-rotulo { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-secundaria); }
+.t15-subindo-item { display: flex; flex-direction: column; gap: var(--e-8); }
+.t15-subindo-titulo { font-size: var(--t-titulo-bloco); font-weight: 700; color: var(--tinta); }
+.t15-subindo-numeros { display: flex; align-items: baseline; gap: var(--e-8); }
+.t15-subindo-pct { font-size: var(--n-progresso); font-weight: 700; letter-spacing: var(--ls-n-progresso); line-height: var(--entrelinha-numero); color: var(--tinta); }
+/* o % junto do número de 40: o 17 da unidade de progresso */
+.t15-subindo-unidade { font-size: var(--n-unidade-progresso); font-weight: 500; color: var(--tinta-secundaria); }
+.t15-subindo-tamanho { font-size: var(--t-link); font-weight: 600; color: var(--tinta-apagada); }
+
+/* o erro que reenvia sozinho: o relógio no poço de 34, o título apagado de 16 */
+.t15-reenvia { display: flex; align-items: center; gap: var(--e-12); }
+.t15-reenvia-texto { flex-grow: 1; display: flex; flex-direction: column; gap: var(--e-2); }
+.t15-reenvia-titulo { font-size: var(--t-destaque); font-weight: 700; color: var(--tinta-secundaria); }
+.t15-reenvia-causa { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+
+/* a legenda do recebido em conflito quebra depois da vírgula, em duas linhas */
+.t15 .ds-linha-fila-legenda { white-space: pre-line; }

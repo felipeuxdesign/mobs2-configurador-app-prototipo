@@ -1,0 +1,26 @@
+.ds-codigo { position: relative; display: flex; gap: var(--e-6); }
+.ds-codigo-celula {
+  flex: 1 1 0; min-width: 0; height: var(--celula-codigo);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--fundo-rebaixado);
+  border-top: var(--traco-borda) solid var(--rebaixado-sombra);
+  border-bottom: var(--traco-borda) solid var(--rebaixado-luz);
+  font-size: var(--t-titulo-proc); font-weight: 700; color: var(--tinta);
+}
+/* o traço de 2 desenhado por cima da borda de 1: a borda troca só a cor e 1 por dentro a
+ * completa — a célula não muda de tamanho, e o dígito não sai do lugar quando o traço pula */
+.ds-codigo-foco {
+  border-bottom-color: var(--lima);
+  box-shadow: inset 0 calc(var(--traco-borda) - var(--traco-destaque)) 0 var(--lima);
+}
+.ds-codigo-errado .ds-codigo-celula {
+  border-bottom-color: var(--vermelho);
+  box-shadow: inset 0 calc(var(--traco-borda) - var(--traco-destaque)) 0 var(--vermelho);
+}
+.ds-codigo-digito { opacity: 0; transition: opacity var(--mov-solta) var(--mov-curva); }
+.ds-codigo-cheio { opacity: 1; }
+/* a entrada de verdade: por cima das células, invisível, só pro teclado */
+.ds-codigo-entrada {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0;
+  opacity: 0; color: transparent; background: transparent; caret-color: transparent; outline: none;
+}

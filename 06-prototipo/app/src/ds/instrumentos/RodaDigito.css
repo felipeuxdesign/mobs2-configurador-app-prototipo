@@ -1,0 +1,14 @@
+/* A roda de dígito: a janela corta a fita; só a fita se move (transform). */
+.ds-roda { overflow: hidden; }
+/* no texto, a janela é da altura da linha e segura a largura do dígito */
+.ds-roda-texto { position: relative; display: inline-block; vertical-align: top; height: 1lh; }
+/* na célula, a janela é a célula inteira, por dentro da borda */
+.ds-roda-celula { position: absolute; inset: 0; }
+.ds-roda-segura { opacity: 0; }
+.ds-roda-fita {
+  position: absolute; inset: 0;
+  animation: ds-roda-rola var(--mov-lento) var(--mov-curva) calc(var(--ordem) * var(--mov-escalonar-tambor)) both;
+}
+.ds-roda-casa { display: block; height: 100%; text-align: center; }
+.ds-roda-celula .ds-roda-casa { display: flex; align-items: center; justify-content: center; }
+@keyframes ds-roda-rola { from { transform: translateY(var(--de)); } to { transform: translateY(var(--ate)); } }

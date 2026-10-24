@@ -1,0 +1,36 @@
+.ds-rodape {
+  flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-6);
+  padding: var(--e-14) var(--e-16) var(--rodape-pe-com-link) var(--e-16);
+  border-top: var(--traco-borda) solid var(--borda-rodape);
+}
+.ds-rodape-fecha-botao { padding-bottom: var(--rodape-pe-com-botao); }
+/* o rodapé do login (T01): sem o traço em cima, 20 dos lados e 28 no pé */
+.ds-rodape.ds-rodape-login { padding: var(--e-14) var(--e-20) var(--e-28) var(--e-20); border-top: 0; }
+/* com o teclado do aparelho aberto (T01/03, decisão 62): só o primário, a 13 do teclado e a 13 do
+   topo, como com o link — o primário fica onde estava dentro do rodapé, e o rodapé sobe junto */
+.ds-rodape.ds-rodape-pe-teclado { padding-top: var(--rodape-alto-com-link); padding-bottom: var(--rodape-pe-teclado); }
+/* o link registrado (T14/06, como a referência desenha o rodapé dela): o registro não é
+   tocável, e fica o desenho sem o link — o rodapé de 14 com o vão de 6, e os 48 que comem 4 de cada lado */
+.ds-rodape .ds-link.ds-rodape-link { margin: calc(var(--e-4) * -1) 0; }
+
+/* com o link embaixo do primário (decisão 38, folha 2): o alto de 13 e o
+   vão de 8 — o link fica a 8 do primário, e a caixa dele, de 44, come 5 embaixo, pro lado livre:
+   13 + 56 + 8 + 44 − 5 + 24 = 140, a mesma altura do rodapé de 14 com o vão de 6. Vale também no login (13 · 20 · 28) e com a
+   legenda em cima, que fica a 6 + 4 + 8 do botão (T05/01, T07/05, T14/01) ou a 4 + 8, junta (T13) */
+.ds-rodape.ds-rodape-com-link { padding-top: var(--rodape-alto-com-link); gap: var(--e-8); }
+/* nada encosta, na área de toque (leis.md): a caixa do link é o desenho de 44, a 8 do primário, e
+   o toque de 48 cresce só pra baixo, os 4 que faltam, dentro do pé — o texto não sai do lugar, e a
+   própria caixa já está a 8 do primário */
+.ds-rodape.ds-rodape-com-link .ds-link.ds-rodape-link { height: var(--toque-desenho); margin: 0 0 calc(var(--link-recuo) * -1) 0; }
+.ds-rodape.ds-rodape-com-link .ds-link.ds-rodape-link::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: var(--alvo-min); }
+
+.ds-rodape-legenda { padding-bottom: var(--e-6); text-align: center; font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-apagada); }
+/* a legenda se afasta 4 do botão, no app inteiro — como as referências
+   medem, 4 de margem por cima do vão do rodapé: a T05/01 e a T07/05 com 6 + 4 + 8, o checklist com 4 + 8 = 12 */
+.ds-rodape.ds-rodape-com-link .ds-rodape-legenda { margin-bottom: var(--e-4); }
+/* T13: a legenda junta, sem o recheio de 6 — só os 4 e o vão do rodapé (decisão 38) */
+.ds-rodape-legenda.ds-rodape-legenda-junta { padding-bottom: 0; }
+.ds-rodape-explicacao {
+  height: var(--e-40); display: flex; align-items: center; justify-content: center;
+  font-size: var(--t-link); font-weight: 500; color: var(--tinta-apagada);
+}

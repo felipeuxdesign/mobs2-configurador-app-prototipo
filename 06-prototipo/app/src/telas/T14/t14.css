@@ -1,0 +1,33 @@
+/* T14 · Ciclo de testes — só a montagem da tela; o desenho de cada bloco é da peça.
+ * A barra do sistema na cor da faixa, a faixa da sessão, o miolo e o rodapé. */
+.t14 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* o miolo: entre a faixa e o rodapé, rola quando passa de 800. A folga de
+ * 16 até o rodapé é o recheio dele: os 16 a mais que as referências põem
+ * embaixo da lista dos passos ficam de fora — na 01 e na 04 o conteúdo passa de
+ * 800 por eles, a referência corta e eles nunca aparecem; aqui fariam o
+ * quadro rolar à toa. */
+.t14 .tela-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--e-8);
+  padding: var(--e-14) var(--e-16) var(--respiro) var(--e-16);
+}
+.t14 .tela-miolo > * { flex-shrink: 0; }
+
+/* o cartão lido com as duas respostas embaixo (08), e a ignição
+ * desligada que explica a espera (10, 11): a linha sem a divisória, e o bloco leva a dela */
+.t14-passo-extra-divisoria { border-bottom: var(--traco-borda) solid var(--divisoria); }
+.t14-respostas { padding: var(--e-2) 0 var(--e-10) 0; }
+.t14-explica {
+  display: block; padding: 0 0 var(--e-8) calc(var(--poco-24) + var(--e-10));
+  font-size: var(--t-legenda); font-weight: 500; color: var(--tinta-secundaria); line-height: var(--entrelinha-apoio);
+}
+/* o cartão que não confere (decisão 64): a causa embaixo em vermelho (não confere · justifique no checklist),
+ * e o Passar de novo à direita · o título e a causa a 1 um do outro, como a 10 desenha */
+.t14 .t14-cartao-nao-confere .ds-checagem-corpo { gap: var(--traco-borda); }
+/* a linha com o porquê tem 46 no mínimo (a 10), e 4 em cima e embaixo */
+.t14 .ds-checagem.t14-cartao-nao-confere { min-height: calc(var(--linha-padrao) + var(--e-2)); }
+/* o Passar de novo (a 10, decisão 64): o não confere e o botão saem esmaecendo em 150, desacelerando, e aí a
+ * linha volta ao passe o cartão · com reduzir, os tempos zeram, e a troca é direta */
+.t14-cartao-sai .ds-checagem-causa, .t14-cartao-sai .ds-botao-linha { animation: t14-cartao-sai var(--mov-rapido) var(--mov-curva) forwards; pointer-events: none; }
+@keyframes t14-cartao-sai { to { opacity: 0; } }

@@ -1,0 +1,15 @@
+.ds-cabecalho { display: flex; align-items: baseline; justify-content: space-between; flex-shrink: 0; }
+.ds-cabecalho-titulo { margin: 0; font-size: var(--t-titulo-tela); font-weight: 700; letter-spacing: var(--ls-titulo-tela); color: var(--tinta); }
+.ds-cabecalho-contador { font-size: var(--t-secundario); font-weight: 600; color: var(--tinta-secundaria); }
+.ds-cabecalho-unidade { color: var(--tinta-apagada); }
+.ds-cabecalho-contador-falha { font-weight: 700; color: var(--vermelho); }
+.ds-cabecalho-contador-falha .ds-cabecalho-unidade { font-weight: 600; }
+.ds-cabecalho-contador-veredito { color: var(--lima); }
+/* T12 · o contador forte: o veredito de uma coisa só, em 700 (o 'aprovada' em lima do detalhe, T12/01) */
+.ds-cabecalho-contador-forte { font-weight: 700; }
+/* T16 · o subtítulo de 12 embaixo do título, no bloco dele, a 4: na 03 e na 06, como as referências
+ * desenham. O 6 está sem uso nas telas */
+.ds-cabecalho-com-subtitulo { display: flex; flex-direction: column; flex-shrink: 0; }
+.ds-cabecalho-folga-4 { gap: var(--e-4); }
+.ds-cabecalho-folga-6 { gap: var(--e-6); }
+.ds-cabecalho-subtitulo { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }

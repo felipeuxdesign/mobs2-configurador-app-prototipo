@@ -1,0 +1,6 @@
+/* O traço que se desenha (movimento.md): o gesto do app — o traço lima diz que algo
+ * se confirmou. Da esquerda pra direita, scaleX de 0 a 1, em --mov-lento, desacelerando, uma vez.
+ * Quem liga é a peça, só no fluxo; pela URL, no print e na coluna do palco, ele já está desenhado
+ * (sem a classe). Com reduzir movimento, o --mov-lento vale 0: aparece direto. Só transform. */
+.ds-traco-desenha { transform-origin: left center; animation: ds-traco-desenha var(--mov-lento) var(--mov-curva); }
+@keyframes ds-traco-desenha { from { transform: scaleX(0); } }

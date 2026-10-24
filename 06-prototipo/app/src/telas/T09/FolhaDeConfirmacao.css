@@ -1,0 +1,6 @@
+/* A folha de confirmação (T09/13, 17, 18 e T11/06): o título é a
+ * consequência, em duas linhas, e o X fica alinhado ao topo dele, como as referências desenham —
+ * o título na entrelinha do título de cartão. Quem mostra a folha põe a caixa .t-confirmacao em volta */
+.t-confirmacao .ds-folha-cabeca { align-items: flex-start; gap: var(--e-12); }   /* o título a 12 do X, como as referências desenham (T09/32) */
+.t-confirmacao .ds-folha-titulo { line-height: var(--entrelinha-cartao); }
+.t-confirmacao .ds-folha-fechar { margin-top: calc(var(--e-10) * -1); }

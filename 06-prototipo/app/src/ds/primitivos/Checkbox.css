@@ -1,0 +1,18 @@
+/* o poço de 24 e o marcador são os primitivos (Poco, Quadrado); aqui, só a linha e o texto */
+.ds-checkbox { position: relative; min-height: var(--alvo-min); display: flex; align-items: center; gap: var(--e-12); touch-action: manipulation; user-select: none; }
+/* o pressionado (R-12): o que a folha não desenha é a camada do Tocavel — o
+ * --elevado na área de 48, por baixo do poço e do texto, que entra no toque e solta em --mov-solta,
+ * como a linha tocável. Parado, em 0: o quadro não muda. Com reduzir, direto. */
+.ds-checkbox::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: var(--elevado); opacity: 0;
+  transition: opacity var(--mov-solta) var(--mov-curva);
+}
+.ds-checkbox > * { position: relative; z-index: 1; }
+.ds-checkbox:active::after { opacity: 1; transition: none; }
+.ds-checkbox-texto { font-size: var(--t-corpo); font-weight: 500; color: var(--tinta-forte); line-height: var(--entrelinha-texto); }
+/* a caixa do não conforme (decisão 39, folha 6, T13/07, 08, 15): o título em
+ * 14/600 --tinta e, embaixo, a 2, a linha do que marcar pede, em 12 --tinta-secundaria */
+.ds-checkbox-textos { display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-checkbox-titulo { font-size: var(--t-corpo); font-weight: 600; color: var(--tinta); }
+.ds-checkbox-legenda { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }

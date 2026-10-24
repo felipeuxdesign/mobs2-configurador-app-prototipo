@@ -1,0 +1,11 @@
+/* no pé da tela, por cima de tudo o que o app desenha (--camada-sistema, e depois de tudo no documento):
+   as folhas, os véus e o indicador de rolagem passam por baixo dela · o fundo é o da tela, e o toque a
+   atravessa. A altura vem do desenho: 412 × 24 na largura da tela dá os 20,97 */
+.ds-navegacao-gestos {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: var(--camada-sistema);
+  pointer-events: none;
+}
+.ds-navegacao-gestos > svg { display: block; width: 100%; height: auto; }
+
+/* R-19: no claro, a pílula de gestos na cor do texto, como o Android faz com app claro */
+[data-tema="claro"] .ds-navegacao-gestos [fill="white"] { fill: var(--tinta); }

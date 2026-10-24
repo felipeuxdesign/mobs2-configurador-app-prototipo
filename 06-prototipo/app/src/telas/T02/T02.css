@@ -1,0 +1,28 @@
+/* T02 · Selecionar contexto — só tokens. A tela sem faixa: a barra do sistema
+ * na cor da página, o miolo (que rola entre a barra e o rodapé quando a lista
+ * passa da altura, sem a barra de rolagem do navegador do computador, que
+ * nenhuma referência desenha, como na T03) e o rodapé de uma ação. */
+.t02 { position: relative; height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); }
+
+/* o miolo e o rodapé, que ficam atrás do véu do diálogo de outro usuário (T01/18):
+ * sem caixa própria — o miolo e o rodapé seguem filhos do flex da tela —, só pro
+ * inert, que deixa os dois sem toque e sem leitor enquanto o diálogo está por cima */
+.t02-fundo { display: contents; }
+
+/* por cima da tela: o diálogo de outro usuário no aparelho, com o véu começando
+ * embaixo da barra do sistema, que fica na cor da página, como a T01/18 desenha */
+.t02-sobre { position: absolute; top: var(--barra-sistema); right: 0; bottom: 0; left: 0; z-index: 1; display: flex; flex-direction: column; }
+
+.t02-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto; scrollbar-width: none;
+  display: flex; flex-direction: column; gap: var(--e-14);
+  padding: var(--e-28) var(--respiro) var(--respiro) var(--respiro);
+}
+
+/* o cabeçalho de entrada: quantas empresas no rótulo de topo e o título de procedimento */
+.t02-cabeca { flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-4); }
+.t02-rotulo { font-size: var(--t-rotulo-topo); font-weight: 700; letter-spacing: var(--ls-rotulo-topo); color: var(--tinta-secundaria); }
+.t02-titulo { margin: 0; font-size: var(--t-titulo-proc); font-weight: 700; letter-spacing: var(--ls-titulo-proc); color: var(--tinta); }
+
+/* o cartão das empresas, no bloco dele, como a referência desenha */
+.t02-grupo { flex-shrink: 0; display: flex; flex-direction: column; gap: var(--e-6); }

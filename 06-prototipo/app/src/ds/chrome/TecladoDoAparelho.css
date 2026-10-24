@@ -1,0 +1,21 @@
+/* o teclado do aparelho (decisão 62): no pé da tela, no fluxo — o app encolhe até o que sobra acima
+   dele —, por cima do que o app desenha (--camada-sistema) e por baixo da pílula, que monta depois de
+   tudo. A altura vem do desenho: 412 × 274 na largura da tela dá os 239,42 (o viewBox, com a altura
+   automática). Sobe em --mov-padrao e desce em --mov-rapido, como a folha */
+.ds-teclado {
+  position: relative; z-index: var(--camada-sistema); flex-shrink: 0;
+  transition: transform var(--mov-padrao) var(--mov-curva);
+}
+.ds-teclado-fechado { transform: translateY(100%); transition-duration: var(--mov-rapido); }
+/* fechando: sai do fluxo de uma vez (o app volta ao tamanho inteiro) e desce por cima do pé */
+.ds-teclado-saindo { position: absolute; left: 0; right: 0; bottom: 0; }
+.ds-teclado-desenho > svg { display: block; width: 100%; height: auto; }
+
+/* R-19: no claro, o desenho do claro do sistema — as cores são do Android, não tokens do app */
+.ds-teclado-claro { display: none; }
+[data-tema="claro"] .ds-teclado-escuro { display: none; }
+[data-tema="claro"] .ds-teclado-claro { display: block; }
+
+/* as teclas: as áreas de toque são os retângulos do próprio desenho (TecladoDoAparelho.jsx) · do
+   sistema, sem pressionado e sem foco desenhado: o desenho não muda */
+.ds-teclado-tecla { position: absolute; cursor: default; outline: none; -webkit-tap-highlight-color: transparent; }

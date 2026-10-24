@@ -1,0 +1,23 @@
+.ds-link {
+  position: relative; height: var(--alvo-min); width: 100%;
+  display: grid; place-items: center; font-size: var(--t-link); font-weight: 500; touch-action: manipulation;
+}
+.ds-link > span { grid-area: 1 / 1; }
+.ds-link-texto { color: var(--tinta-secundaria); }
+.ds-link-toque { color: var(--tinta); opacity: 0; transition: opacity var(--mov-solta) var(--mov-curva); }
+.ds-link-toque[data-texto]::before { content: attr(data-texto); }
+.ds-link:active .ds-link-toque, .ds-link.ds-forca-toque .ds-link-toque { opacity: 1; transition: none; }
+.ds-link.ds-forca-toque .ds-link-texto { opacity: 0; }
+/* a lei 17: o link que não pode agir agora fica em tinta apagada, desabilitado de
+ * verdade e sem o pressionado — o Voltar ao menu enquanto o semear corre (T10); o motivo está no primário */
+.ds-link:disabled .ds-link-texto { color: var(--tinta-apagada); }
+.ds-link:disabled .ds-link-toque { display: none; }
+/* T14/06: o link registrado — o mesmo lugar de 48, sem toque: o glifo
+ * de 14 e o que ficou feito, em --tinta-apagada, a 8. Na troca, só o conteúdo esmaece */
+.ds-link.ds-link-registro { display: flex; align-items: center; justify-content: center; gap: var(--e-8); color: var(--tinta-apagada); }
+.ds-link-registro .ds-glifo { color: var(--tinta-apagada); }
+/* sem preenchimento: sem atraso, o quadro é o mesmo, e a animação que acabou não fica viva */
+.ds-link-registro-entra > * { animation: ds-link-esmaece var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-link-esmaece { from { opacity: 0; } to { opacity: 1; } }
+/* o texto novo do link que troca com o primário (o Tirar de novo da T13): esmaece no lugar, em 150 */
+.ds-link-texto-nasce { animation: ds-link-esmaece var(--mov-rapido) var(--mov-curva); }

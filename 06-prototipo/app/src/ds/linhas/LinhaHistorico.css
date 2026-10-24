@@ -1,0 +1,18 @@
+/* A linha do histórico (folha 4): 72 de alto, poço de 32, a placa, o módulo
+ * e a hora embaixo, o veredito à direita. Tocável (abre a instalação, T12). */
+.ds-historico { gap: var(--e-12); height: var(--linha-escolha); border-bottom: var(--traco-borda) solid var(--divisoria); }
+.ds-historico-sem-divisoria { border-bottom: 0; }
+.ds-historico-corpo { flex-grow: 1; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-historico-placa { font-size: var(--t-botao); font-weight: 700; letter-spacing: var(--ls-dado); color: var(--tinta); }
+.ds-historico-detalhe { font-size: var(--t-rotulo-topo); font-weight: 500; color: var(--tinta-apagada); }
+.ds-historico-veredito { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-secundaria); }
+/* T12 · o veredito pela natureza do estado: o que espera em --tinta, a falha em --vermelho */
+.ds-historico-tom-espera .ds-historico-veredito { color: var(--tinta); }
+.ds-historico-tom-falha .ds-historico-veredito { color: var(--vermelho); }
+/* T12 · a linha de baixo em 12 quando diz há quantos dias (T12/00 e 03, as três últimas) */
+.ds-historico-detalhe-legenda .ds-historico-detalhe { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); }
+/* T12 · a placa e a linha de baixo nunca quebram; o veredito longo, sem
+ * referência ('aprovada após reprocessamento', no cabeçalho do detalhe — a lista diz só *aprovada*), quebra em duas
+ * linhas, alinhado à direita. O que cabe numa linha fica como a folha desenha. */
+.ds-historico-corpo { white-space: nowrap; }
+.ds-historico-veredito { flex-shrink: 1; text-align: right; }

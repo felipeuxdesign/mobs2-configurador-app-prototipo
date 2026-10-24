@@ -1,0 +1,18 @@
+/* As duas caixas da família. A de poço é o fundo do aviso e do par comparado:
+ * o mesmo desenho do poço (Lei 4), e a falha acende o traço de baixo (Lei 2).
+ * A apagada, tracejada, é a do vazio declarado e das notas. Elas servem também
+ * aos instrumentos: o valor em poço e o valor alvo (a de poço) e o fato
+ * declarado (a apagada), sem desenhar a mesma caixa de novo. */
+.ds-caixa-poco {
+  background: var(--fundo-rebaixado);
+  border-top: var(--traco-borda) solid var(--rebaixado-sombra);
+  border-bottom: var(--traco-borda) solid var(--rebaixado-luz);
+  border-left: var(--traco-borda) solid var(--rebaixado-lado);
+  border-right: var(--traco-borda) solid var(--rebaixado-lado);
+}
+.ds-caixa-poco.ds-caixa-falha { border-bottom: var(--traco-destaque) solid var(--vermelho); }
+.ds-caixa-apagada {
+  background: var(--fundo-apagado);
+  border: var(--traco-borda) dashed var(--borda-neutra);   /* o tracejado do vazio: o --borda-neutra, nunca o --divisoria, que some */
+  border-radius: var(--raio);
+}

@@ -1,0 +1,9 @@
+# 56 · O contexto é a empresa
+
+**O contexto.** O técnico escolhia a empresa e depois a unidade, a garagem, e o pacote era o da unidade. Mas a unidade não é uma decisão do técnico: ele vai à garagem que a empresa manda, e o ônibus que está na frente dele pode ser de qualquer garagem da mesma empresa. A escolha da unidade era um passo a mais, e o ônibus de outra garagem travava como *fora do pacote* sem motivo de campo.
+
+**A decisão.** O contexto é só a empresa, e o pacote é o da empresa inteira: todos os ativos, as conexões, os modelos, os eventos e as cercas dela. Na Viação Atlântico Sul, os 24 ativos do mock, 49 itens no pacote. **Com uma empresa só, o app pula a escolha**: o `Entrar` leva direto ao sincronizar, e no menu o nome dela fica no topo sem a seta, e não é botão. O *Trocar de empresa* mora no topo do menu, numa folha com as empresas, cada uma com o pacote dela e os ativos. A T12 lista as instalações dos ativos da empresa (13 no mock), e o *fora do pacote* da T06 é um ônibus de outra empresa.
+
+**O que foi descartado.** Manter a unidade escondida, escolhida pelo cadastro do técnico: o técnico não saberia de onde veio o pacote · a lista das empresas com a única já marcada (a decisão 37 revista): é um toque sem decisão · a busca na lista de empresas, sem desenho nesta versão: o técnico do piloto atende três, e a pergunta fica com o produto.
+
+**A consequência.** Supera a decisão 37 e a lei 18 antiga (*a palavra é unidade*) · a T02 fica com a escolha (00) e a escolhida (01); as oito referências da unidade e da busca saem, e a T04/14 também · a T03, a T04, a T06 e a T12 dizem *empresa* · o mock perde a unidade: o pacote, a versão (`pct-emp01-…`) e o contexto passam a ser da empresa, e as outras duas empresas andam como espelho da Viação depois da T03 · as peças da folha 4 viram *linha de empresa* e *a lista de empresas*.

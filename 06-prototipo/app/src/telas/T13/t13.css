@@ -1,0 +1,74 @@
+/* T13 · Checklist — só a montagem da tela; o desenho de cada bloco é da peça.
+ * A barra do sistema na cor da faixa, a faixa da sessão, o miolo e o rodapé;
+ * por cima, o diálogo da Seção F, com o véu só abaixo da faixa (T13/10). */
+.t13 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* a faixa mora num fieldset, que a desabilita com o diálogo aberto: sem o
+ * desenho e sem o papel do fieldset, ela fica igual (como o topo da T04) */
+.t13-topo { flex-shrink: 0; min-width: 0; margin: 0; padding: 0; border: 0; }
+.t13-topo:disabled { pointer-events: none; }
+
+.t13-corpo { position: relative; flex-grow: 1; min-height: 0; display: flex; flex-direction: column; }
+/* isolado: a camada do toque das linhas e dos cartões fica dentro dele, e o véu passa por cima (como a T04) */
+.t13-conteudo { flex-grow: 1; min-height: 0; display: flex; flex-direction: column; isolation: isolate; }
+
+/* o miolo: entre a faixa e o rodapé, rola quando passa de 800. A folga
+ * de 16 até o rodapé é o recheio dele: as seções abertas rolam aqui, e a
+ * rolagem 0 é o quadro da referência. O visor e o instrumento do nível do
+ * item crescem no que sobra (pecas.css). */
+.t13 .tela-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: var(--e-12);
+  padding: var(--e-14) var(--e-16) var(--respiro) var(--e-16);
+}
+.t13 .tela-miolo > * { flex-shrink: 0; }
+
+/* a barra do checklist, a 8 do título: a folga de 12 do miolo, menos 4 (T13/00 a 14) */
+.t13 .ds-barra-ck.t13-barra { margin-top: calc(-1 * var(--e-4)); }
+
+/* o título do nível do item: a pergunta que o técnico confere agora */
+.t13-titulo-item {
+  font-size: var(--t-titulo-proc); font-weight: 700;
+  line-height: var(--entrelinha-titulo-item); letter-spacing: var(--ls-titulo-proc);
+}
+/* a frase do que enquadrar, embaixo do título (decisão 60): o título e a frase da
+ * T10/11 — 15 em 500, --tinta-secundaria, a 12 do título (a folga do miolo) */
+.t13-frase-item {
+  margin: 0; font-size: var(--t-link); font-weight: 500;
+  line-height: var(--entrelinha-legenda); color: var(--tinta-secundaria);
+}
+/* a caixa do não conforme (decisão 39): desmarcada, fica a 16 do fim do miolo
+ * (T13/07); marcada, com o campo embaixo, sem a folga (T13/08 e 15) */
+.t13-nao-conforme { display: flex; flex-direction: column; }
+.t13-nao-conforme-desmarcada { margin-bottom: var(--respiro); }
+
+/* por cima (T13/10): a composição fica no corpo, e só o fundo do véu se estende
+ * sobre a faixa (--veu-topo); a barra do sistema escurece pela própria peça */
+.t13-sobre { --veu-topo: var(--faixa-sessao); position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; }
+/* o Descartar a ressalva? (T13/51): como o Encerrar antes de terminar?, o véu e a caixa começam embaixo da
+ * barra do sistema, e a caixa fica no meio do que está embaixo dela, com a faixa (o .app é a caixa de posição) */
+.t13-sobre-tela { position: absolute; top: var(--barra-sistema); right: 0; bottom: 0; left: 0; z-index: 1; display: flex; flex-direction: column; }
+
+/* a pergunta do bip (T13/40): 14/600 em --tinta, em cima das duas respostas */
+/* a pergunta do bip abre 4 abaixo da linha (T13/40 e a folha 7) */
+.t13-pergunta-bip { font-size: var(--t-corpo); font-weight: 600; color: var(--tinta); margin-top: var(--e-4); }
+/* a F falhando com o resto resolvido (T13/49): a legenda do Finalizar aceso em --tinta-secundaria, e não na
+ * apagada, a das que explicam o Finalizar apagado */
+.t13.t13-pede-ciencia .ds-rodape-legenda { color: var(--tinta-secundaria); }
+/* o evento de teste que não chegou (T13/49): a linha respondida cresce a 52, 4 em cima e embaixo, como a referência */
+.t13 .ds-item-ck.ds-item-ck-leitura.t13-evento-nao-chegou { height: auto; min-height: calc(var(--linha-padrao) + var(--e-8)); padding: var(--e-4) 0; box-sizing: border-box; }
+/* o Testar de novo (T13/41, 42 e 50, decisão 64): a linha do bip mora numa caixa sem desenho; a resposta e o
+ * que aconteceu saem esmaecendo em 150, desacelerando, e a pergunta que volta entra no lugar, do mesmo jeito ·
+ * com reduzir, os tempos zeram, e a troca é direta */
+.t13-bip { display: contents; }
+.t13-bip-sai .ds-item-ck-resposta, .t13-bip-sai .ds-item-ck-embaixo { animation: t13-bip-sai var(--mov-rapido) var(--mov-curva) forwards; }
+.t13-bip-sai .ds-botao-linha { pointer-events: none; }
+@keyframes t13-bip-sai { to { opacity: 0; } }
+.t13-pergunta-entra { animation: t13-entra var(--mov-rapido) var(--mov-curva); }
+@keyframes t13-entra { from { opacity: 0; } }
+/* o campo do que aconteceu, na linha do item da E (T13/42): 64 de altura, como a referência */
+.t13 .ds-item-ck-embaixo .ds-campo-texto-poco { min-height: calc(var(--alvo-min) + var(--e-16)); }
+
+/* o veredito do registrado (a 11 e a 14): 12 de respiro em cima e embaixo — com o
+ * texto em várias linhas, ele não encosta nas bordas · da tela, não da peça (a folha 7 não mudou) */
+.t13 .ds-veredito-ck { padding-top: var(--e-12); padding-bottom: var(--e-12); box-sizing: border-box; }

@@ -1,0 +1,4 @@
+.tela-vazia { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--e-6); background: var(--fundo-pagina); }
+.tela-vazia-codigo { font-size: var(--t-rotulo-topo); letter-spacing: var(--ls-rotulo-topo); font-weight: 700; color: var(--tinta-apagada); }
+.tela-vazia-nome { font-size: var(--t-titulo-tela); letter-spacing: var(--ls-titulo-tela); font-weight: 700; color: var(--tinta); }
+.tela-vazia-ref { font-size: var(--t-corpo); font-weight: 500; color: var(--tinta-secundaria); }

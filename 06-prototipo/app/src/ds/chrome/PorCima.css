@@ -1,0 +1,13 @@
+/* Por cima da tela (PorCima.jsx): a caixa de cada coisa no véu não desenha nada — a folha e o
+ * diálogo continuam filhos do véu, no fluxo dele, como sempre foram. */
+.ds-por-cima { display: contents; }
+
+/* O que sai enquanto outro entra (a folha que vira diálogo, e a volta): fora do fluxo, no mesmo
+ * lugar em que estava — a folha no pé, o diálogo no meio —, por baixo do que entra e sem toque,
+ * até acabar de sair. O véu da troca é a caixa dele (Veu.css, .ds-veu-troca). */
+.ds-por-cima-sai {
+  position: absolute; inset: 0; z-index: -1;
+  display: flex; flex-direction: column; pointer-events: none;
+}
+.ds-por-cima-sai-folha { justify-content: flex-end; }
+.ds-por-cima-sai-dialogo { justify-content: center; }

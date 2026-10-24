@@ -1,0 +1,24 @@
+/* A linha tocável solta (folha 1): um cartão de 54, poço de 26, o nome e o
+ * valor. No toque, o fundo sobe pra --elevado (a camada do Tocavel). */
+.ds-linha-tocavel {
+  height: var(--linha-tocavel); gap: var(--e-12); padding: 0 var(--e-12);
+  background: var(--fundo-cartao); border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+}
+/* a camada do toque fica por dentro da borda: o raio de dentro é o raio menos o traço */
+.ds-linha-tocavel::after { border-radius: calc(var(--raio) - var(--traco-borda)); }
+.ds-linha-tocavel-titulo { flex-grow: 1; font-size: var(--t-link); font-weight: 600; color: var(--tinta); }
+.ds-linha-tocavel-valor { font-size: var(--t-secundario); color: var(--tinta-secundaria); }
+/* T06/02: a linha de ação — 50, sem poço, o pedido em 14 e o que acompanha em 12 apagado */
+.ds-linha-tocavel.ds-linha-tocavel-acao { height: var(--linha-acao); flex-shrink: 0; }
+.ds-linha-tocavel-acao .ds-linha-tocavel-titulo { font-size: var(--t-corpo); }
+.ds-linha-tocavel-acao .ds-linha-tocavel-valor { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+/* T06/07: a linha de ação registrada — o mesmo cartão de 50, sem toque:
+ * o poço de 32 (o poço na linha) com o glifo de 14 e, empilhados a 2, o feito em 15/600 e o que acontece
+ * agora em 12 secundário. Na troca, só o conteúdo esmaece (opacity, 150ms). */
+.ds-linha-tocavel-registro { display: flex; align-items: center; justify-content: flex-start; }
+.ds-linha-tocavel-registro-texto { display: flex; flex-direction: column; gap: var(--e-2); min-width: 0; }
+.ds-linha-tocavel-registro-titulo { font-size: var(--t-link); font-weight: 600; color: var(--tinta); }
+.ds-linha-tocavel-registro-valor { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-secundaria); }
+/* sem preenchimento: sem atraso, o quadro é o mesmo, e a animação que acabou não fica viva */
+.ds-linha-tocavel-registro-entra > * { animation: ds-linha-tocavel-esmaece var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-linha-tocavel-esmaece { from { opacity: 0; } to { opacity: 1; } }

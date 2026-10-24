@@ -1,0 +1,2 @@
+/* sem linha embaixo: a linha é a de baixo da faixa, que a faixa desenha (a faixa é uma peça só) */
+.ds-topo-menu { flex-shrink: 0; background: var(--fundo-rebaixado); }

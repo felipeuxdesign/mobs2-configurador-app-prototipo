@@ -1,0 +1,14 @@
+/* Os espécimes de movimento das listas (mov-listas.jsx): da vitrine, não do app. A tela em
+ * miniatura tem a altura do celular, e os botões da bancada (tracejados) ficam embaixo dela —
+ * sem hover, sem foco desenhado, sem movimento (o que se mede é a peça, não o botão). */
+.vitrine-ml-pilha { display: flex; flex-direction: column; gap: var(--e-12); }
+.vitrine-ml-tela { height: var(--tela-altura); }
+.vitrine-moldura-chrome .vitrine-ml-controles { padding: 0 var(--e-16) var(--e-16); }
+.vitrine-ml-controles { display: flex; flex-wrap: wrap; gap: var(--e-8); }
+.vitrine-ml-botao {
+  font: inherit; font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-secundaria);
+  background: none; border: var(--traco-borda) dashed var(--borda); border-radius: var(--raio);
+  padding: var(--e-6) var(--e-10); outline: none;
+}
+/* a fila: o rótulo a 6 do cartão, como a T15 monta */
+.vitrine-ml-fila { display: flex; flex-direction: column; gap: var(--e-6); }

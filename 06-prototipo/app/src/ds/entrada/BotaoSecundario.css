@@ -1,0 +1,18 @@
+.ds-secundario {
+  flex-shrink: 0; width: 100%; height: var(--botao-secundario);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--fundo-botao); border: var(--traco-borda) solid var(--borda-botao); border-radius: var(--raio);
+  font-size: var(--t-destaque); font-weight: 700; color: var(--tinta);
+  touch-action: manipulation; user-select: none;
+  transition: transform var(--mov-solta) var(--mov-curva);
+}
+/* desligado, sem o fill · fundo e borda de cartão, texto apagado */
+.ds-secundario:disabled { background: var(--fundo-cartao); border-color: var(--borda); color: var(--tinta-apagada); }
+.ds-secundario:active:not(:disabled), .ds-secundario.ds-forca-toque { transform: scale(var(--escala-toque)); transition: none; }
+/* T15/02: o compacto, dentro do cartão com dois erros — 46 de
+   desenho e 15 de letra; o toque de 48 é uma área invisível por fora */
+.ds-secundario-compacto { position: relative; height: var(--botao-secundario-compacto); font-size: var(--t-link); }
+.ds-secundario-compacto::before { content: ''; position: absolute; inset: calc((var(--botao-secundario-compacto) - var(--alvo-min)) / 2 - var(--traco-borda)) 0; }
+/* R-21: o botão sobe um degrau em relação ao que está embaixo · em cima do rebaixado
+   (o cartão que pede ação da T15, as caixas), o fill do rebaixado: branco no claro, o mesmo no escuro */
+:is(.ds-cartao-acao, .ds-caixa-poco, .ds-prova) .ds-secundario:not(:disabled) { background: var(--fundo-botao-no-rebaixado); }

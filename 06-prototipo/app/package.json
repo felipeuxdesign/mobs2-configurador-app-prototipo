@@ -1,0 +1,32 @@
+{
+  "name": "configurador-mobs2-prototipo",
+  "private": true,
+  "version": "1.7.0",
+  "type": "module",
+  "description": "Protótipo navegável do App Configurador Mobs2 — o app dentro do palco",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "cobertura": "node ../../04-dados/checar-cobertura.js",
+    "tokens": "node scripts/tokens-json.mjs",
+    "checar": "node scripts/checar.mjs",
+    "print": "node scripts/print.mjs",
+    "comparar": "node scripts/comparar.mjs",
+    "tela": "node scripts/tela.mjs",
+    "textos": "node scripts/textos.mjs",
+    "palco": "node scripts/palco.mjs",
+    "fotografo": "node scripts/fotografo.mjs",
+    "fotografo:1": "ESCALA=1 node scripts/fotografo.mjs"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.1.1",
+    "pixelmatch": "7.2.0",
+    "pngjs": "7.0.0",
+    "vite": "8.3.0"
+  }
+}

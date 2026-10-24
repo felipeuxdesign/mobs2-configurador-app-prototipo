@@ -1,0 +1,41 @@
+/* o cartão é a Lista (linhas): fundo, borda, raio e 12 dos lados; aqui só não encolhe */
+.ds-cartao-opcoes { flex-shrink: 0; }
+.ds-linha-opcao {
+  gap: var(--e-12); min-height: var(--linha-escolha); padding: var(--e-10) 0;
+  border-bottom: var(--traco-borda) solid var(--divisoria);
+}
+.ds-linha-opcao:last-child { border-bottom: 0; }
+.ds-linha-opcao-textos { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-linha-opcao-titulo { font-size: var(--t-destaque); font-weight: 600; color: var(--tinta); }
+/* o destino numa linha só; se não couber, reticências (folhas 2 e 6, decisão 31) */
+.ds-linha-opcao-detalhe {
+  font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-secundaria);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* Outras ações segue a densidade da folha do código: 72 no mínimo, recheio 10,
+ * folga 12 e textos 16/13. O efeito fica inteiro; a linha cresce se precisar. */
+.ds-linha-opcao-efeito .ds-linha-opcao-detalhe { white-space: normal; overflow: visible; text-overflow: clip; }
+
+/* T01/04 e 11 — a linha que espera o reenvio: apagada, com a contagem no
+ * lugar da seta; ao liberar, a seta entra e a linha acende, esmaecendo em
+ * --mov-rapido. Duas camadas, e só a opacity troca: a apagada embaixo (o ícone
+ * em --marca-limite; a cópia do texto em --tinta-apagada) e a acesa por cima,
+ * que é a linha de sempre. A cópia é um span vazio fora do leitor
+ * (aria-hidden), que o CSS preenche, como no Link: o leitor lê o texto uma vez. */
+.ds-linha-opcao-camadas { display: grid; }
+.ds-linha-opcao-camadas > * { grid-area: 1 / 1; }
+.ds-linha-opcao-espera .ds-linha-opcao-titulo, .ds-linha-opcao-espera .ds-linha-opcao-detalhe { position: relative; }
+.ds-linha-opcao-copia {
+  position: absolute; inset: 0; color: var(--tinta-apagada);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ds-linha-opcao-copia::before { content: attr(data-texto); }
+.ds-linha-opcao-espera .ds-linha-opcao-acesa,
+.ds-linha-opcao-espera .ds-linha-opcao-apagada { transition: opacity var(--mov-rapido) var(--mov-curva); }
+.ds-linha-opcao-espera .ds-linha-opcao-apagada { opacity: 0; }
+.ds-linha-opcao-esperando .ds-linha-opcao-acesa { opacity: 0; }
+.ds-linha-opcao-esperando .ds-linha-opcao-apagada { opacity: 1; }
+/* a seta e a contagem no mesmo lugar, na ponta; a contagem troca no lugar, tabular */
+.ds-linha-opcao-fim { flex-shrink: 0; display: grid; align-items: center; justify-items: end; }
+.ds-linha-opcao-fim > * { grid-area: 1 / 1; }
+.ds-linha-opcao-contagem { font-size: var(--n-espera); font-weight: 700; color: var(--tinta-apagada); font-variant-numeric: tabular-nums; }

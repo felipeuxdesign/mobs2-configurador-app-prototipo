@@ -1,0 +1,67 @@
+/* T09 · Configurar módulo — só a montagem da tela; o desenho de cada bloco é da peça.
+ * A barra do sistema na cor da faixa, a faixa da sessão, o miolo e o rodapé. */
+.t09 { height: 100%; display: flex; flex-direction: column; background: var(--fundo-pagina); color: var(--tinta); }
+
+/* o miolo: entre a faixa e o rodapé · a cadeia cabe na tela em toda fase, e nada rola
+ * sozinho (decisão 61); se um conteúdo passasse de 800, ele rolaria, sem a
+ * barra de rolagem do navegador do computador, que nenhuma referência desenha.
+ * A folga de 16 até o rodapé é o recheio dele: os 16 a mais que a 00 e as
+ * 21 a 26 põem embaixo da cadeia ficam de fora, porque lá o conteúdo é
+ * cortado e eles nunca aparecem — aqui fariam o quadro rolar à toa. */
+.t09 .tela-miolo {
+  flex-grow: 1; min-height: 0; overflow-y: auto; scrollbar-width: none;
+  display: flex; flex-direction: column; gap: var(--e-14);
+  padding: var(--e-14) var(--e-16) var(--respiro) var(--e-16);
+}
+.t09 .tela-miolo > * { flex-shrink: 0; }
+/* com a cadeia parada (01, 02, 03), os blocos ficam a 12, como as referências desenham */
+.t09 .t09-miolo-justo { gap: var(--e-12); }
+/* a cadeia curta da manutenção (09): o que fica como está, embaixo dos dois elos — a
+ * frase de 12, na entrelinha de 1,5, em --tinta-apagada */
+.t09 .t09-ficam { margin: 0; font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); color: var(--tinta-apagada); }
+
+/* a pergunta pelos dependentes (10, 14 e 15): o cartão, com cada
+ * dependente numerado — o nome de 16, o motivo de 12 e os dois toques, a 8 embaixo e 12 entre eles */
+.t09-pergunta {
+  display: flex; flex-direction: column; padding: 0 var(--e-14);
+  background: var(--fundo-cartao); border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+}
+.t09-pergunta-item { display: flex; flex-direction: column; gap: var(--conferencia-par-folga); padding: var(--e-12) 0; border-bottom: var(--traco-borda) solid var(--divisoria); }
+.t09-pergunta-item:last-child { border-bottom: 0; }
+.t09-pergunta-nome { font-size: var(--t-destaque); font-weight: 600; color: var(--tinta); }
+.t09-pergunta-motivo { font-size: var(--t-legenda); font-weight: 500; line-height: var(--entrelinha-apoio); color: var(--tinta-apagada); }
+.t09-pergunta-acoes { display: flex; align-items: center; gap: var(--e-12); margin-top: var(--e-8); }
+.t09-pergunta-deixar {
+  height: var(--e-36); padding: 0 var(--e-4); background: none; border: 0;
+  font-family: inherit; font-size: var(--t-corpo); font-weight: 600; color: var(--tinta-secundaria);
+  touch-action: manipulation; user-select: none;
+  transition: transform var(--mov-solta) var(--mov-curva);
+}
+.t09-pergunta-deixar:active { transform: scale(var(--escala-toque)); transition: none; }
+/* o Deixar para depois tem 36 de desenho e 48 de toque, pela camada sem desenho, como o BotaoDaLinha */
+.t09-pergunta-deixar { position: relative; }
+.t09-pergunta-deixar::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: var(--alvo-min); transform: translateY(-50%); }
+/* a 19 e a 20: *fica para depois* no lugar do link, 14/600 em --tinta; e o reenviado, o check
+ * de 16 numa caixa de 20, *confere* 14/700 e *· reenviado* 12/500 em --tinta-apagada, a 8 um do outro */
+.t09-pergunta-fica { display: flex; align-items: center; height: var(--e-36); padding: 0 var(--e-4); font-size: var(--t-corpo); font-weight: 600; color: var(--tinta); }
+.t09-pergunta-reenviado { gap: var(--e-8); height: var(--e-36); }
+.t09-pergunta-check { display: flex; align-items: center; justify-content: center; width: var(--e-20); height: var(--e-20); flex-shrink: 0; }
+.t09-pergunta-confere { font-size: var(--t-corpo); font-weight: 700; color: var(--tinta); }
+.t09-pergunta-marca { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 500; color: var(--tinta-apagada); }
+/* ao vivo: a pergunta surge embaixo do check, e o Reenviar que liga acende no lugar · 150, esmaecendo */
+.t09-pergunta-surge, .t09-pergunta-acende { animation: t09-esmaece var(--mov-rapido) var(--mov-curva) backwards; }
+@keyframes t09-esmaece { from { opacity: 0; } }
+
+/* a folha de confirmação (13, 17, 18): a composição fica embaixo da faixa,
+ * e o fundo do véu se estende sobre ela (--veu-topo); a barra escurece pela peça. A faixa, o miolo e o
+ * rodapé ficam em caixas que não mudam nada do desenho (o display: contents) e ficam inertes atrás do véu */
+.t09-topo, .t09-pe { display: contents; }
+.t09-sobre {
+  --veu-topo: var(--faixa-sessao);
+  position: absolute; top: calc(var(--barra-sistema) + var(--faixa-sessao)); right: 0; bottom: 0; left: 0; z-index: 1;
+  display: flex; flex-direction: column;
+}
+
+/* a faixa da cadeia concluída (04): o espaço abre direto, e ela esmaece no lugar em --mov-padrao (200),
+ * quando a Conexão confere na frente de quem olha (movimento.md · a prova que chega) */
+.t09 .t09-faixa .ds-aviso-surge { animation-duration: var(--mov-padrao); }

@@ -1,0 +1,22 @@
+.ds-glifo { display: flex; line-height: 0; }
+.ds-glifo svg { width: 100%; height: 100%; stroke-width: var(--traco-glifo); }
+.ds-glifo-fino svg { stroke-width: var(--traco-fino); }
+.ds-glifo-22 { width: var(--glifo-22); height: var(--glifo-22); }
+.ds-glifo-24 { width: var(--glifo-24); height: var(--glifo-24); }
+.ds-glifo-26 { width: var(--glifo-26); height: var(--glifo-26); }
+.ds-glifo-28 { width: var(--glifo-28); height: var(--glifo-28); }
+.ds-glifo-30 { width: var(--glifo-30); height: var(--glifo-30); }
+.ds-glifo-32 { width: var(--glifo-32); height: var(--glifo-32); }
+.ds-glifo-34 { width: var(--glifo-34); height: var(--glifo-34); }
+.ds-glifo-44 { width: var(--glifo-44); height: var(--glifo-44); }
+.ds-glifo-cor-lima { color: var(--lima); }
+.ds-glifo-cor-vermelho { color: var(--vermelho); }
+.ds-glifo-cor-secundaria { color: var(--tinta-secundaria); }
+.ds-glifo-cor-marca { color: var(--marca); }
+.ds-glifo-traco { display: block; width: var(--e-10); height: var(--traco-borda); background: var(--marca-vazia); }   /* o tracinho vazio: o token do papel dele, nunca a luz do poço, que some no claro */
+.ds-glifo-agora { display: block; width: var(--e-12); height: var(--e-12); background: var(--andamento); }   /* R-22: o item da vez tem cor própria, o creme no escuro e o roxo no claro */
+/* o check que nasce no poço: o glifo que troca depois de a peça
+ * montar esmaece no lugar, em 150 (desacelera); o de antes já saiu. Ao abrir, parado.
+ * Sem preenchimento: acabou, não fica nada vivo. Com reduzir, direto. */
+.ds-glifo-nasce { animation: ds-glifo-nasce var(--mov-rapido) var(--mov-curva); }
+@keyframes ds-glifo-nasce { from { opacity: 0; } }

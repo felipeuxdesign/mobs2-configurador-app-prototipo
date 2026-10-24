@@ -1,0 +1,19 @@
+/* O que as peças da família repetem: o cartão do instrumento, o rótulo de
+ * bloco e a linha das marcas embaixo da escala. A caixa de poço é a da família
+ * cartões (cartoes/caixas.css · .ds-caixa-poco), a mesma do aviso. */
+.ds-inst-cartao {
+  flex-shrink: 0; display: flex; flex-direction: column;
+  background: var(--fundo-cartao); border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+}
+.ds-inst-rotulo {
+  font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco);
+  color: var(--tinta-secundaria);
+}
+.ds-inst-nota { font-size: var(--t-rotulo-bloco); font-weight: 700; letter-spacing: var(--ls-rotulo-bloco); color: var(--tinta-apagada); }
+.ds-inst-cabeca { display: flex; align-items: center; justify-content: space-between; }
+.ds-inst-legendas {
+  display: flex; justify-content: space-between;
+  font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-apagada);
+}
+.ds-inst-legenda-lima { color: var(--lima); }
+.ds-inst-legenda { font-size: var(--t-legenda); line-height: var(--entrelinha-apoio); font-weight: 600; color: var(--tinta-apagada); }

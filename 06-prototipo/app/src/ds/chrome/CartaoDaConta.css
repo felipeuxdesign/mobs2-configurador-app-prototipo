@@ -1,0 +1,8 @@
+.ds-cartao-conta {
+  display: flex; align-items: center; gap: var(--e-12); padding: var(--e-14);
+  background: var(--fundo-cartao);
+  border: var(--traco-borda) solid var(--borda); border-radius: var(--raio);
+}
+.ds-cartao-conta-textos { flex-grow: 1; display: flex; flex-direction: column; gap: var(--e-2); }
+.ds-cartao-conta-nome { font-size: var(--t-nome-conta); font-weight: 700; color: var(--tinta); }
+.ds-cartao-conta-detalhe { font-size: var(--t-secundario); font-weight: 500; color: var(--tinta-apagada); }
